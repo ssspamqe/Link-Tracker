@@ -3,6 +3,7 @@ package edu.java.data.dao.jpa.entities.utils.mappers;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 public interface TimeMapper {
     default LocalDateTime toLocalDateTime(Instant instant) {
@@ -10,6 +11,6 @@ public interface TimeMapper {
     }
 
     default Instant toInstant(LocalDateTime localDateTime) {
-        return localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        return localDateTime.atOffset(ZoneOffset.UTC).toInstant();
     }
 }

@@ -11,6 +11,7 @@ import java.net.URI;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -86,7 +87,7 @@ public class LinkJpaDAO implements LinkDataAccessObject {
     }
 
     private Instant toInstant(LocalDateTime localDateTime) {
-        return localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        return localDateTime.atOffset(ZoneOffset.UTC).toInstant();
     }
 
     LinkJpaEntity findJpaByIdOrThrowException(long id) {

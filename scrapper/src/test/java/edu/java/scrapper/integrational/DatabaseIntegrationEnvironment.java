@@ -15,6 +15,7 @@ import edu.java.data.dao.jpa.dao.StackOverflowQuestionJpaDAO;
 import java.io.File;
 import java.nio.file.Path;
 import java.sql.Connection;
+import jakarta.persistence.EntityManager;
 import liquibase.Contexts;
 import liquibase.LabelExpression;
 import liquibase.Liquibase;
@@ -24,12 +25,17 @@ import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.DirectoryResourceAccessor;
 import liquibase.resource.ResourceAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionTemplate;
 import org.testcontainers.containers.JdbcDatabaseContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -38,6 +44,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.yml")
 @ActiveProfiles("test")
+@AutoConfigureTestEntityManager
 @Transactional
 public abstract class DatabaseIntegrationEnvironment {
 
@@ -50,6 +57,8 @@ public abstract class DatabaseIntegrationEnvironment {
 
     @ServiceConnection
     protected static PostgreSQLContainer<?> POSTGRES;
+
+    @Autowired protected TestEntityManager entityManager;
 
     @Autowired protected JdbcTemplate jdbcTemplate;
 

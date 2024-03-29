@@ -12,6 +12,7 @@ import edu.java.data.exceptions.NoSuchStackOverflowQuestionException;
 import java.util.ArrayList;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
@@ -48,8 +49,6 @@ public class StackOverflowQuestionJpaDAO implements StackOverflowQuestionDataAcc
 
         oldQuestion.setDescriptionMd5Hash(question.getDescriptionMd5Hash());
         oldQuestion.setAnswersIds(new ArrayList<>(question.getAnswersIds()));
-
-        questionRepository.flush(); //TODO investigate problems with transaction management
     }
 
     private boolean linkIdWasChanged(StackOverflowQuestionJpaEntity oldQuestion, StackOverflowQuestion newQuestion) {
@@ -59,7 +58,7 @@ public class StackOverflowQuestionJpaDAO implements StackOverflowQuestionDataAcc
     @Override
     public void save(StackOverflowQuestion question) {
         var jpaQuestion = buildJpaQuestion(question);
-        questionRepository.saveAndFlush(jpaQuestion);
+        questionRepository.save(jpaQuestion);
     }
 
     private StackOverflowQuestionJpaEntity buildJpaQuestion(StackOverflowQuestion question) {

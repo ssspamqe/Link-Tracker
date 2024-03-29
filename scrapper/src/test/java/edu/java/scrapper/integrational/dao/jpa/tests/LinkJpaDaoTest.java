@@ -6,6 +6,7 @@ import edu.java.data.dto.Link;
 import edu.java.scrapper.integrational.DatabaseIntegrationEnvironment;
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,7 +23,7 @@ public class LinkJpaDaoTest extends DatabaseIntegrationEnvironment {
 
     @BeforeEach
     void assignLinkDao() {
-        linkDao = linkJdbcDao;
+        linkDao = linkJpaDao;
     }
 
     @Test
@@ -87,8 +88,10 @@ public class LinkJpaDaoTest extends DatabaseIntegrationEnvironment {
         LocalDateTime expectedLastChecked = LocalDateTime.of(2000, 1, 1, 1, 1);
 
         linkDao.updateLastCheckedAtById(expectedLastChecked, linkId);
+        entityManager.flush();
 
         Link savedLink = jdbcTemplate.queryForObject("SELECT * FROM links", LINK_JDBC_MAPPER);
+        var actualLastCheckedTime = savedLink.getLastCheckedAt();
         assertThat(savedLink.getLastCheckedAt()).isEqualTo(expectedLastChecked);
     }
 

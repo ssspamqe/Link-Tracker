@@ -8,6 +8,8 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StackOverflowQuestionJpaDaoTest extends DatabaseIntegrationEnvironment {
@@ -54,6 +56,7 @@ public class StackOverflowQuestionJpaDaoTest extends DatabaseIntegrationEnvironm
         );
 
         questionDao.update(modifiedQuestion);
+        entityManager.flush();
 
         var actualQuestion =
             jdbcTemplate.queryForObject("SELECT * FROM stack_overflow_questions", QUESTION_JDBC_ROW_MAPPER);
@@ -71,10 +74,10 @@ public class StackOverflowQuestionJpaDaoTest extends DatabaseIntegrationEnvironm
         );
 
         questionDao.save(question);
+        entityManager.flush();
 
         var actualQuestion =
             jdbcTemplate.queryForObject("SELECT * FROM stack_overflow_questions", QUESTION_JDBC_ROW_MAPPER);
         assertThat(actualQuestion).isNotNull();
-
     }
 }

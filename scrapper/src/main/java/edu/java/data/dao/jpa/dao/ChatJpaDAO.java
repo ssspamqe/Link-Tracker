@@ -3,7 +3,6 @@ package edu.java.data.dao.jpa.dao;
 import edu.java.data.dao.interfaces.ChatDataAccessObject;
 import edu.java.data.dao.jpa.entities.AssociationJpa;
 import edu.java.data.dao.jpa.entities.ChatJpaEntity;
-import edu.java.data.dao.jpa.entities.LinkJpaEntity;
 import edu.java.data.dao.jpa.entities.utils.mappers.ChatJpaMapper;
 import edu.java.data.dao.jpa.entities.utils.mappers.LinkJpaMapper;
 import edu.java.data.dao.jpa.repositories.AssociationJpaRepository;
@@ -17,6 +16,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor

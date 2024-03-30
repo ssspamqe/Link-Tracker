@@ -60,7 +60,7 @@ public class GitHubInitialStateScreener implements InitialStateScreener {
     }
 
     private boolean isIncorrectHostName(String hostName) {
-        return !applicationConfig.isGitHubHostName(hostName);
+        return !applicationConfig.gitHubConfig().isCorrectHostName(hostName);
     }
 
     private GitHubRepository buildRepositoryEntity(GitHubRepositoryBody repositoryBody, long linkId) {

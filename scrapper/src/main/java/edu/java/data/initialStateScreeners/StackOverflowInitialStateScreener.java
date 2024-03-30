@@ -60,7 +60,7 @@ public class StackOverflowInitialStateScreener implements InitialStateScreener {
     }
 
     private boolean isIncorrectHostName(String hostName) {
-        return !applicationConfig.isStackOverflowHostName(hostName);
+        return !applicationConfig.stackOverflowConfig().isCorrectHostName(hostName);
     }
 
     private long extractQuestionId(URI url) {

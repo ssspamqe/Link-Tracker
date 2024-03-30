@@ -76,7 +76,7 @@ public class StackOverflowAllUpdatesChecker implements LinkAllUpdatesChecker {
     }
 
     private boolean isIncorrectHostName(String hostName) {
-        return !applicationConfig.isStackOverflowHostName(hostName);
+        return !applicationConfig.stackOverflowConfig().isCorrectHostName(hostName);
     }
 
     private long extractQuestionId(URI url) {

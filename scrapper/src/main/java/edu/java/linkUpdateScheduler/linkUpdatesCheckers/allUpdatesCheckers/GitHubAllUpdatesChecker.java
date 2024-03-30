@@ -76,7 +76,7 @@ public class GitHubAllUpdatesChecker implements LinkAllUpdatesChecker {
     }
 
     private boolean isIncorrectHostName(String hostname) {
-        return !applicationConfig.isGitHubHostName(hostname);
+        return !applicationConfig.gitHubConfig().isCorrectHostName(hostname);
     }
 
     private RepositoryNameAndOwner extractRepositoryNameAndOwner(URI url) {

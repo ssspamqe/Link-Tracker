@@ -22,33 +22,39 @@ public record ApplicationConfig(
     ApplicationConfig.SchedulerConfig schedulerConfig,
 
     @NotNull
-    ApiUrl stackOverflowUrl,
+    ThirdPartyServiceConfig stackOverflowConfig,
 
     @NotNull
-    ApiUrl gitHubUrl,
+    ThirdPartyServiceConfig gitHubConfig,
 
     @NotNull
-    ApiUrl telegramBotUrl,
-
-    @NotNull
-    Set<String> gitHubHostNames,
-
-    @NotNull
-    Set<String> stackOverflowHostNames,
+    TelegramBotConfig telegramBotConfig,
 
     @NotNull
     DatabaseAccessType databaseAccessType
 ) {
 
-    public boolean isGitHubHostName(String hostName) {
-        return gitHubHostNames.contains(hostName);
-    }
-
-    public boolean isStackOverflowHostName(String hostName) {
-        return stackOverflowHostNames.contains(hostName);
-    }
-
     public record SchedulerConfig(boolean enable, @NotNull Duration interval, @NotNull Duration forceCheckDelay) {
+    }
+
+    public record ThirdPartyServiceConfig(@NotNull ApiUrl url, @NotNull Set<String> hostNames,
+                                          @NotNull RetryConfig retryConfig) {
+        public String getBaseUrl() {
+            return url.getBaseUrl();
+        }
+        public boolean isCorrectHostName(String hostName) {
+            return hostNames.contains(hostName);
+        }
+    }
+
+    public record TelegramBotConfig(@NotNull ApiUrl url, @NotNull RetryConfig retryConfig) {
+        public String getBaseUrl() {
+            return url.getBaseUrl();
+        }
+    }
+
+    public record RetryConfig(@NotNull RetryType type, @NotNull Duration delay, @NotNull int maxRetries,
+                              Set<HttpStatusCodeGroups> retryOnStatuses) {
     }
 
     public record ApiUrl(@NotBlank String defaultUrl, String configUrl) {
@@ -62,6 +68,14 @@ public record ApplicationConfig(
 
     public enum DatabaseAccessType {
         JDBC, JPA, JOOQ
+    }
+
+    public enum HttpStatusCodeGroups {
+        INFORMATIONAL, SUCCESSFUL, REDIRECTION, CLIENT_ERROR, SERVER_ERROR;
+    }
+
+    public enum RetryType {
+        CONSTANT, LINEAR, EXPONENTIAL
     }
 
 }

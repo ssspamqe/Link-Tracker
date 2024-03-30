@@ -59,7 +59,7 @@ public class JpaAccessConfiguration {
         LinkJpaRepository linkRepository,
         StackOverflowQuestionJpaMapper questionMapper
     ) {
-        return new StackOverflowQuestionJpaDAO(questionRepository, linkRepository,questionMapper);
+        return new StackOverflowQuestionJpaDAO(questionRepository, linkRepository, questionMapper);
     }
 
 }

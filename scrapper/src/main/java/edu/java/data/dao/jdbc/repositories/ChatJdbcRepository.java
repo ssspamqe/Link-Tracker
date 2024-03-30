@@ -22,7 +22,6 @@ public class ChatJdbcRepository {
     private static final String DELETE_BY_ID_QUERY =
         STR."DELETE FROM \{TABLE_NAME} WHERE id = :id";
 
-
     private final JdbcClient jdbcClient;
 
     @SuppressWarnings("MultipleStringLiterals")

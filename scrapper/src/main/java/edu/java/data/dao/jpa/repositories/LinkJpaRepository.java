@@ -3,7 +3,6 @@ package edu.java.data.dao.jpa.repositories;
 import edu.java.data.dao.jpa.entities.LinkJpaEntity;
 import java.net.URI;
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 import org.springframework.data.jpa.repository.JpaRepository;

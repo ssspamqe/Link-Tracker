@@ -12,7 +12,6 @@ import edu.java.data.exceptions.NoSuchStackOverflowQuestionException;
 import java.util.ArrayList;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor

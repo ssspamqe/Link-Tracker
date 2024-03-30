@@ -54,7 +54,7 @@ public record ApplicationConfig(
     }
 
     public record RetryConfig(@NotNull RetryType type, @NotNull Duration delay, @NotNull int maxRetries,
-                              Set<HttpStatusCodeGroups> retryOnStatuses) {
+                              Set<RetryPolicyHttpStatusCodeGroups> retryOnStatuses) {
     }
 
     public record ApiUrl(@NotBlank String defaultUrl, String configUrl) {
@@ -70,9 +70,6 @@ public record ApplicationConfig(
         JDBC, JPA, JOOQ
     }
 
-    public enum HttpStatusCodeGroups {
-        INFORMATIONAL, SUCCESSFUL, REDIRECTION, CLIENT_ERROR, SERVER_ERROR;
-    }
 
     public enum RetryType {
         CONSTANT, LINEAR, EXPONENTIAL

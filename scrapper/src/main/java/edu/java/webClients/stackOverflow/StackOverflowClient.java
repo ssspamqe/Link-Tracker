@@ -13,9 +13,11 @@ public interface StackOverflowClient {
     @GetExchange(url = "/questions/{id}?site=stackoverflow&filter=withbody")
     StackOverflowResponseBody<StackOverflowQuestionBody> fetchQuestionById(@PathVariable long id);
 
-    StackOverflowResponseBody<StackOverflowQuestionBody> fetchQuestionByIdWithRetries(long id);
+    Mono<StackOverflowResponseBody<StackOverflowQuestionBody>> fetchQuestionByIdWithRetries(long id);
 
     @GetExchange(url = "/questions/{id}/answers?site=stackoverflow&filter=withbody")
     StackOverflowResponseBody<StackOverflowAnswerBody> fetchAnswersByQuestionId(@PathVariable long id);
+
+    Mono<StackOverflowResponseBody<StackOverflowAnswerBody>> fetchAnswersByQuestionIdWithRetries(long id);
 
 }

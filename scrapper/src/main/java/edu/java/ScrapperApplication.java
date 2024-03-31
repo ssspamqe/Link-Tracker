@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableRedisDocumentRepositories(basePackages = "edu.java.*")
 @EnableConfigurationProperties(ApplicationConfig.class)
 @EnableTransactionManagement
-
 public class ScrapperApplication {
     public static void main(String[] args) {
         SpringApplication.run(ScrapperApplication.class, args);

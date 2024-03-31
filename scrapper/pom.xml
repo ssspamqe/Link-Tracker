@@ -36,6 +36,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.giffing.bucket4j.spring.boot.starter</groupId>
+            <artifactId>bucket4j-spring-boot-starter</artifactId>
+            <version>${bucket4j.version}</version>
+        </dependency>
+
+
+
 
         <!-- Data -->
         <dependency>
@@ -66,8 +78,6 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.14.0</version>
         </dependency>
-
-
 
         <!-- Kafka -->
         <dependency>
@@ -164,7 +174,6 @@
             <artifactId>spring-boot-starter-jooq</artifactId>
         </dependency>
 
-
         <!-- Other -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -185,6 +194,21 @@
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct-processor</artifactId>
             <version>${org.mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+            <version>${javax-cache-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>${caffeine.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>jcache</artifactId>
+            <version>${jcache.version}</version>
         </dependency>
     </dependencies>
 

@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
-@Component
 public class StackOverflowClientWithConstantRetries extends StackOverflowClientWithRetries {
 
     public StackOverflowClientWithConstantRetries(StackOverflowClient baseClient, RetryConfig retryConfig) {

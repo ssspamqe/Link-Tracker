@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.Duration;
 import java.util.Set;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;

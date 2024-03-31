@@ -4,8 +4,7 @@ import edu.java.configuration.ApplicationConfig;
 import edu.java.configuration.WebClientRetryType;
 import edu.java.webClients.exceptions.ClientErrorException;
 import edu.java.webClients.gitHub.GitHubClient;
-import edu.java.webClients.retryProxyBuilders.gitHub.GitHubRetryProxyBuilder;
-import edu.java.webClients.retryProxyBuilders.stackOverflow.StackOverflowRetryProxyBuilder;
+
 import edu.java.webClients.stackOverflow.StackOverflowClient;
 import edu.java.webClients.telegramBot.TelegramBotClient;
 import edu.java.webClients.telegramBot.dto.responses.TelegramBotApiErrorResponse;

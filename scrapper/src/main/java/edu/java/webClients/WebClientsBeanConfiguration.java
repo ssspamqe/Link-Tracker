@@ -35,8 +35,6 @@ import static edu.java.configuration.WebClientRetryType.CONSTANT;
 public class WebClientsBeanConfiguration {
 
     private final ApplicationConfig applicationConfig;
-    private final GitHubRetryProxyBuilder gitHubRetryProxyBuilder;
-    private final StackOverflowRetryProxyBuilder stackOverflowRetryProxyBuilder;
 
     @Bean
     public StackOverflowClient stackOverflowClient() {

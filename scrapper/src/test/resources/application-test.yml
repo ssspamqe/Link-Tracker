@@ -8,8 +8,7 @@ app:
   telegram-bot-config:
     url:
       default-url: http://localhost:8080/
-  cache:
-    cache-names: test-rate-limit-bucket
+
 
 spring:
   liquibase:
@@ -19,6 +18,8 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+  cache:
+    type: none
 
 bucket4j:
   enabled: false

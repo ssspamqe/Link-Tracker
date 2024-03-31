@@ -1,6 +1,5 @@
 package edu.java.webClients.webClientsWithRetry.gitHub;
 
-import edu.java.configuration.ApplicationConfig;
 import edu.java.configuration.RetryConfig;
 import edu.java.webClients.gitHub.GitHubClient;
 import edu.java.webClients.gitHub.dto.GitHubRepositoryActivityBody;

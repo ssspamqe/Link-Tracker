@@ -1,15 +1,14 @@
 package edu.java.webClients.webClientsWithRetry.gitHub;
 
-import edu.java.configuration.ApplicationConfig;
 import edu.java.configuration.RetryConfig;
 import edu.java.webClients.gitHub.GitHubClient;
 import edu.java.webClients.gitHub.dto.GitHubRepositoryActivityBody;
 import edu.java.webClients.gitHub.dto.GitHubRepositoryBody;
+import java.util.List;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
-import java.util.List;
 
-public class GitHubClientWithConstantRetries extends GitHubClientWithRetries{
+public class GitHubClientWithConstantRetries extends GitHubClientWithRetries {
 
     public GitHubClientWithConstantRetries(GitHubClient baseClient, RetryConfig retryConfig) {
         super(baseClient, retryConfig);

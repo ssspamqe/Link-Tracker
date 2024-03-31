@@ -31,7 +31,7 @@ public abstract class TelegramBotClientWithRetries extends WebClientWithReties {
 
     public abstract Mono<Void> sendLinkUpdates(List<LinkUpdate> linkUpdates);
 
-    protected boolean mustBeRetried(Throwable throwable){
+    protected boolean mustBeRetried(Throwable throwable) {
         return mustBeRetried(throwable, retryOnHttpStatuses);
     }
 }

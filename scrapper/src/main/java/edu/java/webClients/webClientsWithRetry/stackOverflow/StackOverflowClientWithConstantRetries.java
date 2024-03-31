@@ -1,12 +1,10 @@
 package edu.java.webClients.webClientsWithRetry.stackOverflow;
 
-import edu.java.configuration.ApplicationConfig;
 import edu.java.configuration.RetryConfig;
 import edu.java.webClients.stackOverflow.StackOverflowClient;
 import edu.java.webClients.stackOverflow.dto.StackOverflowAnswerBody;
 import edu.java.webClients.stackOverflow.dto.StackOverflowQuestionBody;
 import edu.java.webClients.stackOverflow.dto.StackOverflowResponseBody;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 

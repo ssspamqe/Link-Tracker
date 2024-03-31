@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatusCode;
 public enum RetryPolicyHttpStatusCodeGroups {
     INFORMATIONAL, SUCCESSFUL, REDIRECTION, CLIENT_ERROR, SERVER_ERROR;
 
+    @SuppressWarnings({"ReturnCount", "MagicNumber"})
     public static RetryPolicyHttpStatusCodeGroups getGroupByStatusCode(int statusCode) {
         if (statusCode >= 100 && statusCode < 200) {
             return INFORMATIONAL;

@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import java.time.Duration;
 import java.util.Set;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
@@ -43,6 +42,7 @@ public record ApplicationConfig(
         public String getBaseUrl() {
             return url.getBaseUrl();
         }
+
         public boolean isCorrectHostName(String hostName) {
             return hostNames.contains(hostName);
         }

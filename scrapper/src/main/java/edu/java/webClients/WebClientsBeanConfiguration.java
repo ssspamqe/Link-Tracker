@@ -1,10 +1,8 @@
 package edu.java.webClients;
 
 import edu.java.configuration.ApplicationConfig;
-import edu.java.configuration.WebClientRetryType;
 import edu.java.webClients.exceptions.ClientErrorException;
 import edu.java.webClients.gitHub.GitHubClient;
-
 import edu.java.webClients.stackOverflow.StackOverflowClient;
 import edu.java.webClients.telegramBot.TelegramBotClient;
 import edu.java.webClients.telegramBot.dto.responses.TelegramBotApiErrorResponse;
@@ -24,14 +22,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatusCode;
-import org.springframework.web.reactive.function.client.ExchangeFilterFunction;
-import org.springframework.web.reactive.function.client.ExchangeFilterFunctions;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import reactor.core.publisher.Mono;
-import java.util.Stack;
-import static edu.java.configuration.WebClientRetryType.CONSTANT;
 
 @Configuration
 @RequiredArgsConstructor
@@ -46,7 +40,7 @@ public class WebClientsBeanConfiguration {
     }
 
     @Bean
-    public StackOverflowClientWithRetries stackOverflowClientWithRetries(){
+    public StackOverflowClientWithRetries stackOverflowClientWithRetries() {
         var retryConfig = applicationConfig.stackOverflowConfig().retryConfig();
         var type = retryConfig.type();
 
@@ -64,11 +58,11 @@ public class WebClientsBeanConfiguration {
     }
 
     @Bean
-    public GitHubClientWithRetries gitHubClientWithRetries(){
+    public GitHubClientWithRetries gitHubClientWithRetries() {
         var retryConfig = applicationConfig.stackOverflowConfig().retryConfig();
         var type = retryConfig.type();
 
-        return switch (type){
+        return switch (type) {
             case CONSTANT -> new GitHubClientWithConstantRetries(gitHubClient(), retryConfig);
             case LINEAR -> new GitHubClientWithLinearRetries(gitHubClient(), retryConfig);
             case EXPONENTIAL -> new GitHubClientWithExponentialRetries(gitHubClient(), retryConfig);
@@ -90,11 +84,11 @@ public class WebClientsBeanConfiguration {
     }
 
     @Bean
-    public TelegramBotClientWithRetries telegramBotClientWithRetries(){
+    public TelegramBotClientWithRetries telegramBotClientWithRetries() {
         var retryConfig = applicationConfig.stackOverflowConfig().retryConfig();
         var type = retryConfig.type();
 
-        return switch (type){
+        return switch (type) {
             case CONSTANT -> new TelegramBotClientWithConstantRetries(telegramBotClient(), retryConfig);
             case LINEAR -> new TelegramBotClientWithLinearRetries(telegramBotClient(), retryConfig);
             case EXPONENTIAL -> new TelegramBotClientWithExponentialRetries(telegramBotClient(), retryConfig);

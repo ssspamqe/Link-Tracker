@@ -2,6 +2,12 @@ app:
   telegram-token: ${TELEGRAM_API_KEY}
   scrapper-url:
     default-url: http://localhost:8080/scrapper/api/v1
+  scrapper-retry-config:
+    type: constant
+    delay: 2s
+    max-retries: 3
+    retry-on-statuses:
+      - SERVER_ERROR
 
 spring:
   application:

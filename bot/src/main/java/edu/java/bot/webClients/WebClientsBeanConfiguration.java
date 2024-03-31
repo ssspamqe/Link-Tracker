@@ -5,6 +5,14 @@ import edu.java.bot.webClients.exceptions.ClientErrorException;
 import edu.java.bot.webClients.scrapper.ScrapperLinksClient;
 import edu.java.bot.webClients.scrapper.ScrapperTelegramChatClient;
 import edu.java.bot.webClients.scrapper.dto.responses.ScrapperApiErrorResponse;
+import edu.java.bot.webClients.scrapperWithRetries.links.ScrapperLinksClientWithConstantRetries;
+import edu.java.bot.webClients.scrapperWithRetries.links.ScrapperLinksClientWithExponentialRetries;
+import edu.java.bot.webClients.scrapperWithRetries.links.ScrapperLinksClientWithLinearRetries;
+import edu.java.bot.webClients.scrapperWithRetries.links.ScrapperLinksClientWithRetries;
+import edu.java.bot.webClients.scrapperWithRetries.telegramChat.ScrapperTelegramChatClientWithConstantRetries;
+import edu.java.bot.webClients.scrapperWithRetries.telegramChat.ScrapperTelegramChatClientWithExponentialRetries;
+import edu.java.bot.webClients.scrapperWithRetries.telegramChat.ScrapperTelegramChatClientWithLinearRetries;
+import edu.java.bot.webClients.scrapperWithRetries.telegramChat.ScrapperTelegramChatClientWithRetries;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -46,7 +54,31 @@ public class WebClientsBeanConfiguration {
     }
 
     @Bean
+    public ScrapperTelegramChatClientWithRetries scrapperTelegramChatClientWithRetries() {
+        var retryConfig = applicationConfig.scrapperRetryConfig();
+
+        return switch (retryConfig.type()) {
+            case CONSTANT ->
+                new ScrapperTelegramChatClientWithConstantRetries(scrapperTelegramChatClient(), retryConfig);
+            case LINEAR -> new ScrapperTelegramChatClientWithLinearRetries(scrapperTelegramChatClient(), retryConfig);
+            case EXPONENTIAL ->
+                new ScrapperTelegramChatClientWithExponentialRetries(scrapperTelegramChatClient(), retryConfig);
+        };
+    }
+
+    @Bean
     public ScrapperLinksClient scrapperLinksClient() {
         return scrapperWebClientsFactory.createClient(ScrapperLinksClient.class);
+    }
+
+    @Bean
+    public ScrapperLinksClientWithRetries scrapperLinksClientWithRetries() {
+        var retryConfig = applicationConfig.scrapperRetryConfig();
+
+        return switch (retryConfig.type()) {
+            case CONSTANT -> new ScrapperLinksClientWithConstantRetries(scrapperLinksClient(), retryConfig);
+            case LINEAR -> new ScrapperLinksClientWithLinearRetries(scrapperLinksClient(), retryConfig);
+            case EXPONENTIAL -> new ScrapperLinksClientWithExponentialRetries(scrapperLinksClient(), retryConfig);
+        };
     }
 }

@@ -12,7 +12,10 @@ public record ApplicationConfig(
     String telegramToken,
 
     @NotNull
-    ApiUrl scrapperUrl
+    ApiUrl scrapperUrl,
+
+    @NotNull
+    RetryConfig scrapperRetryConfig
 ) {
     public record ApiUrl(@NotBlank String defaultUrl, String configUrl) {
         public String getBaseUrl() {

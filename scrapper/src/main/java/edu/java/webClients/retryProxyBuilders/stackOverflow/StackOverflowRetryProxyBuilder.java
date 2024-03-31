@@ -4,6 +4,7 @@ import edu.java.configuration.RetryPolicyHttpStatusCodeGroups;
 import edu.java.webClients.retryProxyBuilders.ProxyWithRetryBuilder;
 import edu.java.webClients.stackOverflow.StackOverflowClient;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
 import java.time.Duration;
 import java.util.Set;
 import org.springframework.stereotype.Component;
@@ -170,5 +171,14 @@ public class StackOverflowRetryProxyBuilder extends ProxyWithRetryBuilder<StackO
                 return method.invoke(proxy, args);
             }
         };
+    }
+
+    @Override
+    public StackOverflowClient buildProxyWithInvocationHandler(StackOverflowClient object, InvocationHandler handler) {
+        return (StackOverflowClient) Proxy.newProxyInstance(
+            object.getClass().getClassLoader(),
+            new Class[] {StackOverflowClient.class},
+            handler
+        );
     }
 }

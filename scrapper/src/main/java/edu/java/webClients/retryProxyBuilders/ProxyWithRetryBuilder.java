@@ -54,23 +54,8 @@ public abstract class ProxyWithRetryBuilder<T> {
         Set<RetryPolicyHttpStatusCodeGroups> retryOnHttpStatuses
     );
 
-    protected boolean mustBeRetried(Throwable throwable, Set<RetryPolicyHttpStatusCodeGroups> statusCodesToRetryOn) {
-        if (!(throwable instanceof WebClientResponseException)) {
-            return false;
-        }
 
-        var statusCode = ((WebClientResponseException) throwable).getStatusCode();
-        var retryPolicyHttpStatusCode = RetryPolicyHttpStatusCodeGroups.getGroupByStatusCode(statusCode);
 
-        return statusCodesToRetryOn.contains(retryPolicyHttpStatusCode);
-    }
-
-    protected T buildProxyWithInvocationHandler(Object object, InvocationHandler handler) {
-        return (T) Proxy.newProxyInstance(
-            object.getClass().getClassLoader(),
-            new Class[] {object.getClass()},
-            handler
-        );
-    }
+    abstract public T buildProxyWithInvocationHandler(T object, InvocationHandler handler);
 
 }

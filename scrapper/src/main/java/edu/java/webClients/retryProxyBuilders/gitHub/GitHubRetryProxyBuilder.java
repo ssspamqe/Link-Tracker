@@ -4,8 +4,10 @@ import edu.java.configuration.RetryPolicyHttpStatusCodeGroups;
 import edu.java.webClients.gitHub.GitHubClient;
 import edu.java.webClients.retryProxyBuilders.ProxyWithRetryBuilder;
 import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Proxy;
 import java.time.Duration;
 import java.util.Set;
+import edu.java.webClients.stackOverflow.StackOverflowClient;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
@@ -158,11 +160,11 @@ public class GitHubRetryProxyBuilder extends ProxyWithRetryBuilder<GitHubClient>
         GitHubRepositoryActivitiesMonoFetch activitiesCall
     ) {
         return (proxy, method, args) -> {
-            if ("fetchQuestionByIdWithRetries".equals(method.getName())) {
+            if ("fetchRepositoryByNameAndOwnerWithRetries".equals(method.getName())) {
                 String repoName = (String) args[0];
                 String owner = (String) args[1];
                 return repositoryCall.fetch((GitHubClient) proxy, repoName, owner);
-            } else if ("fetchAnswersByQuestionIdWithRetries".equals(method.getName())) {
+            } else if ("fetchRepositoryActivitiesByRepositoryNameAndOwnerWithRetries".equals(method.getName())) {
                 String repoName = (String) args[0];
                 String owner = (String) args[1];
                 return activitiesCall.fetch((GitHubClient) proxy, repoName, owner);
@@ -170,5 +172,14 @@ public class GitHubRetryProxyBuilder extends ProxyWithRetryBuilder<GitHubClient>
                 return method.invoke(proxy, args);
             }
         };
+    }
+
+    @Override
+    public GitHubClient buildProxyWithInvocationHandler(GitHubClient object, InvocationHandler handler) {
+        return (GitHubClient) Proxy.newProxyInstance(
+            object.getClass().getClassLoader(),
+            new Class[] {GitHubClient.class},
+            handler
+        );
     }
 }

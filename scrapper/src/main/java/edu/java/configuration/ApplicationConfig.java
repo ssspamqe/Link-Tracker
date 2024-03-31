@@ -65,10 +65,4 @@ public record ApplicationConfig(
     public enum DatabaseAccessType {
         JDBC, JPA, JOOQ
     }
-
-
-    public enum WebClientRetryType {
-        CONSTANT, LINEAR, EXPONENTIAL
-    }
-
 }

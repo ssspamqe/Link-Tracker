@@ -16,6 +16,10 @@ import edu.java.webClients.webClientsWithRetry.stackOverflow.StackOverflowClient
 import edu.java.webClients.webClientsWithRetry.stackOverflow.StackOverflowClientWithExponentialRetries;
 import edu.java.webClients.webClientsWithRetry.stackOverflow.StackOverflowClientWithLinearRetries;
 import edu.java.webClients.webClientsWithRetry.stackOverflow.StackOverflowClientWithRetries;
+import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithConstantRetries;
+import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithExponentialRetries;
+import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithLinearRetries;
+import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithRetries;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -83,6 +87,18 @@ public class WebClientsBeanConfiguration {
         WebClientAdapter adapter = WebClientAdapter.create(webClient);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
         return factory.createClient(TelegramBotClient.class);
+    }
+
+    @Bean
+    public TelegramBotClientWithRetries telegramBotClientWithRetries(){
+        var retryConfig = applicationConfig.stackOverflowConfig().retryConfig();
+        var type = retryConfig.type();
+
+        return switch (type){
+            case CONSTANT -> new TelegramBotClientWithConstantRetries(telegramBotClient(), retryConfig);
+            case LINEAR -> new TelegramBotClientWithLinearRetries(telegramBotClient(), retryConfig);
+            case EXPONENTIAL -> new TelegramBotClientWithExponentialRetries(telegramBotClient(), retryConfig);
+        };
     }
 
     private <T> T createDefaultWebClient(String url, Class<T> webClientInterface) {

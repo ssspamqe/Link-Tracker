@@ -18,12 +18,12 @@ public class StackOverflowRetryProxyBuilder extends ProxyWithRetryBuilder<StackO
         StackOverflowClient webClientObject,
         Duration delay,
         int maxRetries,
-        Set<RetryPolicyHttpStatusCodeGroups> httpsStatusesToRetryOn
+        Set<RetryPolicyHttpStatusCodeGroups> retryOnHttpStatuses
     ) {
 
         StackOverflowQuestionMonoFetch questionCall =
-            buildConstantQuestionCall(delay, maxRetries, httpsStatusesToRetryOn);
-        StackOverflowAnswersMonoFetch answersCall = buildConstantAnswersCall(delay, maxRetries, httpsStatusesToRetryOn);
+            buildConstantQuestionCall(delay, maxRetries, retryOnHttpStatuses);
+        StackOverflowAnswersMonoFetch answersCall = buildConstantAnswersCall(delay, maxRetries, retryOnHttpStatuses);
 
         InvocationHandler handler = buildInvocationHandler(questionCall, answersCall);
 
@@ -59,11 +59,11 @@ public class StackOverflowRetryProxyBuilder extends ProxyWithRetryBuilder<StackO
         StackOverflowClient webClientObject,
         Duration delay,
         int maxRetries,
-        Set<RetryPolicyHttpStatusCodeGroups> httpsStatusesToRetryOn
+        Set<RetryPolicyHttpStatusCodeGroups> retryOnHttpStatuses
     ) {
         StackOverflowQuestionMonoFetch questionCall =
-            buildLinearQuestionCall(delay, maxRetries, httpsStatusesToRetryOn);
-        StackOverflowAnswersMonoFetch answersCall = buildLinearAnswersCall(delay, maxRetries, httpsStatusesToRetryOn);
+            buildLinearQuestionCall(delay, maxRetries, retryOnHttpStatuses);
+        StackOverflowAnswersMonoFetch answersCall = buildLinearAnswersCall(delay, maxRetries, retryOnHttpStatuses);
 
         InvocationHandler handler = buildInvocationHandler(questionCall, answersCall);
 
@@ -119,12 +119,12 @@ public class StackOverflowRetryProxyBuilder extends ProxyWithRetryBuilder<StackO
         StackOverflowClient webClientObject,
         Duration delay,
         int maxRetries,
-        Set<RetryPolicyHttpStatusCodeGroups> httpsStatusesToRetryOn
+        Set<RetryPolicyHttpStatusCodeGroups> retryOnHttpStatuses
     ) {
         StackOverflowQuestionMonoFetch questionCall =
-            buildExponentialQuestionMonoFetch(delay, maxRetries, httpsStatusesToRetryOn);
+            buildExponentialQuestionMonoFetch(delay, maxRetries, retryOnHttpStatuses);
         StackOverflowAnswersMonoFetch answersCall =
-            buildExponentialAnswersMonoFetch(delay, maxRetries, httpsStatusesToRetryOn);
+            buildExponentialAnswersMonoFetch(delay, maxRetries, retryOnHttpStatuses);
 
         InvocationHandler handler = buildInvocationHandler(questionCall, answersCall);
 

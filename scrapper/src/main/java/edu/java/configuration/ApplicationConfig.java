@@ -53,10 +53,6 @@ public record ApplicationConfig(
         }
     }
 
-    public record RetryConfig(@NotNull RetryType type, @NotNull Duration delay, @NotNull int maxRetries,
-                              Set<RetryPolicyHttpStatusCodeGroups> retryOnStatuses) {
-    }
-
     public record ApiUrl(@NotBlank String defaultUrl, String configUrl) {
         public String getBaseUrl() {
             if (configUrl == null) {
@@ -71,7 +67,7 @@ public record ApplicationConfig(
     }
 
 
-    public enum RetryType {
+    public enum WebClientRetryType {
         CONSTANT, LINEAR, EXPONENTIAL
     }
 

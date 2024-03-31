@@ -6,19 +6,21 @@ import edu.java.webClients.retryProxyBuilders.ProxyWithRetryBuilder;
 import java.lang.reflect.InvocationHandler;
 import java.time.Duration;
 import java.util.Set;
+import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;
 
+@Component
 public class GitHubRetryProxyBuilder extends ProxyWithRetryBuilder<GitHubClient> {
     @Override
     public GitHubClient buildProxyWithConstantRetry(
         GitHubClient webClientObject,
         Duration delay,
         int maxRetries,
-        Set<RetryPolicyHttpStatusCodeGroups> httpsStatusesToRetryOn
+        Set<RetryPolicyHttpStatusCodeGroups> retryOnHttpStatuses
     ) {
-        var repositoryCall = buildConstantRepositoryCall(delay, maxRetries, httpsStatusesToRetryOn);
-        var activitiesCall = buildConstantRepositoryActivitiesCall(delay, maxRetries, httpsStatusesToRetryOn);
+        var repositoryCall = buildConstantRepositoryCall(delay, maxRetries, retryOnHttpStatuses);
+        var activitiesCall = buildConstantRepositoryActivitiesCall(delay, maxRetries, retryOnHttpStatuses);
 
         InvocationHandler handler = buildInvocationHandler(repositoryCall, activitiesCall);
 
@@ -56,10 +58,10 @@ public class GitHubRetryProxyBuilder extends ProxyWithRetryBuilder<GitHubClient>
         GitHubClient webClientObject,
         Duration delay,
         int maxRetries,
-        Set<RetryPolicyHttpStatusCodeGroups> httpsStatusesToRetryOn
+        Set<RetryPolicyHttpStatusCodeGroups> retryOnHttpStatuses
     ) {
-        var repositoryCall = buildLinearRepositoryCall(delay, maxRetries, httpsStatusesToRetryOn);
-        var repositoryActivitiesCall = buildLinearRepositoryActivitiesCall(delay, maxRetries, httpsStatusesToRetryOn);
+        var repositoryCall = buildLinearRepositoryCall(delay, maxRetries, retryOnHttpStatuses);
+        var repositoryActivitiesCall = buildLinearRepositoryActivitiesCall(delay, maxRetries, retryOnHttpStatuses);
 
         var handler = buildInvocationHandler(repositoryCall, repositoryActivitiesCall);
 
@@ -115,10 +117,10 @@ public class GitHubRetryProxyBuilder extends ProxyWithRetryBuilder<GitHubClient>
         GitHubClient webClientObject,
         Duration delay,
         int maxRetries,
-        Set<RetryPolicyHttpStatusCodeGroups> httpsStatusesToRetryOn
+        Set<RetryPolicyHttpStatusCodeGroups> retryOnHttpStatuses
     ) {
-        var repositoryCall = buildExponentialRepositoryCall(delay, maxRetries, httpsStatusesToRetryOn);
-        var activitiesCall = buildExponentialRepositoryActivitiesCall(delay, maxRetries, httpsStatusesToRetryOn);
+        var repositoryCall = buildExponentialRepositoryCall(delay, maxRetries, retryOnHttpStatuses);
+        var activitiesCall = buildExponentialRepositoryActivitiesCall(delay, maxRetries, retryOnHttpStatuses);
 
         var handler = buildInvocationHandler(repositoryCall, activitiesCall);
 

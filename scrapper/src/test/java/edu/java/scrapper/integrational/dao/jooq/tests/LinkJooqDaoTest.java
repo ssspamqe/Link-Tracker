@@ -6,6 +6,8 @@ import edu.java.data.dto.Link;
 import edu.java.scrapper.integrational.DatabaseIntegrationEnvironment;
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -84,7 +86,7 @@ public class LinkJooqDaoTest extends DatabaseIntegrationEnvironment {
     @Test
     public void should_updateLastChecked() {
         long linkId = saveLinkWithUrl("https://example.org");
-        LocalDateTime expectedLastChecked = LocalDateTime.of(2000, 1, 1, 1, 1);
+        OffsetDateTime expectedLastChecked = OffsetDateTime.of(2000, 1, 1, 0, 0,0,0, ZoneOffset.UTC);
 
         linkDao.updateLastCheckedAtById(expectedLastChecked, linkId);
 
@@ -98,7 +100,7 @@ public class LinkJooqDaoTest extends DatabaseIntegrationEnvironment {
             "('https://example.org', '1970-01-01 00:00:00', '1980-01-01 00:00:00'), " +
             "('https://example2.org', '1970-01-01 00:00:00', '1990-01-01 00:00:00'), " +
             "('https://example3.org', '1970-01-01 00:00:00', '2000-01-01 00:00:00')");
-        LocalDateTime borderDateTime = LocalDateTime.of(1996, 1, 1, 0, 0);
+        OffsetDateTime borderDateTime = OffsetDateTime.of(1996, 1, 1, 0, 0,0,0, ZoneOffset.UTC);
 
         Set<String> actualLinkUrls = linkDao
             .findByLastCheckedAtBefore(borderDateTime).stream()

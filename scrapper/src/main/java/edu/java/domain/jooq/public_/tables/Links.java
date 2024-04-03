@@ -7,7 +7,7 @@ package edu.java.domain.jooq.public_.tables;
 import edu.java.domain.jooq.public_.Public;
 import edu.java.domain.jooq.public_.tables.records.LinksRecord;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.annotation.processing.Generated;
 
@@ -48,9 +48,9 @@ public class Links extends TableImpl<LinksRecord> {
 
     public final TableField<LinksRecord, String> URL = createField(DSL.name("url"), SQLDataType.CLOB.nullable(false), this, "");
 
-    public final TableField<LinksRecord, LocalDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.LOCALDATETIME(6).nullable(false), this, "");
+    public final TableField<LinksRecord, OffsetDateTime> CREATED_AT = createField(DSL.name("created_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false), this, "");
 
-    public final TableField<LinksRecord, LocalDateTime> LAST_CHECKED_AT = createField(DSL.name("last_checked_at"), SQLDataType.LOCALDATETIME(6).nullable(false).defaultValue(DSL.field(DSL.raw("'1970-01-01 00:00:00'::timestamp without time zone"), SQLDataType.LOCALDATETIME)), this, "");
+    public final TableField<LinksRecord, OffsetDateTime> LAST_CHECKED_AT = createField(DSL.name("last_checked_at"), SQLDataType.TIMESTAMPWITHTIMEZONE(6).nullable(false).defaultValue(DSL.field(DSL.raw("'1970-01-01 03:00:00+03'::timestamp with time zone"), SQLDataType.TIMESTAMPWITHTIMEZONE)), this, "");
 
     private Links(Name alias, Table<LinksRecord> aliased) {
         this(alias, aliased, null);

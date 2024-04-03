@@ -6,6 +6,7 @@ import edu.java.linkUpdateScheduler.exceptions.IncorrectHostException;
 import edu.java.linkUpdateScheduler.linkUpdatesCheckers.allUpdatesCheckers.LinkAllUpdatesChecker;
 import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -29,7 +30,7 @@ public class UniversalLinkUpdatesChecker {
 
             }
         }
-        linkDao.updateLastCheckedAtById(LocalDateTime.now(), link.getId());
+        linkDao.updateLastCheckedAtById(OffsetDateTime.now(), link.getId());
         return List.of();
     }
 }

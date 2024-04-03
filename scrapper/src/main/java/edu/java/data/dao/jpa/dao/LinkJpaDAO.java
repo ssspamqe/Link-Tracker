@@ -9,7 +9,7 @@ import edu.java.data.exceptions.NoSuchLinkException;
 import edu.java.data.initialStateScreeners.UniversalInitialStateScreener;
 import java.net.URI;
 import java.time.Instant;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Optional;
 import java.util.Set;
@@ -63,8 +63,8 @@ public class LinkJpaDAO implements LinkDataAccessObject {
     }
 
     @Override
-    public Set<Link> findByLastCheckedAtBefore(LocalDateTime borderDateTime) {
-        return linkRepository.findByLastCheckedAtBefore(toInstant(borderDateTime)).stream()
+    public Set<Link> findByLastCheckedAtBefore(OffsetDateTime borderDateTime) {
+        return linkRepository.findByLastCheckedAtBefore(borderDateTime.toInstant()).stream()
             .map(linkJpaMapper::toDto)
             .collect(Collectors.toSet());
     }
@@ -80,13 +80,9 @@ public class LinkJpaDAO implements LinkDataAccessObject {
     }
 
     @Override
-    public void updateLastCheckedAtById(LocalDateTime lastChecked, long id) {
+    public void updateLastCheckedAtById(OffsetDateTime lastChecked, long id) {
         var link = findJpaByIdOrThrowException(id);
-        link.setLastCheckedAt(toInstant(lastChecked));
-    }
-
-    private Instant toInstant(LocalDateTime localDateTime) {
-        return localDateTime.atOffset(ZoneOffset.UTC).toInstant();
+        link.setLastCheckedAt(lastChecked.toInstant());
     }
 
     LinkJpaEntity findJpaByIdOrThrowException(long id) {

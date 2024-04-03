@@ -3,6 +3,7 @@ package edu.java.data.dao.jooq.repositories;
 import edu.java.data.dto.Link;
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -24,7 +25,7 @@ public class LinkJooqRepository {
             .fetchOneInto(Link.class);
     }
 
-    public Set<Link> findByLastCheckedAtBefore(LocalDateTime borderDateTime) {
+    public Set<Link> findByLastCheckedAtBefore(OffsetDateTime borderDateTime) {
         return dsl.select()
             .from(LINKS)
             .where(LINKS.LAST_CHECKED_AT.lessThan(borderDateTime))

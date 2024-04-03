@@ -6,7 +6,7 @@ import edu.java.linkUpdateScheduler.linkUpdatesCheckers.UniversalLinkUpdatesChec
 import edu.java.webClients.telegramBot.TelegramBotClient;
 import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -55,8 +55,8 @@ public class LinkUpdateScheduler {
         handleUpdates(allLinkUpdates);
     }
 
-    private LocalDateTime buildBorderCheckTime() {
-        return LocalDateTime.now().minusSeconds(forceCheckDelay.getSeconds());
+    private OffsetDateTime buildBorderCheckTime() {
+        return OffsetDateTime.now().minusSeconds(forceCheckDelay.getSeconds());
     }
 
     private void handleUpdates(List<LinkUpdate> allLinkUpdates) {

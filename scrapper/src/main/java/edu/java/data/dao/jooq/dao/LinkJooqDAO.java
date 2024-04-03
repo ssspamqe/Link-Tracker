@@ -9,6 +9,7 @@ import edu.java.data.exceptions.NoSuchLinkException;
 import edu.java.data.initialStateScreeners.UniversalInitialStateScreener;
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -45,7 +46,7 @@ public class LinkJooqDAO implements LinkDataAccessObject {
     }
 
     @Override
-    public Set<Link> findByLastCheckedAtBefore(LocalDateTime borderDateTime) {
+    public Set<Link> findByLastCheckedAtBefore(OffsetDateTime borderDateTime) {
         return linkRepository.findByLastCheckedAtBefore(borderDateTime);
     }
 
@@ -58,11 +59,12 @@ public class LinkJooqDAO implements LinkDataAccessObject {
     }
 
     @Override
-    public void updateLastCheckedAtById(LocalDateTime lastChecked, long id) {
+    public void updateLastCheckedAtById(OffsetDateTime lastChecked, long id) {
         updateLastCheckedByIdWithoutTransaction(lastChecked, id);
     }
 
-    private void updateLastCheckedByIdWithoutTransaction(LocalDateTime lastChecked, long id) {
+    private void updateLastCheckedByIdWithoutTransaction(OffsetDateTime
+        lastChecked, long id) {
         Link link = findLinkByIdOrThrowException(id);
         link.setLastCheckedAt(lastChecked);
         linkRepository.update(link);

@@ -7,7 +7,7 @@ package edu.java.domain.jooq.public_.tables.records;
 import edu.java.domain.jooq.public_.tables.Links;
 
 import java.beans.ConstructorProperties;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.annotation.processing.Generated;
 
@@ -47,23 +47,23 @@ public class LinksRecord extends TableRecordImpl<LinksRecord> {
         return (String) get(1);
     }
 
-    public void setCreatedAt(@NotNull LocalDateTime value) {
+    public void setCreatedAt(@NotNull OffsetDateTime value) {
         set(2, value);
     }
 
     @jakarta.validation.constraints.NotNull
     @NotNull
-    public LocalDateTime getCreatedAt() {
-        return (LocalDateTime) get(2);
+    public OffsetDateTime getCreatedAt() {
+        return (OffsetDateTime) get(2);
     }
 
-    public void setLastCheckedAt(@Nullable LocalDateTime value) {
+    public void setLastCheckedAt(@Nullable OffsetDateTime value) {
         set(3, value);
     }
 
     @Nullable
-    public LocalDateTime getLastCheckedAt() {
-        return (LocalDateTime) get(3);
+    public OffsetDateTime getLastCheckedAt() {
+        return (OffsetDateTime) get(3);
     }
 
     // -------------------------------------------------------------------------
@@ -75,7 +75,7 @@ public class LinksRecord extends TableRecordImpl<LinksRecord> {
     }
 
     @ConstructorProperties({ "id", "url", "createdAt", "lastCheckedAt" })
-    public LinksRecord(@Nullable Long id, @NotNull String url, @NotNull LocalDateTime createdAt, @Nullable LocalDateTime lastCheckedAt) {
+    public LinksRecord(@Nullable Long id, @NotNull String url, @NotNull OffsetDateTime createdAt, @Nullable OffsetDateTime lastCheckedAt) {
         super(Links.LINKS);
 
         setId(id);

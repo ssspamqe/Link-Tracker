@@ -2,7 +2,7 @@ package edu.java.data.dao.interfaces;
 
 import edu.java.data.dto.Link;
 import java.net.URI;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -14,9 +14,9 @@ public interface LinkDataAccessObject {
 
     Link saveOrFindByUrl(URI url);
 
-    Set<Link> findByLastCheckedAtBefore(LocalDateTime borderDateTime);
+    Set<Link> findByLastCheckedAtBefore(OffsetDateTime borderDateTime);
 
     Set<Long> findAssociatedChatsIdsByLinkId(long id);
 
-    void updateLastCheckedAtById(LocalDateTime lastChecked, long id);
+    void updateLastCheckedAtById(OffsetDateTime lastChecked, long id);
 }

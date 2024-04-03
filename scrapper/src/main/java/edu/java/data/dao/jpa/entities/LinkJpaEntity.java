@@ -10,8 +10,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.net.URI;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.Collection;
 import java.util.HashSet;
 import lombok.AllArgsConstructor;
@@ -39,7 +37,7 @@ public class LinkJpaEntity {
     private Instant createdAt = Instant.now();
 
     @Column(name = "last_checked_at", columnDefinition = "TIMESTAMP") @SuppressWarnings("MagicNumber")
-    private Instant lastCheckedAt = LocalDateTime.of(1970, 1, 1, 0, 0).toInstant(ZoneOffset.UTC);
+    private Instant lastCheckedAt;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "link")
     private Collection<AssociationJpa> associations = new HashSet<>();

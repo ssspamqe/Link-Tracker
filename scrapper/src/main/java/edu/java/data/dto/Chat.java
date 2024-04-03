@@ -1,7 +1,7 @@
 package edu.java.data.dto;
 
 import edu.java.data.dao.jpa.entities.utils.mappers.support.Default;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 
@@ -10,15 +10,15 @@ public class Chat {
 
     @Id
     private long id;
-    private LocalDateTime createdAt;
+    private OffsetDateTime createdAt;
 
     @Default
-    public Chat(long id, LocalDateTime createdAt) {
+    public Chat(long id, OffsetDateTime createdAt) {
         this.id = id;
         this.createdAt = createdAt;
     }
 
     public Chat(long id) {
-        this(id, LocalDateTime.now());
+        this(id, OffsetDateTime.now());
     }
 }

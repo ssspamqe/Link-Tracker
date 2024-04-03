@@ -6,7 +6,7 @@ package edu.java.domain.jooq.public_.tables.pojos;
 
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.annotation.processing.Generated;
 
@@ -28,8 +28,8 @@ public class Links implements Serializable {
 
     private Long id;
     private String url;
-    private LocalDateTime createdAt;
-    private LocalDateTime lastCheckedAt;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime lastCheckedAt;
 
     public Links() {}
 
@@ -44,8 +44,8 @@ public class Links implements Serializable {
     public Links(
         @Nullable Long id,
         @NotNull String url,
-        @NotNull LocalDateTime createdAt,
-        @Nullable LocalDateTime lastCheckedAt
+        @NotNull OffsetDateTime createdAt,
+        @Nullable OffsetDateTime lastCheckedAt
     ) {
         this.id = id;
         this.url = url;
@@ -74,20 +74,20 @@ public class Links implements Serializable {
 
     @jakarta.validation.constraints.NotNull
     @NotNull
-    public LocalDateTime getCreatedAt() {
+    public OffsetDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public void setCreatedAt(@NotNull LocalDateTime createdAt) {
+    public void setCreatedAt(@NotNull OffsetDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
     @Nullable
-    public LocalDateTime getLastCheckedAt() {
+    public OffsetDateTime getLastCheckedAt() {
         return this.lastCheckedAt;
     }
 
-    public void setLastCheckedAt(@Nullable LocalDateTime lastCheckedAt) {
+    public void setLastCheckedAt(@Nullable OffsetDateTime lastCheckedAt) {
         this.lastCheckedAt = lastCheckedAt;
     }
 

@@ -5,6 +5,7 @@ import edu.java.data.dto.Link;
 import java.net.URI;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
@@ -60,10 +61,9 @@ public class LinkJdbcRepository {
     }
 
     @SuppressWarnings("MultipleStringLiterals")
-    public Set<Link> findByLastCheckedAtBefore(LocalDateTime borderTime) {
-        Timestamp sqlTimestamp = Timestamp.valueOf(borderTime);
+    public Set<Link> findByLastCheckedAtBefore(OffsetDateTime borderTime) {
         return jdbcClient.sql(FIND_BY_LAST_CHECK_DELAY_QUERY)
-            .param("timestamp", sqlTimestamp)
+            .param("timestamp", borderTime)
             .query(ROW_MAPPER)
             .set();
     }

@@ -15,7 +15,7 @@ public class ChatLinksJooqRepository {
         dsl.insertInto(CHAT_LINKS)
             .set(CHAT_LINKS.CHAT_ID, chatLink.getChatId())
             .set(CHAT_LINKS.LINK_ID, chatLink.getLinkId())
-            .set(CHAT_LINKS.CREATED_AT, chatLink.getCreatedAt())
+            .set(CHAT_LINKS.CREATED_AT, chatLink.getCreatedAt().toLocalDateTime())
             .execute();
 
     }

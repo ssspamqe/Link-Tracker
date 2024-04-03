@@ -8,7 +8,6 @@ import edu.java.data.dto.Link;
 import edu.java.data.exceptions.NoSuchLinkException;
 import edu.java.data.initialStateScreeners.UniversalInitialStateScreener;
 import java.net.URI;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.Set;
@@ -63,8 +62,10 @@ public class LinkJooqDAO implements LinkDataAccessObject {
         updateLastCheckedByIdWithoutTransaction(lastChecked, id);
     }
 
-    private void updateLastCheckedByIdWithoutTransaction(OffsetDateTime
-        lastChecked, long id) {
+    private void updateLastCheckedByIdWithoutTransaction(
+        OffsetDateTime
+            lastChecked, long id
+    ) {
         Link link = findLinkByIdOrThrowException(id);
         link.setLastCheckedAt(lastChecked);
         linkRepository.update(link);

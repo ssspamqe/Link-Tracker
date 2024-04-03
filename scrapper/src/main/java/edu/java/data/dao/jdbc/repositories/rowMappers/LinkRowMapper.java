@@ -4,7 +4,6 @@ import edu.java.data.dto.Link;
 import java.net.URI;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import org.springframework.jdbc.core.RowMapper;
 

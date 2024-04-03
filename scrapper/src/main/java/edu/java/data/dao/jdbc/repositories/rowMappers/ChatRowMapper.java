@@ -3,7 +3,6 @@ package edu.java.data.dao.jdbc.repositories.rowMappers;
 import edu.java.data.dto.Chat;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import org.springframework.jdbc.core.RowMapper;

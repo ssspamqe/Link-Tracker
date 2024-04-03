@@ -3,8 +3,6 @@ package edu.java.data.dao.jdbc.repositories;
 import edu.java.data.dao.jdbc.repositories.rowMappers.LinkRowMapper;
 import edu.java.data.dto.Link;
 import java.net.URI;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.Optional;
 import java.util.Set;

@@ -67,7 +67,11 @@ public record ApplicationConfig(
         }
     }
 
-    public record KafkaTopicConfiguration(@NotNull String name, Integer partitions, Integer replicas) {
+    public record KafkaTopicConfiguration(
+        @NotNull String name,
+        Integer partitions,
+        Integer replicas
+    ) {
     }
 
     public enum DatabaseAccessType {

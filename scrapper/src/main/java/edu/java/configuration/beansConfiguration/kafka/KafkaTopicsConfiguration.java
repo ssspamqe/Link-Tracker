@@ -1,4 +1,4 @@
-package edu.java.configuration.beansConfiguration;
+package edu.java.configuration.beansConfiguration.kafka;
 
 import edu.java.configuration.ApplicationConfig;
 import jakarta.annotation.PostConstruct;
@@ -14,7 +14,7 @@ import org.springframework.kafka.core.KafkaAdmin;
 
 @Configuration
 @RequiredArgsConstructor
-public class KafkaConfiguration {
+public class KafkaTopicsConfiguration {
 
     private static final int PARTITIONS_DEFAULT = 1;
     private static final int REPLICAS_DEFAULT = 1;

@@ -1,6 +1,7 @@
 package edu.java.configuration;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.Duration;
 import java.util.Set;
@@ -31,7 +32,10 @@ public record ApplicationConfig(
     TelegramBotConfig telegramBotConfig,
 
     @NotNull
-    DatabaseAccessType databaseAccessType
+    DatabaseAccessType databaseAccessType,
+
+    @NotEmpty
+    Set<KafkaTopicConfiguration> kafkaTopicConfigurations
 ) {
 
     public record SchedulerConfig(boolean enable, @NotNull Duration interval, @NotNull Duration forceCheckDelay) {
@@ -61,6 +65,9 @@ public record ApplicationConfig(
             }
             return configUrl;
         }
+    }
+
+    public record KafkaTopicConfiguration(@NotNull String name, Integer partitions, Integer replicas) {
     }
 
     public enum DatabaseAccessType {

@@ -9,6 +9,7 @@ import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.RetryableTopic;
 import org.springframework.kafka.retrytopic.DltStrategy;
+import org.springframework.kafka.retrytopic.TopicSuffixingStrategy;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,7 @@ public class MessageListener {
 
     @RetryableTopic(attempts = "1",
                     kafkaTemplate = "retryableTopicKafkaTemplate",
+                    dltTopicSuffix = "_dlt",
                     dltStrategy = DltStrategy.FAIL_ON_ERROR)
     @KafkaListener(topics = "linkUpdates", groupId = "mainGroup")
     public void listenToLinkUpdates(@Payload LinkUpdate update) {

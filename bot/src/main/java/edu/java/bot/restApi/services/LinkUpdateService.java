@@ -4,6 +4,7 @@ import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
 import edu.java.bot.restApi.dto.requests.LinkUpdate;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ public class LinkUpdateService {
 
     private void handleLinkUpdate(LinkUpdate linkUpdate) {
         String messageText = buildMessageText(linkUpdate);
-        List<Long> chats = linkUpdate.tgChatIds();
+        List<Long> chats = new ArrayList<>();
         chats.forEach(chatId -> sendMessageToChatId(messageText, chatId));
     }
 
@@ -30,13 +31,13 @@ public class LinkUpdateService {
     }
 
     private String buildMessageText(LinkUpdate linkUpdate) {
-        URI url = URI.create(linkUpdate.url());
+        URI url = URI.create("");
         String hostName = url.getHost();
-        String updateMessage = linkUpdate.type().getMessage();
+        //String updateMessage = linkUpdate.type().getMessage();
 
-        return "Hello!\n"
-            + STR."There is new update on \{hostName}: \{updateMessage}\n"
-            + STR."(full url: \{linkUpdate.url()})";
+        return "Hello!\n";
+           // + STR."There is new update on \{hostName}: \{updateMessage}\n"
+            //+ STR."(full url: \{linkUpdate.url()})";
     }
 
 }

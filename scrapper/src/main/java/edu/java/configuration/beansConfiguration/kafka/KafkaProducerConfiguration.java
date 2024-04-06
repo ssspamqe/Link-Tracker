@@ -20,7 +20,6 @@ public class KafkaProducerConfiguration {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
-    @Bean
     public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092"); //TODO use application.yml

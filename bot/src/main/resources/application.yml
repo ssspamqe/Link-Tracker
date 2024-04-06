@@ -9,11 +9,20 @@ app:
     retry-on-statuses:
       - SERVER_ERROR
 
+  kafka-topic-configurations:
+    - name: linkUpdates
+      partitions: 1
+      replicas: 1
+
 spring:
   application:
     name: bot
   jackson:
     time-zone: UTC
+  kafka:
+    consumer:
+      properties:
+        spring.json.trusted.packages: "*"
 
 server:
   port: 8090
@@ -25,3 +34,4 @@ springdoc:
   show-actuator: true
   swagger-ui:
     path: /bot/api/v1/swagger-ui
+

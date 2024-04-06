@@ -13,11 +13,13 @@ public class LinkUpdateService {
 
     private final TelegramBot telegramBot;
 
+
+
     public void sendUpdatesToBot(List<LinkUpdate> linkUpdates) {
-        linkUpdates.forEach(this::handleLinkUpdate);
+        linkUpdates.forEach(this::sendUpdateToBot);
     }
 
-    private void handleLinkUpdate(LinkUpdate linkUpdate) {
+    public void sendUpdateToBot(LinkUpdate linkUpdate) {
         String messageText = buildMessageText(linkUpdate);
         List<Long> chats = linkUpdate.tgChatIds();
         chats.forEach(chatId -> sendMessageToChatId(messageText, chatId));

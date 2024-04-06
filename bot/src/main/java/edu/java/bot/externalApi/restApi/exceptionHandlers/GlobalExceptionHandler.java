@@ -1,6 +1,6 @@
-package edu.java.bot.restApi.exceptionHandlers;
+package edu.java.bot.externalApi.restApi.exceptionHandlers;
 
-import edu.java.bot.restApi.dto.responses.ApiErrorResponse;
+import edu.java.bot.externalApi.dto.responses.ApiErrorResponse;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;

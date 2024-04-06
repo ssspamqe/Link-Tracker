@@ -1,7 +1,7 @@
-package edu.java.bot.restApi.controllers;
+package edu.java.bot.externalApi.restApi.controllers;
 
-import edu.java.bot.restApi.dto.requests.LinkUpdate;
-import edu.java.bot.restApi.services.LinkUpdateService;
+import edu.java.bot.externalApi.services.LinkUpdateService;
+import edu.java.bot.externalApi.dto.requests.LinkUpdate;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

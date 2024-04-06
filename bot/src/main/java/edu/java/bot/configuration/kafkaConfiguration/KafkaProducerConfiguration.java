@@ -1,6 +1,6 @@
 package edu.java.bot.configuration.kafkaConfiguration;
 
-import edu.java.bot.restApi.dto.requests.LinkUpdate;
+import edu.java.bot.externalApi.dto.requests.LinkUpdate;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.producer.ProducerConfig;

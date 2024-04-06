@@ -1,6 +1,6 @@
-package edu.java.bot.kafka;
+package edu.java.bot.externalApi.kafka;
 
-import edu.java.bot.restApi.dto.requests.LinkUpdate;
+import edu.java.bot.externalApi.dto.requests.LinkUpdate;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.kafka.annotation.DltHandler;

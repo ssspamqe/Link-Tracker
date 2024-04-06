@@ -1,8 +1,7 @@
-package edu.java.bot.externApi.restApi.dto.requests;
+package edu.java.bot.externalApi.dto.requests;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.net.URI;
 import java.util.List;

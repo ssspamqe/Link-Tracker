@@ -1,6 +1,6 @@
-package edu.java.restApi.controllers;
+package edu.java.externalApi.restApi.controllers;
 
-import edu.java.restApi.services.TelegramChatService;
+import edu.java.externalApi.services.TelegramChatService;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package edu.java.restApi.services;
+package edu.java.externalApi.services;
 
 import edu.java.data.dao.interfaces.ChatDataAccessObject;
 import edu.java.data.dto.Chat;

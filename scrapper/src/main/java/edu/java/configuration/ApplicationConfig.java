@@ -1,7 +1,9 @@
 package edu.java.configuration;
 
+import edu.java.configuration.exceptions.EmptyKafkaPropertiesException;
+import edu.java.configuration.exceptions.EmptyTelegramBotClientPropertiesException;
+import jakarta.annotation.PostConstruct;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.time.Duration;
 import java.util.Set;
@@ -29,14 +31,24 @@ public record ApplicationConfig(
     ThirdPartyServiceConfig gitHubConfig,
 
     @NotNull
-    TelegramBotConfig telegramBotConfig,
-
-    @NotNull
     DatabaseAccessType databaseAccessType,
 
-    @NotEmpty
+    @NotNull
+    boolean useQueue,
+
+    TelegramBotConfig telegramBotConfig,
+
     Set<KafkaTopicConfiguration> kafkaTopicConfigurations
 ) {
+
+    @PostConstruct
+    private void init() {
+        if (useQueue && kafkaTopicConfigurations == null) {
+            throw new EmptyKafkaPropertiesException();
+        } else if (!useQueue && telegramBotConfig == null) {
+            throw new EmptyTelegramBotClientPropertiesException();
+        }
+    }
 
     public record SchedulerConfig(boolean enable, @NotNull Duration interval, @NotNull Duration forceCheckDelay) {
     }

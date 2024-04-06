@@ -1,10 +1,10 @@
-package edu.java.restApi.controllers;
+package edu.java.externalApi.restApi.controllers;
 
-import edu.java.restApi.controllers.dto.requests.AddLinkRequest;
-import edu.java.restApi.controllers.dto.requests.RemoveLinkRequest;
-import edu.java.restApi.controllers.dto.responses.LinkResponse;
-import edu.java.restApi.controllers.dto.responses.ListLinksResponse;
-import edu.java.restApi.services.LinkService;
+import edu.java.externalApi.dto.requests.AddLinkRequest;
+import edu.java.externalApi.dto.requests.RemoveLinkRequest;
+import edu.java.externalApi.dto.responses.LinkResponse;
+import edu.java.externalApi.dto.responses.ListLinksResponse;
+import edu.java.externalApi.services.LinkService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import java.net.URI;

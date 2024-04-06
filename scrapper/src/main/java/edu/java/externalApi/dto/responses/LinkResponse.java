@@ -1,4 +1,4 @@
-package edu.java.restApi.controllers.dto.responses;
+package edu.java.externalApi.dto.responses;
 
 import edu.java.data.dto.Link;
 import edu.java.data.redis.documents.CachedLink;

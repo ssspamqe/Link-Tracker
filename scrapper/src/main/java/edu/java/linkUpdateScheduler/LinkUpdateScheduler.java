@@ -3,12 +3,14 @@ package edu.java.linkUpdateScheduler;
 import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dto.Link;
 import edu.java.linkUpdateScheduler.linkUpdatesCheckers.UniversalLinkUpdatesChecker;
+import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;
 import edu.java.webClients.telegramBot.TelegramBotClient;
 import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -28,6 +30,7 @@ public class LinkUpdateScheduler {
 
     private final LinkDataAccessObject linkDao;
     private final UniversalLinkUpdatesChecker universalLinkUpdatesChecker;
+    private final LinkUpdatesSender linkUpdatesSender;
     private final TelegramBotClient telegramBotClient;
 
     private boolean contextIsLoaded = false;
@@ -63,7 +66,7 @@ public class LinkUpdateScheduler {
         if (!allLinkUpdates.isEmpty()) {
             LOGGER.debug(STR."Sending \{allLinkUpdates.size()} updates to bot...");
             try {
-                telegramBotClient.sendLinkUpdates(allLinkUpdates);
+                linkUpdatesSender.sendUpdates(new HashSet<>(allLinkUpdates));
                 LOGGER.debug(STR."Sent \{allLinkUpdates.size()} updates to bot");
             } catch (Exception ex) {
                 LOGGER.warn("Can't send updates to bot, because of {}", ex.getMessage());

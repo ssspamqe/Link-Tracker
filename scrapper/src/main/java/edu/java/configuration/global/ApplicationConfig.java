@@ -41,7 +41,8 @@ public record ApplicationConfig(
     @PostConstruct
     private void init() {
         if (!useQueue && telegramBotConfig == null) {
-            throw new EmptyTelegramBotClientPropertiesException("Telegram bot web client must be set up, when queue turned off");
+            throw new EmptyTelegramBotClientPropertiesException(
+                "Telegram bot web client must be set up, when queue turned off");
         }
     }
 

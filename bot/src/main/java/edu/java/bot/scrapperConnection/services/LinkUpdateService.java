@@ -1,4 +1,4 @@
-package edu.java.bot.scrapperConnection.restApi.services;
+package edu.java.bot.scrapperConnection.services;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service;
 public class LinkUpdateService {
 
     private final TelegramBot telegramBot;
-
-
 
     public void sendUpdatesToBot(List<LinkUpdate> linkUpdates) {
         linkUpdates.forEach(this::sendUpdateToBot);

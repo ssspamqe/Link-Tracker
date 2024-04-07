@@ -1,7 +1,8 @@
 package edu.java.bot.scrapperConnection.kafka;
 
 import edu.java.bot.scrapperConnection.dto.linkUpdate.LinkUpdate;
-import edu.java.bot.scrapperConnection.restApi.services.LinkUpdateService;
+import edu.java.bot.scrapperConnection.services.LinkUpdateService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,7 +26,7 @@ public class MessageListener {
                     dltTopicSuffix = "${kafka.dlt-topic-suffix}",
                     dltStrategy = DltStrategy.FAIL_ON_ERROR)
     @KafkaListener(topics = "linkUpdates", groupId = "mainGroup")
-    public void listenToLinkUpdates(@Payload LinkUpdate update) {
+    public void listenToLinkUpdates(@Valid @Payload LinkUpdate update) {
         LOGGER.debug("Got new update:" + update);
         linkUpdateService.sendUpdateToBot(update);
     }

@@ -17,7 +17,7 @@ public class LinkUpdatesQueueProducer {
     public void send(LinkUpdate update) {
         LOGGER.warn("Sending message to kafka...");
         try {
-            LOGGER.warn("topic name: {}",topicName);
+            LOGGER.warn("topic name: {}", topicName);
             kafkaTemplate.send(topicName, update).whenComplete(
                 (sendResult, throwable) -> {
                     if (throwable != null) {

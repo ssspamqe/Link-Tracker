@@ -1,9 +1,9 @@
 package edu.java.linkUpdateScheduler.linkUpdatesSender;
 
-import edu.java.telegramBotConnection.kafka.LinkUpdatesQueueProducer;
 import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
-import lombok.RequiredArgsConstructor;
+import edu.java.telegramBotConnection.kafka.LinkUpdatesQueueProducer;
 import java.util.Set;
+import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class KafkaLinkUpdatesSender implements LinkUpdatesSender {

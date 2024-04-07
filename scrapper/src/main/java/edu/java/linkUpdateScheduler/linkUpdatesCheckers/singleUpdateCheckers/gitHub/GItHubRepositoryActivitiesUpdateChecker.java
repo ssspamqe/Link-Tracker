@@ -1,10 +1,10 @@
 package edu.java.linkUpdateScheduler.linkUpdatesCheckers.singleUpdateCheckers.gitHub;
 
 import edu.java.data.dto.GitHubRepository;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdateType;
 import edu.java.webClients.gitHub.GitHubClient;
 import edu.java.webClients.gitHub.dto.GitHubRepositoryActivityBody;
 import edu.java.webClients.gitHub.dto.GitHubRepositoryBody;
-import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdateType;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;

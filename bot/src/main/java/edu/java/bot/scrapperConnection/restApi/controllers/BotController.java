@@ -1,7 +1,7 @@
 package edu.java.bot.scrapperConnection.restApi.controllers;
 
-import edu.java.bot.scrapperConnection.restApi.services.LinkUpdateService;
 import edu.java.bot.scrapperConnection.dto.linkUpdate.LinkUpdate;
+import edu.java.bot.scrapperConnection.services.LinkUpdateService;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

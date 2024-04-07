@@ -1,8 +1,8 @@
 package edu.java.linkUpdateScheduler.linkUpdatesCheckers.singleUpdateCheckers.stackoverflow;
 
 import edu.java.data.dto.StackOverflowQuestion;
-import edu.java.webClients.stackOverflow.dto.StackOverflowQuestionBody;
 import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdateType;
+import edu.java.webClients.stackOverflow.dto.StackOverflowQuestionBody;
 import org.springframework.stereotype.Component;
 
 @Component

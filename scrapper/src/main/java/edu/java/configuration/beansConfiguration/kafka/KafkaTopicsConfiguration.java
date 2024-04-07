@@ -1,8 +1,6 @@
 package edu.java.configuration.beansConfiguration.kafka;
 
-import edu.java.configuration.global.ApplicationConfig;
 import edu.java.configuration.kafkaConfiguration.KafkaConfig;
-import jakarta.annotation.PostConstruct;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;

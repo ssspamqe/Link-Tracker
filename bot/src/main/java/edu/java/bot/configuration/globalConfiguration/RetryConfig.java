@@ -1,4 +1,4 @@
-package edu.java.configuration;
+package edu.java.bot.configuration.globalConfiguration;
 
 import jakarta.validation.constraints.NotNull;
 import java.time.Duration;

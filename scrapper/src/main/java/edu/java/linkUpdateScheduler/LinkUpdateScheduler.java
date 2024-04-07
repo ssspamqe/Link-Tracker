@@ -31,7 +31,6 @@ public class LinkUpdateScheduler {
     private final LinkDataAccessObject linkDao;
     private final UniversalLinkUpdatesChecker universalLinkUpdatesChecker;
     private final LinkUpdatesSender linkUpdatesSender;
-    private final TelegramBotClient telegramBotClient;
 
     private boolean contextIsLoaded = false;
     @Value("${app.scheduler-config.force-check-delay}")

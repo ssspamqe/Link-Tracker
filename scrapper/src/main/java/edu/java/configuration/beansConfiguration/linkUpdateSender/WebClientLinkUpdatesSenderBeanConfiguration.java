@@ -1,6 +1,6 @@
 package edu.java.configuration.beansConfiguration.linkUpdateSender;
 
-import edu.java.configuration.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfig;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.WebClientLinkUpdatesSender;
 import edu.java.webClients.exceptions.ClientErrorException;

@@ -3,7 +3,6 @@ package edu.java.bot.configuration.kafkaConfiguration;
 import edu.java.bot.externalApi.dto.requests.LinkUpdate;
 import java.util.HashMap;
 import java.util.Map;
-import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;
@@ -19,8 +18,13 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 
 @Configuration
 @EnableKafka
-@RequiredArgsConstructor
 public class KafkaConsumerConfiguration {
+
+    private final KafkaConfig.ConsumerConfiguration consumerConfig;
+
+    public KafkaConsumerConfiguration(KafkaConfig kafkaConfig) {
+        consumerConfig = kafkaConfig.consumerConfiguration();
+    }
 
     @Bean
     KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, LinkUpdate>> kafkaListenerContainerFactory(
@@ -28,8 +32,9 @@ public class KafkaConsumerConfiguration {
         ConcurrentKafkaListenerContainerFactory<String, LinkUpdate> factory =
             new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        factory.setConcurrency(3);
-        factory.getContainerProperties().setPollTimeout(3000);
+        if (consumerConfig.concurrency() != null) {
+            factory.setConcurrency(consumerConfig.concurrency());
+        }
         return factory;
     }
 
@@ -46,14 +51,40 @@ public class KafkaConsumerConfiguration {
         props.put(JsonDeserializer.KEY_DEFAULT_TYPE, String.class);
         props.put(ErrorHandlingDeserializer.VALUE_DESERIALIZER_CLASS, JsonDeserializer.class);
         props.put(JsonDeserializer.VALUE_DEFAULT_TYPE, LinkUpdate.class);
-        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "mainGroup");
-        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
-        props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, true);
-        props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, 60_000);
         props.put(JsonDeserializer.USE_TYPE_INFO_HEADERS, false);
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, consumerConfig.bootstrapServers());
+        setGroupId(props);
+        setAutoOffset(props);
+        setEnableAutoCommit(props);
+        setMaxPollInterval(props);
+
         return props;
+    }
+
+    private void setGroupId(Map<String, Object> props) {
+        if (consumerConfig.groupId() != null) {
+            props.put(ConsumerConfig.GROUP_ID_CONFIG, consumerConfig.groupId());
+        }
+    }
+
+    private void setAutoOffset(Map<String, Object> props) {
+        if (consumerConfig.autoOffsetReset() != null) {
+            props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, consumerConfig.autoOffsetReset());
+        }
+    }
+
+    private void setEnableAutoCommit(Map<String, Object> props) {
+        if (consumerConfig.enableAutoCommit() != null) {
+            props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, consumerConfig.enableAutoCommit());
+        }
+    }
+
+    private void setMaxPollInterval(Map<String, Object> props) {
+        if (consumerConfig.maxPollInterval() != null) {
+            props.put(ConsumerConfig.MAX_POLL_INTERVAL_MS_CONFIG, consumerConfig.maxPollInterval());
+        }
     }
 
 }

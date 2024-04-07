@@ -5,6 +5,7 @@ import edu.java.bot.externalApi.services.LinkUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.RetryableTopic;
@@ -21,9 +22,9 @@ public class MessageListener {
 
     private final LinkUpdateService linkUpdateService;
 
-    @RetryableTopic(attempts = "1",
+    @RetryableTopic(attempts = "${kafka.retryable-topic-attempts}",
                     kafkaTemplate = "retryableTopicKafkaTemplate",
-                    dltTopicSuffix = "_dlt",
+                    dltTopicSuffix = "${kafka.dlt-topic-suffix}",
                     dltStrategy = DltStrategy.FAIL_ON_ERROR)
     @KafkaListener(topics = "linkUpdates", groupId = "mainGroup")
     public void listenToLinkUpdates(@Payload LinkUpdate update) {

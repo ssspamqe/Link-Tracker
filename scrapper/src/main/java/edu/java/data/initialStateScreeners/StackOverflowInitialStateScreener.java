@@ -1,6 +1,6 @@
 package edu.java.data.initialStateScreeners;
 
-import edu.java.configuration.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfig;
 import edu.java.data.dao.interfaces.StackOverflowQuestionDataAccessObject;
 import edu.java.data.dto.Link;
 import edu.java.data.dto.StackOverflowQuestion;

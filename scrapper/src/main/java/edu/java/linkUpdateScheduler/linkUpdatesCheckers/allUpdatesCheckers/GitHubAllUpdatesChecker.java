@@ -1,6 +1,6 @@
 package edu.java.linkUpdateScheduler.linkUpdatesCheckers.allUpdatesCheckers;
 
-import edu.java.configuration.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfig;
 import edu.java.data.dao.interfaces.GitHubRepositoryDataAccessObject;
 import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dto.GitHubRepository;

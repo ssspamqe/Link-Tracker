@@ -1,6 +1,6 @@
 package edu.java.bot.webClients;
 
-import edu.java.bot.configuration.ApplicationConfig;
+import edu.java.bot.configuration.globalConfiguration.ApplicationConfig;
 import edu.java.bot.webClients.exceptions.ClientErrorException;
 import edu.java.bot.webClients.scrapper.ScrapperLinksClient;
 import edu.java.bot.webClients.scrapper.ScrapperTelegramChatClient;

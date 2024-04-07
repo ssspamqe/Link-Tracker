@@ -1,6 +1,5 @@
-package edu.java.configuration;
+package edu.java.configuration.global;
 
-import edu.java.configuration.exceptions.EmptyKafkaPropertiesException;
 import edu.java.configuration.exceptions.EmptyTelegramBotClientPropertiesException;
 import jakarta.annotation.PostConstruct;
 import jakarta.validation.constraints.NotBlank;
@@ -34,19 +33,15 @@ public record ApplicationConfig(
     DatabaseAccessType databaseAccessType,
 
     @NotNull
-    boolean useQueue,
+    Boolean useQueue,
 
-    TelegramBotConfig telegramBotConfig,
-
-    Set<KafkaTopicConfiguration> kafkaTopicConfigurations
+    TelegramBotConfig telegramBotConfig
 ) {
 
     @PostConstruct
     private void init() {
-        if (useQueue && kafkaTopicConfigurations == null) {
-            throw new EmptyKafkaPropertiesException();
-        } else if (!useQueue && telegramBotConfig == null) {
-            throw new EmptyTelegramBotClientPropertiesException();
+        if (!useQueue && telegramBotConfig == null) {
+            throw new EmptyTelegramBotClientPropertiesException("Telegram bot web client must be set up, when queue turned off");
         }
     }
 
@@ -77,13 +72,6 @@ public record ApplicationConfig(
             }
             return configUrl;
         }
-    }
-
-    public record KafkaTopicConfiguration(
-        @NotNull String name,
-        Integer partitions,
-        Integer replicas
-    ) {
     }
 
     public enum DatabaseAccessType {

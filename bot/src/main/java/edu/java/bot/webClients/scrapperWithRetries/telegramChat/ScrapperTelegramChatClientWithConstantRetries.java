@@ -1,6 +1,6 @@
 package edu.java.bot.webClients.scrapperWithRetries.telegramChat;
 
-import edu.java.bot.configuration.RetryConfig;
+import edu.java.bot.configuration.globalConfiguration.RetryConfig;
 import edu.java.bot.webClients.scrapper.ScrapperTelegramChatClient;
 import reactor.core.publisher.Mono;
 import reactor.util.retry.Retry;

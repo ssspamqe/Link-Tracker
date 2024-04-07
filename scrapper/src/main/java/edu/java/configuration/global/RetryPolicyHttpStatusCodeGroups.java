@@ -1,4 +1,4 @@
-package edu.java.bot.configuration;
+package edu.java.configuration.global;
 
 import org.springframework.http.HttpStatusCode;
 

@@ -1,6 +1,6 @@
 package edu.java.data.initialStateScreeners;
 
-import edu.java.configuration.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfig;
 import edu.java.data.dao.interfaces.GitHubRepositoryDataAccessObject;
 import edu.java.data.dto.GitHubRepository;
 import edu.java.data.dto.Link;

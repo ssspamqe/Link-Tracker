@@ -40,7 +40,7 @@ app:
 
 
   database-access-type: jdbc
-  use-queue: false
+  use-queue: true
 
 kafka:
   topic-configurations:

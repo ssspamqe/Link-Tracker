@@ -1,24 +1,23 @@
-package edu.java.scrapper.integrational.dao.jdbc.tests;
+package edu.java.scrapper.integrational.database.dao.jooq.tests;
 
 import edu.java.data.dao.interfaces.GitHubRepositoryDataAccessObject;
 import edu.java.data.dao.jdbc.repositories.rowMappers.GitHubRepositoryRowMapper;
 import edu.java.data.dto.GitHubRepository;
 import java.util.Set;
-import edu.java.scrapper.integrational.DatabaseIntegrationEnvironment;
+import edu.java.scrapper.integrational.database.DatabaseIntegrationEnvironment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.RowMapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class GitHubRepositoryJdbcDaoTest extends DatabaseIntegrationEnvironment {
-
+public class GitHubRepositoryJooqDaoTest extends DatabaseIntegrationEnvironment {
     private static final RowMapper<GitHubRepository> REPOSITORY_JDBC_ROW_MAPPER = new GitHubRepositoryRowMapper();
 
     private GitHubRepositoryDataAccessObject repositoryDao;
 
     @BeforeEach
     void assignDao() {
-        repositoryDao = gitHubRepositoryJdbcDao;
+        repositoryDao = gitHubRepositoryJooqDao;
     }
 
     @Test

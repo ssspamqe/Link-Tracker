@@ -1,4 +1,4 @@
-package edu.java.scrapper.integrational;
+package edu.java.scrapper.integrational.database;
 
 import edu.java.data.dao.jdbc.dao.ChatJdbcDAO;
 import edu.java.data.dao.jdbc.dao.GitHubRepositoryJdbcDAO;

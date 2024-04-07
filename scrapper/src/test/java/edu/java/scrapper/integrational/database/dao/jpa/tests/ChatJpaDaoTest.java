@@ -1,4 +1,4 @@
-package edu.java.scrapper.integrational.dao.jpa.tests;
+package edu.java.scrapper.integrational.database.dao.jpa.tests;
 
 import edu.java.data.dao.interfaces.ChatDataAccessObject;
 import edu.java.data.dao.jdbc.repositories.rowMappers.ChatRowMapper;
@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import edu.java.scrapper.integrational.DatabaseIntegrationEnvironment;
+import edu.java.scrapper.integrational.database.DatabaseIntegrationEnvironment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.RowMapper;

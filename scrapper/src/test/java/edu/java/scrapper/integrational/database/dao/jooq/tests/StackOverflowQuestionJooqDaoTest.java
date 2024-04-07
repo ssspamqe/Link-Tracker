@@ -1,16 +1,16 @@
-package edu.java.scrapper.integrational.dao.jpa.tests;
+package edu.java.scrapper.integrational.database.dao.jooq.tests;
 
 import edu.java.data.dao.interfaces.StackOverflowQuestionDataAccessObject;
 import edu.java.data.dao.jdbc.repositories.rowMappers.StackOverflowQuestionRowMapper;
 import edu.java.data.dto.StackOverflowQuestion;
 import java.util.Set;
-import edu.java.scrapper.integrational.DatabaseIntegrationEnvironment;
+import edu.java.scrapper.integrational.database.DatabaseIntegrationEnvironment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.RowMapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StackOverflowQuestionJpaDaoTest extends DatabaseIntegrationEnvironment {
+public class StackOverflowQuestionJooqDaoTest extends DatabaseIntegrationEnvironment {
 
     private static final RowMapper<StackOverflowQuestion> QUESTION_JDBC_ROW_MAPPER =
         new StackOverflowQuestionRowMapper();
@@ -19,7 +19,7 @@ public class StackOverflowQuestionJpaDaoTest extends DatabaseIntegrationEnvironm
 
     @BeforeEach
     void assignDao() {
-        questionDao = stackOverflowQuestionJpaDao;
+        questionDao = stackOverflowQuestionJooqDao;
     }
 
     @Test
@@ -54,7 +54,6 @@ public class StackOverflowQuestionJpaDaoTest extends DatabaseIntegrationEnvironm
         );
 
         questionDao.update(modifiedQuestion);
-        entityManager.flush();
 
         var actualQuestion =
             jdbcTemplate.queryForObject("SELECT * FROM stack_overflow_questions", QUESTION_JDBC_ROW_MAPPER);
@@ -72,10 +71,10 @@ public class StackOverflowQuestionJpaDaoTest extends DatabaseIntegrationEnvironm
         );
 
         questionDao.save(question);
-        entityManager.flush();
 
         var actualQuestion =
             jdbcTemplate.queryForObject("SELECT * FROM stack_overflow_questions", QUESTION_JDBC_ROW_MAPPER);
         assertThat(actualQuestion).isNotNull();
+
     }
 }

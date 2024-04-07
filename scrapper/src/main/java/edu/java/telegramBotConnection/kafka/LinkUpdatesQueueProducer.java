@@ -12,11 +12,13 @@ public class LinkUpdatesQueueProducer {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final KafkaTemplate<String, LinkUpdate> kafkaTemplate;
+    private final String topicName;
 
     public void send(LinkUpdate update) {
         LOGGER.warn("Sending message to kafka...");
         try {
-            kafkaTemplate.send("linkUpdates", update).whenComplete(
+            LOGGER.warn("topic name: {}",topicName);
+            kafkaTemplate.send(topicName, update).whenComplete(
                 (sendResult, throwable) -> {
                     if (throwable != null) {
                         LOGGER.error("Kafka error: {}", throwable);

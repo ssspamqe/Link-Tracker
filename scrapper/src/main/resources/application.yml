@@ -39,8 +39,8 @@ app:
         - SERVER_ERROR
 
 
-  database-access-type: jpa
-  use-queue: true
+  database-access-type: jdbc
+  use-queue: false
 
 kafka:
   topic-configurations:
@@ -55,6 +55,7 @@ kafka:
     delivery-timeout: 100000
     linger-ms: 5000
     batch-size: 200000
+    link-updates-topic: linkUpdates
 
 
 

@@ -3,13 +3,11 @@ package edu.java.scrapper.integrational.dao.jpa.tests;
 import edu.java.data.dao.interfaces.StackOverflowQuestionDataAccessObject;
 import edu.java.data.dao.jdbc.repositories.rowMappers.StackOverflowQuestionRowMapper;
 import edu.java.data.dto.StackOverflowQuestion;
-import edu.java.scrapper.integrational.DatabaseIntegrationEnvironment;
 import java.util.Set;
+import edu.java.scrapper.integrational.DatabaseIntegrationEnvironment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Transactional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StackOverflowQuestionJpaDaoTest extends DatabaseIntegrationEnvironment {

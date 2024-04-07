@@ -9,6 +9,16 @@ app:
     url:
       default-url: http://localhost:8080
 
+kafka:
+  topic-configurations:
+    - name: linkUpdates-test
+      partitions: 1
+      replicas: 1
+
+  producer-configuration:
+    linger-ms: 100
+    link-updates-topic: linkUpdates-test
+
 
 spring:
   liquibase:

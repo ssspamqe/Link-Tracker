@@ -1,4 +1,4 @@
-package edu.java.configuration.beansConfiguration.linkUpdateSender;
+package edu.java.scrapper.integrational.kafka.beanConfiguration;
 
 import edu.java.configuration.kafkaConfiguration.KafkaConfig;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.KafkaLinkUpdatesSender;
@@ -6,16 +6,14 @@ import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;
 import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
 import edu.java.telegramBotConnection.kafka.LinkUpdatesQueueProducer;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
 
-@Configuration
-@ConditionalOnProperty(prefix = "app", name = "use-queue", havingValue = "true")
+@TestConfiguration
 @RequiredArgsConstructor
-public class KafkaLinkUpdatesSenderBeanConfiguration {
-
+public class LinkUpdateQueueProducerConfiguration {
     private final KafkaTemplate<String, LinkUpdate> kafkaTemplate;
     private final KafkaConfig kafkaConfig;
 

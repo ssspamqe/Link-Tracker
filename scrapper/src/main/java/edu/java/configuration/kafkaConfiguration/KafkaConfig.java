@@ -23,6 +23,7 @@ public record KafkaConfig(
 
     public record ProducerConfiguration(
         @NotNull String bootstrapServers,
+        @NotNull String linkUpdatesTopic,
         String clientId,
         String acksConfig,
         Integer deliveryTimeout,

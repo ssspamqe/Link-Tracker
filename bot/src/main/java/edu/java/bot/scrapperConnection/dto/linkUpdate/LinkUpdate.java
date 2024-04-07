@@ -1,4 +1,4 @@
-package edu.java.bot.externalApi.dto.requests;
+package edu.java.bot.scrapperConnection.dto.linkUpdate;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

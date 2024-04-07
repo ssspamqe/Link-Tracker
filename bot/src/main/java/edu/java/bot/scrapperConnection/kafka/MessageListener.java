@@ -1,16 +1,14 @@
-package edu.java.bot.externalApi.kafka;
+package edu.java.bot.scrapperConnection.kafka;
 
-import edu.java.bot.externalApi.dto.requests.LinkUpdate;
-import edu.java.bot.externalApi.services.LinkUpdateService;
+import edu.java.bot.scrapperConnection.dto.linkUpdate.LinkUpdate;
+import edu.java.bot.scrapperConnection.restApi.services.LinkUpdateService;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.RetryableTopic;
 import org.springframework.kafka.retrytopic.DltStrategy;
-import org.springframework.kafka.retrytopic.TopicSuffixingStrategy;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 

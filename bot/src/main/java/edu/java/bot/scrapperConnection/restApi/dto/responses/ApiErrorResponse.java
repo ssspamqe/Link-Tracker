@@ -1,4 +1,4 @@
-package edu.java.bot.externalApi.dto.responses;
+package edu.java.bot.scrapperConnection.restApi.dto.responses;
 
 import java.util.List;
 

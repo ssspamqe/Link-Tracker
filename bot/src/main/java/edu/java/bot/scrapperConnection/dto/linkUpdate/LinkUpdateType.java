@@ -1,4 +1,4 @@
-package edu.java.bot.externalApi.dto.requests;
+package edu.java.bot.scrapperConnection.dto.linkUpdate;
 
 public enum LinkUpdateType {
     STACK_OVERFLOW_DESCRIPTION("Question body was updated!"),

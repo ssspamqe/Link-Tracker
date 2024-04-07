@@ -12,8 +12,8 @@ import edu.java.linkUpdateScheduler.linkUpdatesCheckers.singleUpdateCheckers.sta
 import edu.java.webClients.stackOverflow.StackOverflowClient;
 import edu.java.webClients.stackOverflow.dto.StackOverflowAnswerBody;
 import edu.java.webClients.stackOverflow.dto.StackOverflowQuestionBody;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdateType;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdateType;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;

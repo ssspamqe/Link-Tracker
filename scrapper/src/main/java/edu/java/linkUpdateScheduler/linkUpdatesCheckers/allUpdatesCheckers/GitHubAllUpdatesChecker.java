@@ -12,8 +12,8 @@ import edu.java.linkUpdateScheduler.linkUpdatesCheckers.singleUpdateCheckers.git
 import edu.java.webClients.gitHub.GitHubClient;
 import edu.java.webClients.gitHub.dto.GitHubRepositoryActivityBody;
 import edu.java.webClients.gitHub.dto.GitHubRepositoryBody;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdateType;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdateType;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;

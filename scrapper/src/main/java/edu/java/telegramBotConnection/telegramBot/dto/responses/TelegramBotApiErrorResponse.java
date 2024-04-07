@@ -1,4 +1,4 @@
-package edu.java.webClients.telegramBot.dto.responses;
+package edu.java.telegramBotConnection.telegramBot.dto.responses;
 
 import edu.java.webClients.exceptions.ClientErrorResponseBody;
 import java.util.List;

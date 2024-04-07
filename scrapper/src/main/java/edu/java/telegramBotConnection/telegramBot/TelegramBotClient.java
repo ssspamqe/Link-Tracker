@@ -1,6 +1,6 @@
-package edu.java.webClients.telegramBot;
+package edu.java.telegramBotConnection.telegramBot;
 
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
 import java.util.List;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.service.annotation.HttpExchange;

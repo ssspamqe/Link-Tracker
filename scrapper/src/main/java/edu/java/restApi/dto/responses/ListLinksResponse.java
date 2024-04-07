@@ -1,4 +1,4 @@
-package edu.java.externalApi.dto.responses;
+package edu.java.restApi.dto.responses;
 
 import java.util.List;
 

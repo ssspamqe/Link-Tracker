@@ -2,7 +2,7 @@ package edu.java.linkUpdateScheduler.linkUpdatesCheckers.singleUpdateCheckers.gi
 
 import edu.java.data.dto.GitHubRepository;
 import edu.java.webClients.gitHub.dto.GitHubRepositoryBody;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdateType;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdateType;
 import org.springframework.stereotype.Component;
 
 @Component

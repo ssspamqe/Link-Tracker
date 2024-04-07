@@ -1,8 +1,8 @@
 package edu.java.webClients.webClientsWithRetry.telegramBot;
 
 import edu.java.configuration.global.RetryConfig;
-import edu.java.webClients.telegramBot.TelegramBotClient;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
+import edu.java.telegramBotConnection.telegramBot.TelegramBotClient;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
 import edu.java.webClients.webClientsWithRetry.WebClientWithRetries;
 import java.util.List;
 import reactor.core.publisher.Mono;

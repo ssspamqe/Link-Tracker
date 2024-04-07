@@ -1,7 +1,7 @@
 package edu.java.configuration.beansConfiguration.kafka;
 
 import edu.java.configuration.kafkaConfiguration.KafkaConfig;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.producer.ProducerConfig;

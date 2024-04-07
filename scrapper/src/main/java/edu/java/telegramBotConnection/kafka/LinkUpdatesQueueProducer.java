@@ -1,6 +1,6 @@
-package edu.java.externalApi.kafka;
+package edu.java.telegramBotConnection.kafka;
 
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

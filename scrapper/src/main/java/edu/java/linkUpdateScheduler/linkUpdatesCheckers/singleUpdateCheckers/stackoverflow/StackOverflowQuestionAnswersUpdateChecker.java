@@ -4,7 +4,7 @@ import edu.java.data.dto.StackOverflowQuestion;
 import edu.java.webClients.stackOverflow.StackOverflowClient;
 import edu.java.webClients.stackOverflow.dto.StackOverflowAnswerBody;
 import edu.java.webClients.stackOverflow.dto.StackOverflowQuestionBody;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdateType;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdateType;
 import java.util.Set;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;

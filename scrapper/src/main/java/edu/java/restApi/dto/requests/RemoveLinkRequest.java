@@ -1,4 +1,4 @@
-package edu.java.externalApi.dto.requests;
+package edu.java.restApi.dto.requests;
 
 import jakarta.validation.constraints.Pattern;
 

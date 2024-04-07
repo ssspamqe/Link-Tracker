@@ -1,9 +1,9 @@
 package edu.java.configuration.beansConfiguration.linkUpdateSender;
 
-import edu.java.externalApi.kafka.LinkUpdatesQueueProducer;
+import edu.java.telegramBotConnection.kafka.LinkUpdatesQueueProducer;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.KafkaLinkUpdatesSender;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
+import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

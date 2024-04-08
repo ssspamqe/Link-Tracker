@@ -1,6 +1,6 @@
 package edu.java.configuration.beansconfiguration.kafka;
 
-import edu.java.configuration.kafkaConfiguration.KafkaConfig;
+import edu.java.configuration.kafkaconfiguration.KafkaConfig;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import java.util.HashMap;
 import java.util.Map;

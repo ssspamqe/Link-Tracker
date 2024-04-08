@@ -2,7 +2,7 @@ package edu.java;
 
 import com.redis.om.spring.annotations.EnableRedisDocumentRepositories;
 import edu.java.configuration.global.ApplicationConfig;
-import edu.java.configuration.kafkaConfiguration.KafkaConfig;
+import edu.java.configuration.kafkaconfiguration.KafkaConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

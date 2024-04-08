@@ -1,6 +1,6 @@
-package edu.java.configuration.beansconfiguration.linkUpdateSender;
+package edu.java.configuration.beansconfiguration.linkupdatesender;
 
-import edu.java.configuration.kafkaConfiguration.KafkaConfig;
+import edu.java.configuration.kafkaconfiguration.KafkaConfig;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.KafkaLinkUpdatesSender;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;

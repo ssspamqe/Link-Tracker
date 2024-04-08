@@ -1,4 +1,4 @@
-package edu.java.configuration.beansconfiguration.linkUpdateSender;
+package edu.java.configuration.beansconfiguration.linkupdatesender;
 
 import edu.java.configuration.global.ApplicationConfig;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;

@@ -1,6 +1,6 @@
 package edu.java.configuration.beansconfiguration.kafka;
 
-import edu.java.configuration.kafkaConfiguration.KafkaConfig;
+import edu.java.configuration.kafkaconfiguration.KafkaConfig;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;

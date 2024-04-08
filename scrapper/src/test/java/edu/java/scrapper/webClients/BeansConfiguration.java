@@ -1,8 +1,8 @@
 package edu.java.scrapper.webClients;
 
 import edu.java.configuration.global.ApplicationConfig;
-import edu.java.telegramBotConnection.telegramBot.TelegramBotClient;
-import edu.java.telegramBotConnection.telegramBot.dto.responses.TelegramBotApiErrorResponse;
+import edu.java.telegrambotconnection.telegrambot.TelegramBotClient;
+import edu.java.telegrambotconnection.telegrambot.dto.responses.TelegramBotApiErrorResponse;
 import edu.java.webClients.exceptions.ClientErrorException;
 import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithConstantRetries;
 import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithExponentialRetries;

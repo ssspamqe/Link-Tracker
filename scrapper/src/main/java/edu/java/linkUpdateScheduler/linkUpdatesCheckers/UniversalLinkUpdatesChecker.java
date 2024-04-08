@@ -4,7 +4,7 @@ import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dto.Link;
 import edu.java.linkUpdateScheduler.exceptions.IncorrectHostException;
 import edu.java.linkUpdateScheduler.linkUpdatesCheckers.allUpdatesCheckers.LinkAllUpdatesChecker;
-import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
+import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

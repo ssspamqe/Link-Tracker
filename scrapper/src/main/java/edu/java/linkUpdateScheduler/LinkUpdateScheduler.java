@@ -4,7 +4,7 @@ import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dto.Link;
 import edu.java.linkUpdateScheduler.linkUpdatesCheckers.UniversalLinkUpdatesChecker;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;
-import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
+import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;

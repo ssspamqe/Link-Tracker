@@ -1,4 +1,4 @@
-package edu.java.telegramBotConnection.dto.linkUpdateDto;
+package edu.java.telegrambotconnection.dto.linkupdatedto;
 
 import java.net.URI;
 import java.util.Set;

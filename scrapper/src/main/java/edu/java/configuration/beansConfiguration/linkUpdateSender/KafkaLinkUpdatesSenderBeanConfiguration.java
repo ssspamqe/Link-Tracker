@@ -1,10 +1,10 @@
-package edu.java.configuration.beansConfiguration.linkUpdateSender;
+package edu.java.configuration.beansconfiguration.linkUpdateSender;
 
 import edu.java.configuration.kafkaConfiguration.KafkaConfig;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.KafkaLinkUpdatesSender;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;
-import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
-import edu.java.telegramBotConnection.kafka.LinkUpdatesQueueProducer;
+import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
+import edu.java.telegrambotconnection.kafka.LinkUpdatesQueueProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

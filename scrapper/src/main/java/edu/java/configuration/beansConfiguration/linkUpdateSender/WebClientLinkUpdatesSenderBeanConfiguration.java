@@ -1,10 +1,10 @@
-package edu.java.configuration.beansConfiguration.linkUpdateSender;
+package edu.java.configuration.beansconfiguration.linkUpdateSender;
 
 import edu.java.configuration.global.ApplicationConfig;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;
 import edu.java.linkUpdateScheduler.linkUpdatesSender.WebClientLinkUpdatesSender;
-import edu.java.telegramBotConnection.telegramBot.TelegramBotClient;
-import edu.java.telegramBotConnection.telegramBot.dto.responses.TelegramBotApiErrorResponse;
+import edu.java.telegrambotconnection.telegrambot.TelegramBotClient;
+import edu.java.telegrambotconnection.telegrambot.dto.responses.TelegramBotApiErrorResponse;
 import edu.java.webClients.exceptions.ClientErrorException;
 import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithConstantRetries;
 import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithExponentialRetries;

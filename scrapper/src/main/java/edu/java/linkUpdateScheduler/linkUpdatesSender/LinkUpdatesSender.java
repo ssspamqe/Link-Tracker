@@ -1,6 +1,6 @@
 package edu.java.linkUpdateScheduler.linkUpdatesSender;
 
-import edu.java.telegramBotConnection.dto.linkUpdateDto.LinkUpdate;
+import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import java.util.Set;
 
 public interface LinkUpdatesSender {

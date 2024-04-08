@@ -1,4 +1,4 @@
-package edu.java.configuration.beansConfiguration.kafka;
+package edu.java.configuration.beansconfiguration.kafka;
 
 import edu.java.configuration.kafkaConfiguration.KafkaConfig;
 import java.util.HashSet;

@@ -1,4 +1,4 @@
-package edu.java.telegramBotConnection.dto.linkUpdateDto;
+package edu.java.telegrambotconnection.dto.linkupdatedto;
 
 public enum LinkUpdateType {
     STACK_OVERFLOW_DESCRIPTION,

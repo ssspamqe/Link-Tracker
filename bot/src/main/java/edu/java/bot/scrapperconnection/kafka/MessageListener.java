@@ -1,7 +1,7 @@
-package edu.java.bot.scrapperConnection.kafka;
+package edu.java.bot.scrapperconnection.kafka;
 
-import edu.java.bot.scrapperConnection.dto.linkUpdate.LinkUpdate;
-import edu.java.bot.scrapperConnection.services.LinkUpdateService;
+import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdate;
+import edu.java.bot.scrapperconnection.services.LinkUpdateService;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package edu.java.bot.scrapperConnection.dto.linkUpdate;
+package edu.java.bot.scrapperconnection.dto.linkupdate;
 
 public enum LinkUpdateType {
     STACK_OVERFLOW_DESCRIPTION("Question body was updated!"),

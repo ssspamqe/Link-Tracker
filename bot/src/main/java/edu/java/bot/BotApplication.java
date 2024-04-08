@@ -1,7 +1,7 @@
 package edu.java.bot;
 
-import edu.java.bot.configuration.globalConfiguration.ApplicationConfig;
-import edu.java.bot.configuration.kafkaConfiguration.KafkaConfig;
+import edu.java.bot.configuration.globalconfiguration.ApplicationConfig;
+import edu.java.bot.configuration.kafkaconfiguration.KafkaConfig;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

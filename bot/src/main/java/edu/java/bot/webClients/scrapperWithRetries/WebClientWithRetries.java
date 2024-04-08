@@ -1,7 +1,7 @@
 package edu.java.bot.webClients.scrapperWithRetries;
 
-import edu.java.bot.configuration.globalConfiguration.RetryConfig;
-import edu.java.bot.configuration.globalConfiguration.RetryPolicyHttpStatusCodeGroups;
+import edu.java.bot.configuration.globalconfiguration.RetryConfig;
+import edu.java.bot.configuration.globalconfiguration.RetryPolicyHttpStatusCodeGroups;
 import jakarta.annotation.PostConstruct;
 import java.time.Duration;
 import java.util.Set;

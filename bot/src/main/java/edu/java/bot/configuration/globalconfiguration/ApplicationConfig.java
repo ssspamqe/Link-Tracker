@@ -1,4 +1,4 @@
-package edu.java.bot.configuration.globalConfiguration;
+package edu.java.bot.configuration.globalconfiguration;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

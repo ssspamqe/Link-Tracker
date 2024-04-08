@@ -1,4 +1,4 @@
-package edu.java.bot.scrapperConnection.restApi.dto.responses;
+package edu.java.bot.scrapperconnection.restapi.dto.responses;
 
 import java.util.List;
 

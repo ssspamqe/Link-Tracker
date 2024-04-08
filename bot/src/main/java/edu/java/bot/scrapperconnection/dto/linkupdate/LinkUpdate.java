@@ -1,4 +1,4 @@
-package edu.java.bot.scrapperConnection.dto.linkUpdate;
+package edu.java.bot.scrapperconnection.dto.linkupdate;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;

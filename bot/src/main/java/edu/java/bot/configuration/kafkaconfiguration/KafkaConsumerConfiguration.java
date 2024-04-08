@@ -1,6 +1,6 @@
-package edu.java.bot.configuration.kafkaConfiguration;
+package edu.java.bot.configuration.kafkaconfiguration;
 
-import edu.java.bot.scrapperConnection.dto.linkUpdate.LinkUpdate;
+import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdate;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.consumer.ConsumerConfig;

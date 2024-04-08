@@ -1,8 +1,8 @@
-package edu.java.bot.scrapperConnection.services;
+package edu.java.bot.scrapperconnection.services;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
-import edu.java.bot.scrapperConnection.dto.linkUpdate.LinkUpdate;
+import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

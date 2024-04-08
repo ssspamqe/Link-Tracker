@@ -1,4 +1,4 @@
-package edu.java.bot.configuration.kafkaConfiguration;
+package edu.java.bot.configuration.kafkaconfiguration;
 
 import java.util.HashMap;
 import java.util.Map;

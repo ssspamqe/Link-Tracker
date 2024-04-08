@@ -1,6 +1,6 @@
-package edu.java.bot.scrapperConnection.restApi.exceptionHandlers;
+package edu.java.bot.scrapperconnection.restapi.exceptionhandlers;
 
-import edu.java.bot.scrapperConnection.restApi.dto.responses.ApiErrorResponse;
+import edu.java.bot.scrapperconnection.restapi.dto.responses.ApiErrorResponse;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;

@@ -1,4 +1,4 @@
-package edu.java.bot.configuration.kafkaConfiguration;
+package edu.java.bot.configuration.kafkaconfiguration;
 
 import jakarta.validation.constraints.NotNull;
 import java.util.Set;

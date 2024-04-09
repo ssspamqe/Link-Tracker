@@ -1,11 +1,11 @@
 package edu.java.scrapper.webClients;
 
-import edu.java.webClients.gitHub.GitHubClient;
-import edu.java.webClients.gitHub.dto.GitHubOwnerBody;
-import edu.java.webClients.gitHub.dto.GitHubRepositoryActivityBody;
-import edu.java.webClients.gitHub.dto.GitHubRepositoryActivityType;
-import edu.java.webClients.gitHub.dto.GitHubRepositoryBody;
-import edu.java.webClients.gitHub.dto.GitHubRepositoryVisibilityType;
+import edu.java.webclients.gitHub.GitHubClient;
+import edu.java.webclients.gitHub.dto.GitHubOwnerBody;
+import edu.java.webclients.gitHub.dto.GitHubRepositoryActivityBody;
+import edu.java.webclients.gitHub.dto.GitHubRepositoryActivityType;
+import edu.java.webclients.gitHub.dto.GitHubRepositoryBody;
+import edu.java.webclients.gitHub.dto.GitHubRepositoryVisibilityType;
 import java.time.OffsetDateTime;
 import java.util.List;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package edu.java.telegrambotconnection.telegrambot.dto.responses;
 
-import edu.java.webClients.exceptions.ClientErrorResponseBody;
+import edu.java.webclients.exceptions.ClientErrorResponseBody;
 import java.util.List;
 
 public record TelegramBotApiErrorResponse(

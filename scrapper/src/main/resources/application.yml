@@ -58,6 +58,10 @@ kafka:
     link-updates-topic: linkUpdates
 
 management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
   endpoint:
     health:
       enabled: true
@@ -73,8 +77,10 @@ management:
       base-path: /
       path-mapping:
         prometheus : "metrics"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
     enabled-by-default: false
-
   server:
     port: 8081
 
@@ -128,6 +134,6 @@ logging:
   config: classpath:log4j2-plain.xml
 
 springdoc:
-  show-actuator: true
+  show-actuator: false
   swagger-ui:
     path: /scrapper/api/v1/swagger-ui

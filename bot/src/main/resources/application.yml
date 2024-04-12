@@ -34,12 +34,42 @@ kafka:
   retryable-topic-attempts: 1
   dlt-topic-suffix: _dlt
 
+management:
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+  endpoint:
+    health:
+      enabled: true
+    info:
+      enabled: true
+    prometheus:
+      enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /
+      path-mapping:
+        prometheus : "metrics"
+      cors:
+        allowed-origins: "*"
+        allowed-methods: "*"
+    enabled-by-default: false
+  server:
+    port: 8091
 
 spring:
   application:
     name: bot
   jackson:
     time-zone: UTC
+  docker:
+    compose:
+      enabled: true
+      file: compose.yml
 
 server:
   port: 8090
@@ -48,7 +78,7 @@ logging:
   config: classpath:log4j2-plain.xml
 
 springdoc:
-  show-actuator: true
+  show-actuator: false
   swagger-ui:
     path: /bot/api/v1/swagger-ui
 

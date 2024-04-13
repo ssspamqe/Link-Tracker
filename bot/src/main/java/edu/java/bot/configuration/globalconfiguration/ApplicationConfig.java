@@ -15,9 +15,11 @@ public record ApplicationConfig(
     ApiUrl scrapperUrl,
 
     @NotNull
-    RetryConfig scrapperRetryConfig
+    RetryConfig scrapperRetryConfig,
 
-    ) {
+    @NotNull
+    String processedLinkUpdatesMetricName
+) {
     public record ApiUrl(@NotBlank String defaultUrl, String configUrl) {
         public String getBaseUrl() {
             if (configUrl != null) {

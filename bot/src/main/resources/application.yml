@@ -8,6 +8,7 @@ app:
     max-retries: 3
     retry-on-statuses:
       - SERVER_ERROR
+  processed-link-updates-metric-name: processed_link_updates_total
 
 kafka:
   topic-configurations:

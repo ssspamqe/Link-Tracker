@@ -5,6 +5,7 @@ import edu.java.data.dto.Link;
 import edu.java.linkupdatescheduler.linkupdatescheckers.UniversalLinkUpdatesChecker;
 import edu.java.linkupdatescheduler.linkupdatessender.LinkUpdatesSender;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
+import io.micrometer.core.instrument.Counter;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -31,6 +32,8 @@ public class LinkUpdateScheduler {
     private final UniversalLinkUpdatesChecker universalLinkUpdatesChecker;
     private final LinkUpdatesSender linkUpdatesSender;
 
+    private final Counter processedLinkUpdatesMetric;
+
     private boolean contextIsLoaded = false;
     @Value("${app.scheduler-config.force-check-delay}")
     private Duration forceCheckDelay;
@@ -53,14 +56,16 @@ public class LinkUpdateScheduler {
             allLinkUpdates.addAll(linkUpdates);
         });
 
-        handleUpdates(allLinkUpdates);
+        sendUpdates(allLinkUpdates);
     }
 
     private OffsetDateTime buildBorderCheckTime() {
         return OffsetDateTime.now().minusSeconds(forceCheckDelay.getSeconds());
     }
 
-    private void handleUpdates(List<LinkUpdate> allLinkUpdates) {
+    private void sendUpdates(List<LinkUpdate> allLinkUpdates) {
+        processedLinkUpdatesMetric.increment(allLinkUpdates.size());
+
         if (!allLinkUpdates.isEmpty()) {
             LOGGER.debug(STR."Sending \{allLinkUpdates.size()} updates to bot...");
             try {

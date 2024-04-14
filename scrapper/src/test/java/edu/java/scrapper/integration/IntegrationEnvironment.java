@@ -12,7 +12,6 @@ import edu.java.data.dao.jpa.dao.ChatJpaDAO;
 import edu.java.data.dao.jpa.dao.GitHubRepositoryJpaDAO;
 import edu.java.data.dao.jpa.dao.LinkJpaDAO;
 import edu.java.data.dao.jpa.dao.StackOverflowQuestionJpaDAO;
-import edu.java.scrapper.integration.kafka.KafkaTestContainersConfiguration;
 import java.io.File;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -44,7 +43,6 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
-@Import(KafkaTestContainersConfiguration.class)
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.yml")
 @ActiveProfiles("test")

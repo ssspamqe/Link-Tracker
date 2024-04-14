@@ -12,6 +12,7 @@ import edu.java.data.dao.jpa.dao.ChatJpaDAO;
 import edu.java.data.dao.jpa.dao.GitHubRepositoryJpaDAO;
 import edu.java.data.dao.jpa.dao.LinkJpaDAO;
 import edu.java.data.dao.jpa.dao.StackOverflowQuestionJpaDAO;
+import edu.java.scrapper.integration.kafka.KafkaTestContainersConfiguration;
 import java.io.File;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -23,20 +24,27 @@ import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.DirectoryResourceAccessor;
 import liquibase.resource.ResourceAccessor;
+import org.junit.ClassRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.JdbcDatabaseContainer;
+import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import org.testcontainers.utility.DockerImageName;
 
 @Testcontainers
+@Import(KafkaTestContainersConfiguration.class)
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.yml")
 @ActiveProfiles("test")
@@ -53,6 +61,8 @@ public abstract class IntegrationEnvironment {
 
     @ServiceConnection
     protected static PostgreSQLContainer<?> POSTGRES;
+    @ServiceConnection @ClassRule
+    public static KafkaContainer KAFKA;
 
     @Autowired protected TestEntityManager entityManager;
 
@@ -74,6 +84,11 @@ public abstract class IntegrationEnvironment {
     @Autowired protected StackOverflowQuestionJpaDAO stackOverflowQuestionJpaDao;
 
     static {
+        setUpPostgresContainer();
+        setUpKafkaContainer();
+    }
+
+    private static void setUpPostgresContainer() {
         POSTGRES = new PostgreSQLContainer<>("postgres:16")
             .withDatabaseName("scrapper")
             .withUsername("postgres")
@@ -85,6 +100,11 @@ public abstract class IntegrationEnvironment {
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
+    }
+
+    private static void setUpKafkaContainer() {
+        KAFKA = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.3.2"));
+        KAFKA.start();
     }
 
     private static void runMigrations(JdbcDatabaseContainer<?> c) throws Exception {
@@ -109,5 +129,10 @@ public abstract class IntegrationEnvironment {
 
     protected void saveChatIdLinkId(long chatId, long linkId) {
         jdbcTemplate.update(INSERT_CHAT_LINKS_STATEMENT, chatId, linkId);
+    }
+
+    @DynamicPropertySource
+    static void kafkaBootstrap(DynamicPropertyRegistry registry) {
+        registry.add("kafka.producer-configuration.bootstrap-servers", KAFKA::getBootstrapServers);
     }
 }

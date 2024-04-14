@@ -1,4 +1,4 @@
-package edu.java.scrapper.integrational.database;
+package edu.java.scrapper.integration;
 
 import edu.java.data.dao.jdbc.dao.ChatJdbcDAO;
 import edu.java.data.dao.jdbc.dao.GitHubRepositoryJdbcDAO;
@@ -15,7 +15,6 @@ import edu.java.data.dao.jpa.dao.StackOverflowQuestionJpaDAO;
 import java.io.File;
 import java.nio.file.Path;
 import java.sql.Connection;
-import jakarta.persistence.EntityManager;
 import liquibase.Contexts;
 import liquibase.LabelExpression;
 import liquibase.Liquibase;
@@ -26,16 +25,13 @@ import liquibase.resource.DirectoryResourceAccessor;
 import liquibase.resource.ResourceAccessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.support.TransactionTemplate;
 import org.testcontainers.containers.JdbcDatabaseContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
@@ -46,7 +42,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 @ActiveProfiles("test")
 @AutoConfigureTestEntityManager
 @Transactional
-public abstract class DatabaseIntegrationEnvironment {
+public abstract class IntegrationEnvironment {
 
     protected static final String INSERT_LINK_STATEMENT =
         "INSERT INTO links(url, created_at) VALUES (?, '1970-01-01 00:00:00') RETURNING id";

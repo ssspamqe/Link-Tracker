@@ -1,4 +1,4 @@
-package edu.java.scrapper.integrational.database.dao.jpa.tests;
+package edu.java.scrapper.integration.dao.jooq.tests;
 
 import edu.java.data.dao.interfaces.ChatDataAccessObject;
 import edu.java.data.dao.jdbc.repositories.rowMappers.ChatRowMapper;
@@ -11,14 +11,14 @@ import java.net.URI;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import edu.java.scrapper.integrational.database.DatabaseIntegrationEnvironment;
+import edu.java.scrapper.integration.IntegrationEnvironment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.RowMapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ChatJpaDaoTest extends DatabaseIntegrationEnvironment {
+public class ChatJooqDaoTest extends IntegrationEnvironment {
 
     private static final RowMapper<Link> LINK_JDBC_ROW_MAPPER = new LinkRowMapper();
     private static final RowMapper<Chat> CHAT_JDBC_ROW_MAPPER = new ChatRowMapper();
@@ -27,7 +27,7 @@ public class ChatJpaDaoTest extends DatabaseIntegrationEnvironment {
 
     @BeforeEach
     void assignChatDao() {
-        chatDao = chatJpaDao;
+        chatDao = chatJdbcDao;
     }
 
     @Test
@@ -73,7 +73,6 @@ public class ChatJpaDaoTest extends DatabaseIntegrationEnvironment {
         URI url = URI.create("https://example.org");
 
         chatDao.associateUrlByChatId(url, 1);
-        entityManager.flush();
 
         int chatLinksCouplesCount = jdbcTemplate.queryForObject(
             "SELECT COUNT(*) FROM chat_links", Integer.class
@@ -98,7 +97,6 @@ public class ChatJpaDaoTest extends DatabaseIntegrationEnvironment {
         long linkId = saveLinkWithUrl("https://example.org");
 
         chatDao.associateUrlByChatId(URI.create("https://example.org"), 1);
-        entityManager.flush();
 
         int chatLinksCouplesCount = jdbcTemplate.queryForObject(
             "SELECT COUNT(*) FROM chat_links", Integer.class
@@ -113,7 +111,6 @@ public class ChatJpaDaoTest extends DatabaseIntegrationEnvironment {
         saveChatIdLinkId(1, linkId);
 
         chatDao.dissociateUrlByChatId(URI.create("https://example.org"), 1);
-        entityManager.flush();
 
         int chatLinksCouplesCount = jdbcTemplate.queryForObject(
             "SELECT COUNT(*) FROM chat_links", Integer.class
@@ -137,7 +134,6 @@ public class ChatJpaDaoTest extends DatabaseIntegrationEnvironment {
     @Test
     public void should_registerChatWithId() {
         chatDao.registerChatWithId(1);
-        entityManager.flush();
 
         Chat chat = jdbcTemplate.queryForObject("SELECT * FROM chats", CHAT_JDBC_ROW_MAPPER);
         assertThat(chat).isNotNull();
@@ -146,6 +142,7 @@ public class ChatJpaDaoTest extends DatabaseIntegrationEnvironment {
     @Test
     public void should_throwException_when_chatWithSuchIdWasAlreadyRegistered() {
         saveChatWithId(1);
+
         assertThatThrownBy(() -> chatDao.registerChatWithId(1))
             .isInstanceOf(DoubleChatRegistrationException.class);
     }
@@ -155,7 +152,6 @@ public class ChatJpaDaoTest extends DatabaseIntegrationEnvironment {
         saveChatWithId(1);
 
         chatDao.deleteChatWithId(1);
-        entityManager.flush();
 
         List<Chat> actualSavedChats = jdbcTemplate.query("SELECT * FROM chats", CHAT_JDBC_ROW_MAPPER);
         assertThat(actualSavedChats).isEmpty();

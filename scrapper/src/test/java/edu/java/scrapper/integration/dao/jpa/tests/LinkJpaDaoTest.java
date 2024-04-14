@@ -1,4 +1,4 @@
-package edu.java.scrapper.integrational.database.dao.jooq.tests;
+package edu.java.scrapper.integration.dao.jpa.tests;
 
 import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dao.jdbc.repositories.rowMappers.LinkRowMapper;
@@ -9,13 +9,14 @@ import java.time.ZoneOffset;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import edu.java.scrapper.integrational.database.DatabaseIntegrationEnvironment;
+
+import edu.java.scrapper.integration.IntegrationEnvironment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.RowMapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LinkJooqDaoTest extends DatabaseIntegrationEnvironment {
+public class LinkJpaDaoTest extends IntegrationEnvironment {
 
     private static final RowMapper<Link> LINK_JDBC_MAPPER = new LinkRowMapper();
 
@@ -23,7 +24,7 @@ public class LinkJooqDaoTest extends DatabaseIntegrationEnvironment {
 
     @BeforeEach
     void assignLinkDao() {
-        linkDao = linkJdbcDao;
+        linkDao = linkJpaDao;
     }
 
     @Test
@@ -85,11 +86,13 @@ public class LinkJooqDaoTest extends DatabaseIntegrationEnvironment {
     @Test
     public void should_updateLastChecked() {
         long linkId = saveLinkWithUrl("https://example.org");
-        OffsetDateTime expectedLastChecked = OffsetDateTime.of(2000, 1, 1, 0, 0,0,0, ZoneOffset.UTC);
+        OffsetDateTime expectedLastChecked = OffsetDateTime.of(2000, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
 
         linkDao.updateLastCheckedAtById(expectedLastChecked, linkId);
+        entityManager.flush();
 
         Link savedLink = jdbcTemplate.queryForObject("SELECT * FROM links", LINK_JDBC_MAPPER);
+        var actualLastCheckedTime = savedLink.getLastCheckedAt();
         assertThat(savedLink.getLastCheckedAt()).isEqualTo(expectedLastChecked);
     }
 
@@ -99,7 +102,7 @@ public class LinkJooqDaoTest extends DatabaseIntegrationEnvironment {
             "('https://example.org', '1970-01-01 00:00:00', '1980-01-01 00:00:00'), " +
             "('https://example2.org', '1970-01-01 00:00:00', '1990-01-01 00:00:00'), " +
             "('https://example3.org', '1970-01-01 00:00:00', '2000-01-01 00:00:00')");
-        OffsetDateTime borderDateTime = OffsetDateTime.of(1996, 1, 1, 0, 0,0,0, ZoneOffset.UTC);
+        OffsetDateTime borderDateTime = OffsetDateTime.of(1996, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC);
 
         Set<String> actualLinkUrls = linkDao
             .findByLastCheckedAtBefore(borderDateTime).stream()

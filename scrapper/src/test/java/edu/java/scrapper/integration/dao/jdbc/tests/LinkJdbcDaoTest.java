@@ -1,4 +1,4 @@
-package edu.java.scrapper.integrational.database.dao.jdbc.tests;
+package edu.java.scrapper.integration.dao.jdbc.tests;
 import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dao.jdbc.repositories.rowMappers.LinkRowMapper;
 import edu.java.data.dto.Link;
@@ -8,13 +8,13 @@ import java.time.ZoneOffset;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import edu.java.scrapper.integrational.database.DatabaseIntegrationEnvironment;
+import edu.java.scrapper.integration.IntegrationEnvironment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.RowMapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LinkJdbcDaoTest extends DatabaseIntegrationEnvironment {
+public class LinkJdbcDaoTest extends IntegrationEnvironment {
 
     private static final RowMapper<Link> LINK_JDBC_MAPPER = new LinkRowMapper();
 

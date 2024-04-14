@@ -1,4 +1,4 @@
-package edu.java.scrapper.integrational.database.dao.jooq.configuration;
+package edu.java.scrapper.integration.dao.jooq.configuration;
 
 import edu.java.data.dao.jooq.dao.ChatJooqDAO;
 import edu.java.data.dao.jooq.dao.GitHubRepositoryJooqDAO;

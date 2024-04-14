@@ -1,4 +1,4 @@
-package edu.java.scrapper.integrational.database.dao.jdbc.tests;
+package edu.java.scrapper.integration.dao.jdbc.tests;
 
 import edu.java.data.dao.interfaces.ChatDataAccessObject;
 import edu.java.data.dao.jdbc.repositories.rowMappers.ChatRowMapper;
@@ -11,14 +11,14 @@ import java.net.URI;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-import edu.java.scrapper.integrational.database.DatabaseIntegrationEnvironment;
+import edu.java.scrapper.integration.IntegrationEnvironment;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.RowMapper;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ChatJdbcDaoTest extends DatabaseIntegrationEnvironment {
+public class ChatJdbcDaoTest extends IntegrationEnvironment {
 
     private static final RowMapper<Link> LINK_JDBC_ROW_MAPPER = new LinkRowMapper();
     private static final RowMapper<Chat> CHAT_JDBC_ROW_MAPPER = new ChatRowMapper();

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
-public class MessageListener {
+public class KafkaMessageListener {
 
     private static final Logger LOGGER = LogManager.getLogger();
 

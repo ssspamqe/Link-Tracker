@@ -1,15 +1,18 @@
 package edu.java.scrapper.integration.kafka;
 
 import edu.java.scrapper.integration.IntegrationEnvironment;
+import edu.java.scrapper.integration.kafka.configuration.TestConsumer;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdateType;
 import edu.java.telegrambotconnection.kafka.LinkUpdatesQueueProducer;
 import java.net.URI;
+import java.time.Duration;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.awaitility.Awaitility.await;
-import static org.hamcrest.Matchers.equalTo;
 
 public class LinkUpdatesQueueProducerTest extends IntegrationEnvironment {
 
@@ -24,7 +27,11 @@ public class LinkUpdatesQueueProducerTest extends IntegrationEnvironment {
         linkUpdatesQueueProducer.send(linkUpdate);
 
         await()
-            .until(testConsumer::getLastMessage, equalTo(linkUpdate));
+            .pollInterval(Duration.ofSeconds(2))
+            .atMost(10, TimeUnit.SECONDS)
+            .untilAsserted(() -> {
+                assertThat(testConsumer.getLastMessage()).isEqualTo(linkUpdate);
+            });
     }
 
 }

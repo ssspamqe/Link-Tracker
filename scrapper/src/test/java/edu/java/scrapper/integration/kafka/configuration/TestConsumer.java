@@ -1,4 +1,4 @@
-package edu.java.scrapper.integration.kafka;
+package edu.java.scrapper.integration.kafka.configuration;
 
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import lombok.Getter;
@@ -7,8 +7,8 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-@Getter @Component
-
+@Component
+@Getter
 public class TestConsumer {
 
     private static final Logger LOGGER = LogManager.getLogger();

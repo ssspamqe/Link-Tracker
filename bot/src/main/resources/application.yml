@@ -23,6 +23,7 @@ kafka:
     enable-auto-commit: true
     max-poll-interval: 10000
     concurrency: 3
+    topic: linkUpdates
 
   producer-configuration:
     bootstrap-servers: localhost:9092

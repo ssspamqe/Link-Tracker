@@ -52,6 +52,5 @@ public abstract class IntegrationEnvironment {
     static void kafkaBootstrap(DynamicPropertyRegistry registry) {
         registry.add("kafka.consumer-configuration.bootstrap-servers", KAFKA::getBootstrapServers);
         registry.add("kafka.producer-configuration.bootstrap-servers", KAFKA::getBootstrapServers);
-        registry.add("spring.kafka.producer.bootstrap-servers", KAFKA::getBootstrapServers);
     }
 }

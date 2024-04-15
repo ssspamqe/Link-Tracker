@@ -12,10 +12,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
 public class LinkUpdatesQueueProducerTest extends IntegrationEnvironment {
+
     @Test
     public void should_sendMessageToQueue() {
         var linkUpdate =
-            new LinkUpdate(1, URI.create("https://some/url"), LinkUpdateType.STACK_OVERFLOW_ANSWERS, Set.of());
+            new LinkUpdate(1, URI.create("https://some/url"), LinkUpdateType.STACK_OVERFLOW_ANSWERS, Set.of(1L));
 
         linkUpdatesQueueProducer.send(linkUpdate);
 

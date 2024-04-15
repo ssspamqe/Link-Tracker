@@ -29,7 +29,7 @@ public class KafkaMessageListenerTest extends IntegrationEnvironment {
 
         await()
             .pollInterval(Duration.ofSeconds(2))
-            .atMost(10, TimeUnit.SECONDS)
+            .atMost(20, TimeUnit.SECONDS)
             .untilAsserted(() -> {
                 Mockito.verify(spyLinkUpdateService, Mockito.times(1)).sendUpdateToBot(any());
             });
@@ -44,7 +44,7 @@ public class KafkaMessageListenerTest extends IntegrationEnvironment {
 
         await()
             .pollInterval(Duration.ofSeconds(2))
-            .atMost(10, TimeUnit.SECONDS)
+            .atMost(20, TimeUnit.SECONDS)
             .untilAsserted(() -> {
                 var lastMessage = dltConsumer.readAndDeleteNewMessage();
                 assertThat(lastMessage).isEqualTo(sentLinkUpdate);

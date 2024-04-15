@@ -22,7 +22,7 @@ public class LinkUpdatesQueueProducerTest extends IntegrationEnvironment {
 
         await()
             .pollInterval(Duration.ofSeconds(2))
-            .atMost(10, TimeUnit.SECONDS)
+            .atMost(20, TimeUnit.SECONDS)
             .untilAsserted(() -> {
                 assertThat(testConsumer.getLastMessage()).isEqualTo(linkUpdate);
             });

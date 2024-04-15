@@ -12,6 +12,8 @@ import edu.java.data.dao.jpa.dao.ChatJpaDAO;
 import edu.java.data.dao.jpa.dao.GitHubRepositoryJpaDAO;
 import edu.java.data.dao.jpa.dao.LinkJpaDAO;
 import edu.java.data.dao.jpa.dao.StackOverflowQuestionJpaDAO;
+import edu.java.scrapper.integration.kafka.configuration.TestConsumer;
+import edu.java.telegrambotconnection.kafka.LinkUpdatesQueueProducer;
 import java.io.File;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -29,7 +31,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEnti
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -80,6 +81,9 @@ public abstract class IntegrationEnvironment {
     @Autowired protected LinkJpaDAO linkJpaDao;
     @Autowired protected GitHubRepositoryJpaDAO gitHubRepositoryJpaDao;
     @Autowired protected StackOverflowQuestionJpaDAO stackOverflowQuestionJpaDao;
+
+    @Autowired protected LinkUpdatesQueueProducer linkUpdatesQueueProducer;
+    @Autowired protected TestConsumer testConsumer;
 
     static {
         setUpPostgresContainer();

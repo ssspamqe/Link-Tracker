@@ -1,11 +1,16 @@
 package edu.java.bot.integration;
 
-import edu.java.bot.configuration.kafkaconfiguration.KafkaConsumerConfiguration;
-import edu.java.bot.integration.kafka.configurations.TestKafkaBeansConfiguration;
+import edu.java.bot.integration.kafka.configurations.TestKafkaDltConsumer;
+import edu.java.bot.integration.kafka.configurations.TestKafkaProducer;
+import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdate;
+import edu.java.bot.scrapperconnection.kafka.KafkaMessageListener;
+import edu.java.bot.scrapperconnection.services.LinkUpdateService;
 import org.junit.ClassRule;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.springframework.context.annotation.Import;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -18,8 +23,22 @@ import org.testcontainers.utility.DockerImageName;
 @SpringBootTest
 @TestPropertySource(locations = "classpath:application-test.yml")
 @ActiveProfiles("test")
-@Import({KafkaConsumerConfiguration.class, TestKafkaBeansConfiguration.class})
+
 public abstract class IntegrationEnvironment {
+
+    @Autowired
+    protected KafkaMessageListener kafkaMessageListener;
+
+    @Autowired @Qualifier("spyLinkUpdateService")
+    protected LinkUpdateService spyLinkUpdateService;
+
+    @Autowired
+    protected TestKafkaProducer producer;
+    @Autowired
+    protected TestKafkaDltConsumer dltConsumer;
+
+    @Autowired @Qualifier("testKafkaTemplate")
+    protected KafkaTemplate<String, LinkUpdate> kafkaTemplate;
 
     @ServiceConnection @ClassRule
     public static KafkaContainer KAFKA;

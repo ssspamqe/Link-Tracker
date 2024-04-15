@@ -5,36 +5,20 @@ import edu.java.bot.integration.kafka.configurations.TestKafkaDltConsumer;
 import edu.java.bot.integration.kafka.configurations.TestKafkaProducer;
 import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdate;
 import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdateType;
-import edu.java.bot.scrapperconnection.kafka.KafkaMessageListener;
-import edu.java.bot.scrapperconnection.services.LinkUpdateService;
 import java.net.URI;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import edu.java.bot.scrapperconnection.kafka.KafkaMessageListener;
+import edu.java.bot.scrapperconnection.services.LinkUpdateService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.kafka.core.KafkaTemplate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 import static org.mockito.ArgumentMatchers.any;
 
 public class KafkaMessageListenerTest extends IntegrationEnvironment {
-
-    @Autowired
-    KafkaMessageListener kafkaMessageListener;
-
-    @Autowired @Qualifier("spyLinkUpdateService")
-    LinkUpdateService spyLinkUpdateService;
-
-    @Autowired
-    TestKafkaProducer producer;
-    @Autowired
-    TestKafkaDltConsumer dltConsumer;
-
-    @Autowired @Qualifier("testKafkaTemplate")
-    KafkaTemplate<String, LinkUpdate> kafkaTemplate;
 
     @Test
     public void should_consumeMessagesFromTopic() {

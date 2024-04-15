@@ -25,12 +25,14 @@ public class KafkaMessageListener {
     private final Validator validator;
     private final LinkUpdateService linkUpdateService;
 
-
     @RetryableTopic(attempts = "${kafka.retryable-topic-attempts}",
                     kafkaTemplate = "retryableTopicKafkaTemplate",
                     dltTopicSuffix = "${kafka.dlt-topic-suffix}",
                     dltStrategy = DltStrategy.FAIL_ON_ERROR)
-    @KafkaListener(topics = "${kafka.consumer-configuration.topic}", groupId = "${kafka.consumer-configuration.group-id}")
+    @KafkaListener(
+        topics = "${kafka.consumer-configuration.topic}",
+        groupId = "${kafka.consumer-configuration.group-id}"
+    )
     public void listenToLinkUpdate(@Payload LinkUpdate update) {
         LOGGER.debug("Got new update {}", update);
         throwExceptionIfInvalid(update);

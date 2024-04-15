@@ -44,7 +44,6 @@ public class KafkaConsumerConfiguration {
     }
 
     public Map<String, Object> consumerProperties() {
-        System.out.println("setted bootstrap in beans config: " + consumerConfig.bootstrapServers());
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, ErrorHandlingDeserializer.class);

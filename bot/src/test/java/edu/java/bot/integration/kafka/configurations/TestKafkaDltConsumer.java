@@ -11,7 +11,6 @@ public class TestKafkaDltConsumer {
 
     @KafkaListener(topics = "${kafka.consumer-configuration.topic}${kafka.dlt-topic-suffix}")
     public void consumeMessage(LinkUpdate message) {
-        System.out.println("dlt update: " + message);
         lastMessage = message;
     }
 

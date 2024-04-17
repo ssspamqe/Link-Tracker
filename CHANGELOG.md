@@ -1,7 +1,38 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.5] - 2024-04-08
+## [0.6] - 2024-03-19
+
+### Added 
+- PostgreSQL tables:
+    - Chats
+    - Links
+    - chat_links
+    - stack_overflow_questions
+    - git_hub_repositories
+- JDBC PostgreSQL connection
+- JDBC repositories implementations
+    - Chat Repository
+    - Link Repository
+    - StackOverflow question Repository
+    - GitHub repositories Repository
+- JDBC related services implementations
+    - Chats service
+    - Links service
+    - StackOveflow questions service
+    - GitHub repotitories service
+- Parsing Links and determining service, which they represent
+- Reporting the type of update for bot service
+- new LinkUpdateType enum
+
+### Changed
+- Slash commands methods' signatures
+- The LinkUpdate object data
+
+### Deleted
+- Redis Services
+
+## [0.5] - 2024-03-08
 
 ### Added
 - Database migration files

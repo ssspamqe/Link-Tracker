@@ -1,6 +1,16 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
+
+## [0.7] - 2023-03-20
+
+### Added
+- Scrapper-jooq application (need for autogenerating jooq code)
+- Jooq-implemented repositories
+
+### Changed
+- Once implemented service can use JDBC or Jooq implemented repotitories
+
 ## [0.6] - 2024-03-19
 
 ### Added 
@@ -27,7 +37,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Slash commands methods' signatures
-- The LinkUpdate object data
+- The LinkUpdate DTO data
 
 ### Deleted
 - Redis Services

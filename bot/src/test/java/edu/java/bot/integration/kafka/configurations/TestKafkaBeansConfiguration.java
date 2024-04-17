@@ -21,19 +21,6 @@ import static edu.java.bot.integration.IntegrationEnvironment.KAFKA;
 public class TestKafkaBeansConfiguration {
 
     @Bean
-    public LinkUpdateService spyLinkUpdateService() {
-        return Mockito.mock(LinkUpdateService.class);
-    }
-
-    @Bean
-    KafkaMessageListener kafkaMessageListener(
-        Validator validator,
-        @Qualifier("spyLinkUpdateService") LinkUpdateService spyLinkUpdateService
-    ) {
-        return new KafkaMessageListener(validator, spyLinkUpdateService);
-    }
-
-    @Bean
     KafkaTemplate<String, LinkUpdate> testKafkaTemplate() {
         return new KafkaTemplate<>(testProducerFactory());
     }

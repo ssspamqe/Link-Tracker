@@ -9,6 +9,7 @@ import org.junit.ClassRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.test.context.ActiveProfiles;
@@ -29,8 +30,8 @@ public abstract class IntegrationEnvironment {
     @Autowired
     protected KafkaMessageListener kafkaMessageListener;
 
-    @Autowired @Qualifier("spyLinkUpdateService")
-    protected LinkUpdateService spyLinkUpdateService;
+    @MockBean
+    protected LinkUpdateService mockLinkUpdateService;
 
     @Autowired
     protected TestKafkaProducer producer;

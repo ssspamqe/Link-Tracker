@@ -1,19 +1,14 @@
 package edu.java.bot.integration.kafka;
 
 import edu.java.bot.integration.IntegrationEnvironment;
-import edu.java.bot.integration.kafka.configurations.TestKafkaDltConsumer;
-import edu.java.bot.integration.kafka.configurations.TestKafkaProducer;
 import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdate;
 import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdateType;
 import java.net.URI;
 import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import edu.java.bot.scrapperconnection.kafka.KafkaMessageListener;
-import edu.java.bot.scrapperconnection.services.LinkUpdateService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.kafka.core.KafkaTemplate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 import static org.mockito.ArgumentMatchers.any;
@@ -31,7 +26,7 @@ public class KafkaMessageListenerTest extends IntegrationEnvironment {
             .pollInterval(Duration.ofSeconds(2))
             .atMost(20, TimeUnit.SECONDS)
             .untilAsserted(() -> {
-                Mockito.verify(spyLinkUpdateService, Mockito.times(1)).sendUpdateToBot(any());
+                Mockito.verify(mockLinkUpdateService, Mockito.times(1)).sendUpdateToBot(any());
             });
     }
 

@@ -15,7 +15,7 @@
         <maven.version>3.8.6</maven.version>
         <jdk.version>21</jdk.version>
         <java.release>21</java.release>
-        
+
         <revision>0.9</revision>
 
         <skip.unit.tests>false</skip.unit.tests>

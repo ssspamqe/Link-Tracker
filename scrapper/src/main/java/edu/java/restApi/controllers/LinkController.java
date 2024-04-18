@@ -1,12 +1,13 @@
 package edu.java.restApi.controllers;
 
-import edu.java.restApi.controllers.dto.requests.AddLinkRequest;
-import edu.java.restApi.controllers.dto.requests.RemoveLinkRequest;
-import edu.java.restApi.controllers.dto.responses.LinkResponse;
-import edu.java.restApi.controllers.dto.responses.ListLinksResponse;
+import edu.java.restApi.dto.requests.AddLinkRequest;
+import edu.java.restApi.dto.requests.RemoveLinkRequest;
+import edu.java.restApi.dto.responses.LinkResponse;
+import edu.java.restApi.dto.responses.ListLinksResponse;
 import edu.java.restApi.services.LinkService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
+import java.net.URI;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -48,8 +49,7 @@ public class LinkController {
         @RequestHeader("Tg-Chat-Id") @Min(1) int chatId,
         @Valid @RequestBody AddLinkRequest addLinkRequest
     ) {
-        String linkUrl = addLinkRequest.url();
-        LOGGER.warn(linkUrl);
+        URI linkUrl = URI.create(addLinkRequest.url());
         LinkResponse linkResponse = new LinkResponse(linkService.addLinkToTrack(chatId, linkUrl));
         return ResponseEntity.ok(linkResponse);
     }
@@ -59,7 +59,7 @@ public class LinkController {
         @RequestHeader("Tg-Chat-Id") @Min(1) int chatId,
         @Valid @RequestBody RemoveLinkRequest removeLinkRequest
     ) {
-        String linkUrl = removeLinkRequest.url();
+        URI linkUrl = URI.create(removeLinkRequest.url());
         LinkResponse linkResponse = new LinkResponse(linkService.untrackLink(chatId, linkUrl));
         return ResponseEntity.ok(linkResponse);
     }

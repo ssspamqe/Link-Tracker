@@ -1,19 +1,62 @@
 app:
   scheduler-config:
     enable: true
-    interval: 10000
-    force-check-delay: 10000
-  stack-overflow-url:
-    default-url: https://api.stackexchange.com/2.3/
-  git-hub-url:
-    default-url: https://api.github.com/
-  telegram-bot-url:
-    default-url: http://localhost:8090/bot/api/v1/
-  git-hub-host-names:
-    - github.com
-    - github.dev
-  stack-overflow-host-names:
-    - stackoverflow.com
+    interval: 10s
+    force-check-delay: 10s
+  stack-overflow-config:
+    url:
+      default-url: https://api.stackexchange.com/2.3/
+    host-names:
+      -stackoverflow.com
+    retry-config:
+      type: constant
+      delay: 2s
+      max-retries: 3
+      retry-on-statuses:
+        - SERVER_ERROR
+
+  git-hub-config:
+    url:
+      default-url: https://api.github.com/
+    host-names:
+      - github.com
+      - github.dev
+    retry-config:
+      type: constant
+      delay: 2s
+      max-retries: 3
+      retry-on-statuses:
+        - SERVER_ERROR
+
+  telegram-bot-config:
+    url:
+      default-url: http://localhost:8090/bot/api/v1/
+    retry-config:
+      type: constant
+      delay: 2s
+      max-retries: 3
+      retry-on-statuses:
+        - SERVER_ERROR
+
+
+  database-access-type: jdbc
+  use-queue: true
+
+kafka:
+  topic-configurations:
+    - name: linkUpdates
+      partitions: 1
+      replicas: 1
+
+  producer-configuration:
+    bootstrap-servers: localhost:9092
+    client-id: scrapperProducerGroup
+    acks-config: 1
+    delivery-timeout: 100000
+    linger-ms: 5000
+    batch-size: 200000
+    link-updates-topic: linkUpdates
+
 
 spring:
   application:
@@ -24,14 +67,39 @@ spring:
       port: 6379
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://postgresql:5432/scrapper
+    url: jdbc:postgresql://localhost:5432/scrapper
     password: postgres
     username: postgres
-
   docker:
     compose:
       enabled: true
       file: compose.yml
+  jooq:
+    sql-dialect: postgres
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  cache:
+    cache-names: rate-limit-bucket
+    caffeine:
+      spec: maximumSize=50000,expireAfterAccess=3600s
+
+bucket4j:
+  enabled: true
+  filters:
+    - cache-name: rate-limit-bucket
+      url: .*
+      strategy: first
+      http-response-body: "{ \"status\": 429, \"error\": \"Too Many Requests\", \"message\": \"You have exhausted your API Request Quota\" }"
+      rate-limits:
+        - cache-key: getRemoteAddr()
+          bandwidths:
+            - capacity: 10
+              time: 1
+              unit: minutes
 
 server:
   port: 8080

@@ -1,6 +1,6 @@
 package edu.java.scrapper.configClasses;
 
-import edu.java.configuration.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfig;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 

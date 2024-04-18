@@ -1,19 +1,19 @@
 package edu.java.linkUpdateScheduler.linkUpdatesCheckers.allUpdatesCheckers;
 
-import edu.java.configuration.ApplicationConfig;
-import edu.java.data.dao.LinkDataAccessObject;
-import edu.java.data.dao.StackOverflowQuestionDataAccessObject;
+import edu.java.configuration.global.ApplicationConfig;
+import edu.java.data.dao.interfaces.LinkDataAccessObject;
+import edu.java.data.dao.interfaces.StackOverflowQuestionDataAccessObject;
+import edu.java.data.dto.Link;
+import edu.java.data.dto.StackOverflowQuestion;
 import edu.java.data.exceptions.NoSuchStackOverflowQuestionException;
-import edu.java.data.postgres.entities.Link;
-import edu.java.data.postgres.entities.StackOverflowQuestion;
 import edu.java.linkUpdateScheduler.exceptions.IncorrectHostException;
 import edu.java.linkUpdateScheduler.exceptions.UnsuccessfulStackOverflowQuestionUrlParseException;
 import edu.java.linkUpdateScheduler.linkUpdatesCheckers.singleUpdateCheckers.stackoverflow.StackOverflowQuestionSingleUpdateChecker;
+import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
+import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdateType;
 import edu.java.webClients.stackOverflow.StackOverflowClient;
 import edu.java.webClients.stackOverflow.dto.StackOverflowAnswerBody;
 import edu.java.webClients.stackOverflow.dto.StackOverflowQuestionBody;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdateType;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class StackOverflowAllUpdatesChecker implements LinkAllUpdatesChecker {
     }
 
     private List<LinkUpdate> buildLinkUpdateList(Link link, List<LinkUpdateType> updateTypes) {
-        List<Long> chatIds = linkDao.findAssociatedChatsIdsById(link.getId());
+        Set<Long> chatIds = linkDao.findAssociatedChatsIdsByLinkId(link.getId());
         return updateTypes.stream()
             .map(type ->
                 new LinkUpdate(
@@ -76,7 +76,7 @@ public class StackOverflowAllUpdatesChecker implements LinkAllUpdatesChecker {
     }
 
     private boolean isIncorrectHostName(String hostName) {
-        return !applicationConfig.isStackOverflowHostName(hostName);
+        return !applicationConfig.stackOverflowConfig().isCorrectHostName(hostName);
     }
 
     private long extractQuestionId(URI url) {

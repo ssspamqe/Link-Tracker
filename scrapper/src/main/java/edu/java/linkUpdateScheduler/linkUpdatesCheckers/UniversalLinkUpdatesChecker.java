@@ -1,10 +1,11 @@
 package edu.java.linkUpdateScheduler.linkUpdatesCheckers;
 
-import edu.java.data.dao.LinkDataAccessObject;
-import edu.java.data.postgres.entities.Link;
+import edu.java.data.dao.interfaces.LinkDataAccessObject;
+import edu.java.data.dto.Link;
 import edu.java.linkUpdateScheduler.exceptions.IncorrectHostException;
 import edu.java.linkUpdateScheduler.linkUpdatesCheckers.allUpdatesCheckers.LinkAllUpdatesChecker;
-import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
+import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
+import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +29,7 @@ public class UniversalLinkUpdatesChecker {
 
             }
         }
-        linkDao.updateLastCheckedById(link.getId());
+        linkDao.updateLastCheckedAtById(OffsetDateTime.now(), link.getId());
         return List.of();
     }
 }

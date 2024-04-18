@@ -1,11 +1,35 @@
 app:
-  stack-overflow-url:
-    default-url: http://localhost:8080/
-  git-hub-url:
-    default-url: http://localhost:8080/
-  telegram-bot-url:
-    default-url: http://localhost:8080/
+  stack-overflow-config:
+    url:
+      default-url: http://localhost:8080
+  git-hub-config:
+    url:
+      default-url: http://localhost:8080
+  telegram-bot-config:
+    url:
+      default-url: http://localhost:8080
+
+kafka:
+  topic-configurations:
+    - name: linkUpdates-test
+      partitions: 1
+      replicas: 1
+
+  producer-configuration:
+    linger-ms: 100
+    link-updates-topic: linkUpdates-test
+
 
 spring:
   liquibase:
     enabled: false
+    change-log: classpath:../../../../migrations/master.yaml
+
+  main:
+    allow-bean-definition-overriding: true
+
+  cache:
+    type: none
+
+bucket4j:
+  enabled: false

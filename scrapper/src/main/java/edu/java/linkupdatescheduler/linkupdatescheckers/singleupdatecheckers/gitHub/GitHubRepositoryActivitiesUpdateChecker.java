@@ -2,11 +2,11 @@ package edu.java.linkupdatescheduler.linkupdatescheckers.singleupdatecheckers.gi
 
 import edu.java.data.dto.GitHubRepository;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdateType;
-import java.util.Set;
-import java.util.stream.Collectors;
 import edu.java.webclients.gitHub.GitHubClient;
 import edu.java.webclients.gitHub.dto.GitHubRepositoryActivityBody;
 import edu.java.webclients.gitHub.dto.GitHubRepositoryBody;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -35,7 +35,10 @@ public record ApplicationConfig(
     @NotNull
     Boolean useQueue,
 
-    TelegramBotConfig telegramBotConfig
+    TelegramBotConfig telegramBotConfig,
+
+    @NotNull
+    String processedUpdatesMetricName
 ) {
 
     @PostConstruct

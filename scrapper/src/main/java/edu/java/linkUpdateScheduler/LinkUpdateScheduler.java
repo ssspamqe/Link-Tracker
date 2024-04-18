@@ -2,8 +2,6 @@ package edu.java.linkUpdateScheduler;
 
 import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dto.Link;
-import edu.java.data.dao.LinkDataAccessObject;
-import edu.java.data.postgres.entities.Link;
 import edu.java.linkUpdateScheduler.linkUpdatesCheckers.UniversalLinkUpdatesChecker;
 import edu.java.webClients.telegramBot.TelegramBotClient;
 import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;

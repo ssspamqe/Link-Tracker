@@ -2,6 +2,8 @@ package edu.java.linkUpdateScheduler;
 
 import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dto.Link;
+import edu.java.data.dao.LinkDataAccessObject;
+import edu.java.data.postgres.entities.Link;
 import edu.java.linkUpdateScheduler.linkUpdatesCheckers.UniversalLinkUpdatesChecker;
 import edu.java.webClients.telegramBot.TelegramBotClient;
 import edu.java.webClients.telegramBot.dto.requests.LinkUpdate;
@@ -34,7 +36,7 @@ public class LinkUpdateScheduler {
     @Value("${app.scheduler-config.force-check-delay}")
     private Duration forceCheckDelay;
 
-    @Scheduled(fixedDelayString = "#{schedulerConfig.interval()}")
+    @Scheduled(fixedDelayString = "${app.scheduler-config.interval}")
     @ConditionalOnProperty(value = "app.scheduler.enable", havingValue = "true")
     public void update() {
         if (!contextIsLoaded) {
@@ -43,6 +45,7 @@ public class LinkUpdateScheduler {
         }
 
         LOGGER.debug("LinkUpdateScheduler is looking for updates...");
+
         Collection<Link> linksToCheck = linkDao.findByLastCheckedAtBefore(buildBorderCheckTime());
 
         List<LinkUpdate> allLinkUpdates = new ArrayList<>();

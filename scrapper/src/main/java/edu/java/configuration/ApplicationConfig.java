@@ -17,9 +17,8 @@ import org.springframework.validation.annotation.Validated;
 @ConfigurationProperties(prefix = "app", ignoreUnknownFields = false)
 @EnableScheduling
 public record ApplicationConfig(
-    @Bean
     @NotNull
-    ApplicationConfig.SchedulerConfig schedulerConfig,
+    SchedulerConfig schedulerConfig,
 
     @NotNull
     ApiUrl stackOverflowUrl,

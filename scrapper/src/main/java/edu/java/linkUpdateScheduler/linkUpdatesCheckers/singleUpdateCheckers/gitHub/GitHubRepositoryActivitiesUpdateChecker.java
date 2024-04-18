@@ -22,6 +22,7 @@ public class GitHubRepositoryActivitiesUpdateChecker implements GitHubRepository
     }
 
     @Override
+
     public boolean hasUpdate(GitHubRepository oldState, GitHubRepositoryBody newState) {
         Set<Long> oldActivities = oldState.getActivitiesIds();
         Set<Long> newActivities = fetchActivitiesIds(newState.name(), newState.owner().login());

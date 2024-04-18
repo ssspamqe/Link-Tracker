@@ -28,6 +28,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/scrapper
     password: postgres
     username: postgres
+
   docker:
     compose:
       enabled: true

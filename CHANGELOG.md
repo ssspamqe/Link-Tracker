@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.7] - 2023-03-20
+## [0.8] - 2024-03-30
+
+### Added
+- Jpa-implemented repositories and DataAccessObjects
+
+## Changed
+- Repositories implementation now can be choosed via yaml config file
+- Methods in repositories that retrieve "Now" time were deleted.
+
+## [0.7] - 2024-03-20
 
 ### Added
 - Scrapper-jooq application (need for autogenerating jooq code)

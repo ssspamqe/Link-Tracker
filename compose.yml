@@ -46,6 +46,8 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_SERVERS: zoo1:2888:3888
+    networks:
+      - backend
 
   kafka1:
     image: confluentinc/cp-kafka:7.3.2
@@ -71,6 +73,8 @@ services:
       KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
     depends_on:
       - zoo1
+    networks:
+      - backend
 
   kafka-ui:
     container_name: kafka-ui
@@ -79,6 +83,8 @@ services:
       - 8100:8080
     environment:
       DYNAMIC_CONFIG_ENABLED: 'true'
+    networks:
+      - backend
 
   prometheus:
     container_name: prometheus
@@ -88,6 +94,8 @@ services:
     volumes:
       - ./prometheus:/etc/prometheus
       - prometheus_data:/prometheus
+    networks:
+      - backend
 
   grafana:
     container_name: grafana
@@ -96,6 +104,8 @@ services:
       - 3000:3000
     volumes:
       - grafana_data:/var/lib/grafana
+    networks:
+      - backend
 
 volumes:
   postgresql: { }

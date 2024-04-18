@@ -36,7 +36,8 @@ public record KafkaConfig(
         String autoOffsetReset,
         Boolean enableAutoCommit,
         Integer maxPollInterval,
-        Integer concurrency
+        Integer concurrency,
+        String topic
     ) {
     }
 

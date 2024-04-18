@@ -31,7 +31,8 @@ public class CommandServiceTest {
     @Spy
     HelpSlashCommand helpSlashCommand;
 
-    @Spy ScrapperLinksClient scrapperLinksClient;
+    @Spy
+    ScrapperLinksClient scrapperLinksClient;
 
     @Spy
     @InjectMocks

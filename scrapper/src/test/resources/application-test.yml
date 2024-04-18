@@ -1,4 +1,6 @@
 app:
+  scheduler-config:
+    enable: false
   stack-overflow-config:
     url:
       default-url: http://localhost:8080
@@ -19,17 +21,25 @@ kafka:
     linger-ms: 100
     link-updates-topic: linkUpdates-test
 
-
 spring:
   liquibase:
     enabled: false
     change-log: classpath:../../../../migrations/master.yaml
+  kafka:
+    consumer:
+      auto-offset-reset: earliest
+      group-id: testGroup
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
 
   main:
     allow-bean-definition-overriding: true
 
   cache:
     type: none
+
 
 bucket4j:
   enabled: false

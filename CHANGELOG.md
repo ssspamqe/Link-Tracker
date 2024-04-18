@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10] - 2024-04-09
+
+### Added
+- Kafka Connection between Scrapper and Bot
+  - Configurable kafka consumer in Bot
+        - Messagges that can be deserialized or processed will be sent to dead letter topic
+  - Confgurable kafka producer in Scrapper
+  - Kafka, Zookeeper and Kafka-ui were added to compose file
+
+### Changed
+- LocalDateTime was changed to OffsetDateTime to keep the time zones
+
 ## [0.9] - 2024-04-04
 
 ### Added

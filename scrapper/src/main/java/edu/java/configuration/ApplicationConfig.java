@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import java.time.Duration;
 import java.util.Set;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -17,9 +16,8 @@ import org.springframework.validation.annotation.Validated;
 @ConfigurationProperties(prefix = "app", ignoreUnknownFields = false)
 @EnableScheduling
 public record ApplicationConfig(
-    @Bean
     @NotNull
-    ApplicationConfig.SchedulerConfig schedulerConfig,
+    SchedulerConfig schedulerConfig,
 
     @NotNull
     ThirdPartyServiceConfig stackOverflowConfig,

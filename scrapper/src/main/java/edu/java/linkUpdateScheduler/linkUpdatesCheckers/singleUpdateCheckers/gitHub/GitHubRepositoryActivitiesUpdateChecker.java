@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class GItHubRepositoryActivitiesUpdateChecker implements GitHubRepositorySingleUpdateChecker {
+public class GitHubRepositoryActivitiesUpdateChecker implements GitHubRepositorySingleUpdateChecker {
 
     private final GitHubClient gitHubClient;
 
@@ -22,6 +22,7 @@ public class GItHubRepositoryActivitiesUpdateChecker implements GitHubRepository
     }
 
     @Override
+
     public boolean hasUpdate(GitHubRepository oldState, GitHubRepositoryBody newState) {
         Set<Long> oldActivities = oldState.getActivitiesIds();
         Set<Long> newActivities = fetchActivitiesIds(newState.name(), newState.owner().login());

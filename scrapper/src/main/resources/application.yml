@@ -37,7 +37,6 @@ app:
       max-retries: 3
       retry-on-statuses:
         - SERVER_ERROR
-
   database-access-type: jpa
 
 spring:
@@ -52,6 +51,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/scrapper
     password: postgres
     username: postgres
+
   docker:
     compose:
       enabled: true

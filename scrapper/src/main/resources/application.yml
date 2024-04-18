@@ -84,7 +84,6 @@ management:
     enabled-by-default: false
   server:
     port: 8081
-
 spring:
   application:
     name: scrapper

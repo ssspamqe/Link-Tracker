@@ -1,7 +1,75 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-## [0.5] - 2024-04-08
+
+## [0.10] - 2024-04-09
+
+### Added
+- Kafka Connection between Scrapper and Bot
+  - Configurable kafka consumer in Bot
+        - Messagges that can be deserialized or processed will be sent to dead letter topic
+  - Confgurable kafka producer in Scrapper
+  - Kafka, Zookeeper and Kafka-ui were added to compose file
+
+### Changed
+- LocalDateTime was changed to OffsetDateTime to keep the time zones
+
+## [0.9] - 2024-04-04
+
+### Added
+- Configurable retry mechanics to all web clients
+- Configurable rate limiting for rest api endpoints in Srapper
+
+## [0.8] - 2024-03-30
+
+### Added
+- Jpa-implemented repositories and DataAccessObjects
+
+### Changed
+- Repositories implementation now can be choosed via yaml config file
+- Methods in repositories that retrieve "Now" time were deleted.
+
+## [0.7] - 2024-03-20
+
+### Added
+- Scrapper-jooq application (need for autogenerating jooq code)
+- Jooq-implemented repositories
+
+### Changed
+- Once implemented service can use JDBC or Jooq implemented repotitories
+
+## [0.6] - 2024-03-19
+
+### Added 
+- PostgreSQL tables:
+    - Chats
+    - Links
+    - chat_links
+    - stack_overflow_questions
+    - git_hub_repositories
+- JDBC PostgreSQL connection
+- JDBC repositories implementations
+    - Chat Repository
+    - Link Repository
+    - StackOverflow question Repository
+    - GitHub repositories Repository
+- JDBC related services implementations
+    - Chats service
+    - Links service
+    - StackOveflow questions service
+    - GitHub repotitories service
+- Parsing Links and determining service, which they represent
+- Reporting the type of update for bot service
+- new LinkUpdateType enum
+
+### Changed
+- Slash commands methods' signatures
+- The LinkUpdate DTO data
+
+### Deleted
+- Redis Services
+
+## [0.5] - 2024-03-08
 
 ### Added
 - Database migration files

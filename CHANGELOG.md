@@ -2,12 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.9] - 2024-04-04
+
+### Added
+- Configurable retry mechanics to all web clients
+- Configurable rate limiting for rest api endpoints in Srapper
+
 ## [0.8] - 2024-03-30
 
 ### Added
 - Jpa-implemented repositories and DataAccessObjects
 
-## Changed
+### Changed
 - Repositories implementation now can be choosed via yaml config file
 - Methods in repositories that retrieve "Now" time were deleted.
 

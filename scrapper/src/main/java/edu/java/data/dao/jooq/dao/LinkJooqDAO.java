@@ -6,7 +6,7 @@ import edu.java.data.dao.jooq.repositories.LinkJooqRepository;
 import edu.java.data.dto.ChatLink;
 import edu.java.data.dto.Link;
 import edu.java.data.exceptions.NoSuchLinkException;
-import edu.java.data.initialStateScreeners.UniversalInitialStateScreener;
+import edu.java.data.initialstatescreeners.UniversalInitialStateScreener;
 import java.net.URI;
 import java.time.OffsetDateTime;
 import java.util.Optional;

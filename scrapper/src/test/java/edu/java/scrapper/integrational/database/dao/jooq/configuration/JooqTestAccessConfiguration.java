@@ -9,7 +9,7 @@ import edu.java.data.dao.jooq.repositories.ChatLinksJooqRepository;
 import edu.java.data.dao.jooq.repositories.GitHubRepositoryJooqRepository;
 import edu.java.data.dao.jooq.repositories.LinkJooqRepository;
 import edu.java.data.dao.jooq.repositories.StackOverflowQuestionJooqRepository;
-import edu.java.data.initialStateScreeners.UniversalInitialStateScreener;
+import edu.java.data.initialstatescreeners.UniversalInitialStateScreener;
 import org.jooq.impl.DefaultDSLContext;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;

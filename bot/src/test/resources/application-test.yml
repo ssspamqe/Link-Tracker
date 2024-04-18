@@ -2,3 +2,11 @@ app:
   telegram-token: telegramTokenPlaceHolder
   scrapper-url:
     default-url: http://localhost:8080
+
+kafka:
+  topic-configurations:
+    - name: linkUpdates-test
+      partitions: 1
+      replicas: 1
+
+  dlt-topic-suffix: _dlt-test

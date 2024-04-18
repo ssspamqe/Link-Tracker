@@ -1,10 +1,10 @@
 package edu.java.scrapper.webClients;
 
-import edu.java.webClients.stackOverflow.StackOverflowClient;
-import edu.java.webClients.stackOverflow.dto.StackOverflowAnswerBody;
-import edu.java.webClients.stackOverflow.dto.StackOverflowOwnerBody;
-import edu.java.webClients.stackOverflow.dto.StackOverflowQuestionBody;
-import edu.java.webClients.stackOverflow.dto.StackOverflowResponseBody;
+import edu.java.webclients.stackoverflow.StackOverflowClient;
+import edu.java.webclients.stackoverflow.dto.StackOverflowAnswerBody;
+import edu.java.webclients.stackoverflow.dto.StackOverflowOwnerBody;
+import edu.java.webclients.stackoverflow.dto.StackOverflowQuestionBody;
+import edu.java.webclients.stackoverflow.dto.StackOverflowResponseBody;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;

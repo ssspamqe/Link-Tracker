@@ -1,8 +1,8 @@
 package edu.java.configuration.beansconfiguration.linkupdatesender;
 
 import edu.java.configuration.kafkaconfiguration.KafkaConfig;
-import edu.java.linkUpdateScheduler.linkUpdatesSender.KafkaLinkUpdatesSender;
-import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;
+import edu.java.linkupdatescheduler.linkupdatessender.KafkaLinkUpdatesSender;
+import edu.java.linkupdatescheduler.linkupdatessender.LinkUpdatesSender;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import edu.java.telegrambotconnection.kafka.LinkUpdatesQueueProducer;
 import lombok.RequiredArgsConstructor;

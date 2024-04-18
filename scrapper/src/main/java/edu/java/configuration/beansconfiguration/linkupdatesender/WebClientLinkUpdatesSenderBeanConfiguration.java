@@ -1,15 +1,15 @@
 package edu.java.configuration.beansconfiguration.linkupdatesender;
 
 import edu.java.configuration.global.ApplicationConfig;
-import edu.java.linkUpdateScheduler.linkUpdatesSender.LinkUpdatesSender;
-import edu.java.linkUpdateScheduler.linkUpdatesSender.WebClientLinkUpdatesSender;
+import edu.java.linkupdatescheduler.linkupdatessender.LinkUpdatesSender;
+import edu.java.linkupdatescheduler.linkupdatessender.WebClientLinkUpdatesSender;
 import edu.java.telegrambotconnection.telegrambot.TelegramBotClient;
 import edu.java.telegrambotconnection.telegrambot.dto.responses.TelegramBotApiErrorResponse;
-import edu.java.webClients.exceptions.ClientErrorException;
-import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithConstantRetries;
-import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithExponentialRetries;
-import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithLinearRetries;
-import edu.java.webClients.webClientsWithRetry.telegramBot.TelegramBotClientWithRetries;
+import edu.java.webclients.exceptions.ClientErrorException;
+import edu.java.webclients.webclientswithretry.telegramBot.TelegramBotClientWithConstantRetries;
+import edu.java.webclients.webclientswithretry.telegramBot.TelegramBotClientWithExponentialRetries;
+import edu.java.webclients.webclientswithretry.telegramBot.TelegramBotClientWithLinearRetries;
+import edu.java.webclients.webclientswithretry.telegramBot.TelegramBotClientWithRetries;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

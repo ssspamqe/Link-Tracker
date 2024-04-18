@@ -58,7 +58,6 @@ kafka:
     link-updates-topic: linkUpdates
 
 
-
 spring:
   application:
     name: scrapper

@@ -39,7 +39,7 @@ public class LinkUpdateScheduler {
     @ConditionalOnProperty(value = "app.scheduler.enable", havingValue = "true")
     public void update() {
         if (!contextIsLoaded) {
-            LOGGER.warn("Context is not loaded, skipping link updates checking...");
+            LOGGER.warn("Context is not loaded, skipping link updated checking...");
             return;
         }
 
@@ -69,6 +69,7 @@ public class LinkUpdateScheduler {
             } catch (Exception ex) {
                 LOGGER.warn("Can't send updates to bot, because of {}", ex.getMessage());
             }
+
         } else {
             LOGGER.debug("No updates found...");
         }

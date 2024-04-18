@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.11] - 2024-04-13
+
+### Added
+- Prometheus and Grafana to docker compose file
+- Metrics configuration in yaml file
+
 ## [0.10] - 2024-04-09
 
 ### Added

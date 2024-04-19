@@ -35,11 +35,12 @@ public class LinkUpdateScheduler {
     private final Counter processedLinkUpdatesMetric;
 
     private boolean contextIsLoaded = false;
+
     @Value("${app.scheduler-config.force-check-delay}")
     private Duration forceCheckDelay;
 
-    @Scheduled(fixedDelayString = "#{schedulerConfig.interval()}")
-    @ConditionalOnProperty(value = "app.scheduler.enable", havingValue = "true")
+    @Scheduled(fixedDelayString = "${app.scheduler-config.interval}")
+    @ConditionalOnProperty(value = "${app.scheduler-config.enable}", havingValue = "true")
     public void update() {
         if (!contextIsLoaded) {
             LOGGER.warn("Context is not loaded, skipping link updated checking...");

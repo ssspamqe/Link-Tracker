@@ -1,10 +1,4 @@
-![Bot](https://github.com/ssspamqe/Link-Tracke/actions/workflows/bot.yml/badge.svg)
-![Scrapper](https://github.com/ssspamqe/Link-Tracke/actions/workflows/scrapper.yml/badge.svg)
-
 # Link Tracker
-
-ФИО: Дементьев Степан Валерьевич
-
 Приложение для отслеживания обновлений контента по ссылкам.
 При появлении новых событий отправляется уведомление в Telegram.
 

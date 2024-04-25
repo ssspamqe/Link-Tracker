@@ -1,5 +1,5 @@
-![Bot](https://github.com/sanyarnd/java-course-2023-backend-template/actions/workflows/bot.yml/badge.svg)
-![Scrapper](https://github.com/sanyarnd/java-course-2023-backend-template/actions/workflows/scrapper.yml/badge.svg)
+![Bot](https://github.com/ssspamqe/Link-Tracke/actions/workflows/bot.yml/badge.svg)
+![Scrapper](https://github.com/ssspamqe/Link-Tracke/actions/workflows/scrapper.yml/badge.svg)
 
 # Link Tracker
 
@@ -11,9 +11,14 @@
 Проект написан на `Java 21` с использованием `Spring Boot 3`.
 
 Проект состоит из 2-х приложений:
-* Bot
-* Scrapper
+* Bot (сервис Телеграм-бота)
+* Scrapper (сервис-планировщик, проверяющий обновления по ссылкам, созраненным в бд)
 
 Для работы требуется БД `PostgreSQL` и `Redis`. Присутствует опциональная зависимость на `Kafka`.
+
+Пользователь регистрируется в телеграмм боте, отправляет ссылки на вопрос на StackOverflow или GItHub репозиторий и получает информацию о, например, новом вопросе или новом коммите прямо в мессенджер. 
+Полученная от пользователя ссылка сохранятся в базе  данных, затем сервис-планировщик опрашивает указанные ресурсы с настраиваемым промежутком во времени и отправляет информацию об обновлениях, если они были, в сервис телеграмм бота.
+Сервисы могут передавать данные либо через RestAPI, либо через Kafka (это настраивается через конфигурационный файл yaml). В роли SQL базы данных используется PostgreSQL, но временно использовалась NoSQL база данных Redis. В дальнейшем она будет выполнять роль кэша в сервисе-планировщике. Также присутствует возможность выбора между jdbc/jooq/hibernate
+Помимо всего вышесказанного, в проекте присутствуют юнит тесты и интеграционные тесты c базой данных и Kafka.
 
 Список изменений по версиям: [изменения](CHANGELOG.md)

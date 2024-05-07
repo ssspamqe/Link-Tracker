@@ -49,7 +49,7 @@ public class TelegramBotInitializer {
         try {
             return commandService.handleMessage(message);
         } catch (Exception ex) {
-            LOGGER.error(ex.getMessage());
+            LOGGER.error();
             Long chatId = message.chat().id();
             return new SendMessage(chatId, ex.getMessage());
         }

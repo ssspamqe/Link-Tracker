@@ -5,6 +5,6 @@ import lombok.Value;
 
 @EqualsAndHashCode(callSuper = true)
 @Value
-public class ClientErrorException extends RuntimeException {
-    private final ClientErrorResponseBody errorResponseBody;
+public class ScrapperWebClientErrorException extends RuntimeException {
+    ClientErrorResponseBody errorResponseBody;
 }

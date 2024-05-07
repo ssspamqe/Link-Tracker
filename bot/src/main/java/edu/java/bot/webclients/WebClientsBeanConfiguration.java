@@ -1,7 +1,7 @@
 package edu.java.bot.webclients;
 
 import edu.java.bot.configuration.globalconfiguration.ApplicationConfig;
-import edu.java.bot.webclients.exceptions.ClientErrorException;
+import edu.java.bot.webclients.exceptions.ScrapperWebClientErrorException;
 import edu.java.bot.webclients.scrapper.ScrapperLinksClient;
 import edu.java.bot.webclients.scrapper.ScrapperTelegramChatClient;
 import edu.java.bot.webclients.scrapper.dto.responses.ScrapperApiErrorResponse;
@@ -40,7 +40,7 @@ public class WebClientsBeanConfiguration {
         WebClient webClient = WebClient.builder()
             .defaultStatusHandler(HttpStatusCode::is4xxClientError, response ->
                 response.bodyToMono(ScrapperApiErrorResponse.class)
-                    .flatMap(errorBody -> Mono.error(new ClientErrorException(errorBody)))
+                    .flatMap(errorBody -> Mono.error(new ScrapperWebClientErrorException(errorBody)))
             )
             .baseUrl(baseUrl)
             .build();

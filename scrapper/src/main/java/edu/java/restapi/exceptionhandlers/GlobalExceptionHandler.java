@@ -34,7 +34,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse> handleMethodArgumentNotValidException(
         HandlerMethodValidationException exception
     ) {
-
         HttpStatusCode statusCode = exception.getStatusCode();
         String description = Arrays.toString(exception.getDetailMessageArguments());
         ApiErrorResponse errorResponse =

@@ -62,7 +62,8 @@ public class LinkController {
     }
 
     @Operation(summary = "Track link",
-               description = "Creates relation between passed chatId and link, sending LinkUpdates to chatId via scheduler")
+               description =
+                   "Creates relation between passed chatId and link, sending LinkUpdates to chatId via scheduler")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successfully tracked link"),
         @ApiResponse(responseCode = "400", description = "Retrieved data is not correct", content = {
@@ -83,7 +84,9 @@ public class LinkController {
     }
 
     @Operation(summary = "Untrack link",
-               description = "Removes relation between passed chatId and link, stopping sending LinkUpdates to chatId via scheduler")
+               description =
+                   "Removes relation between passed chatId and link, "
+                       + "stopping sending LinkUpdates to chatId via scheduler")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successfully untracked link"),
         @ApiResponse(responseCode = "400", description = "Retrieved data is not correct", content = {

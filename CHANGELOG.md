@@ -2,9 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.12.1] - 2024-05-07
+
+### Added
+- Additional documentation at swagger page
+    - Endpoints description
+    - Possible API response description
+
 ## [0.12] - 2024-04-15
 
-## Added
+### Added
 - Kafka integration tests (using Awaitility)
 
 ## [0.11] - 2024-04-13

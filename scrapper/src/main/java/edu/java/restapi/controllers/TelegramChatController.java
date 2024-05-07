@@ -1,6 +1,7 @@
 package edu.java.restapi.controllers;
 
 import edu.java.restapi.services.TelegramChatService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,12 +22,16 @@ public class TelegramChatController {
         this.chatService = chatService;
     }
 
+    @Operation(summary = "Register chat",
+               description = "Registers and saves chat with given id")
     @PostMapping("/{id}")
     public ResponseEntity<?> registerChat(@PathVariable @Min(1) long id) {
         chatService.registerChat(id);
         return ResponseEntity.ok().build();
     }
 
+    @Operation(summary = "Delete chat",
+               description = "Deletes chat and all it's relations with links")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteChat(@PathVariable @Min(1) long id) {
         chatService.deleteChat(id);

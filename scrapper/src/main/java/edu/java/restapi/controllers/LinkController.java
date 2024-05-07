@@ -2,9 +2,15 @@ package edu.java.restapi.controllers;
 
 import edu.java.restapi.dto.requests.AddLinkRequest;
 import edu.java.restapi.dto.requests.RemoveLinkRequest;
+import edu.java.restapi.dto.responses.ApiErrorResponse;
 import edu.java.restapi.dto.responses.LinkResponse;
 import edu.java.restapi.dto.responses.ListLinksResponse;
 import edu.java.restapi.services.LinkService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import java.net.URI;
@@ -34,6 +40,17 @@ public class LinkController {
         this.linkService = linkService;
     }
 
+    @Operation(summary = "Get all tracked links by specified chat",
+               description = "Returns a list of links, that a tracked by chat with specified id")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successfully returned tracked links"),
+        @ApiResponse(responseCode = "400", description = "Retrieved data is not correct", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))
+        }),
+        @ApiResponse(responseCode = "404", description = "There is no saved chat with such id", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))
+        })
+    })
     @GetMapping
     public ResponseEntity<ListLinksResponse> getTrackedLinksByChatId(
         @RequestHeader("Tg-Chat-Id") @Min(1) int chatApiId
@@ -44,6 +61,18 @@ public class LinkController {
         return ResponseEntity.ok(listLinksResponse);
     }
 
+    @Operation(summary = "Track link",
+               description =
+                   "Creates relation between passed chatId and link, sending LinkUpdates to chatId via scheduler")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successfully tracked link"),
+        @ApiResponse(responseCode = "400", description = "Retrieved data is not correct", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))
+        }),
+        @ApiResponse(responseCode = "404", description = "There is no saved chat with such id", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))
+        })
+    })
     @PostMapping
     public ResponseEntity<LinkResponse> trackLink(
         @RequestHeader("Tg-Chat-Id") @Min(1) int chatId,
@@ -54,6 +83,19 @@ public class LinkController {
         return ResponseEntity.ok(linkResponse);
     }
 
+    @Operation(summary = "Untrack link",
+               description =
+                   "Removes relation between passed chatId and link, "
+                       + "stopping sending LinkUpdates to chatId via scheduler")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successfully untracked link"),
+        @ApiResponse(responseCode = "400", description = "Retrieved data is not correct", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))
+        }),
+        @ApiResponse(responseCode = "404", description = "There is no saved chat with such id", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))
+        })
+    })
     @DeleteMapping
     public ResponseEntity<LinkResponse> untrackLink(
         @RequestHeader("Tg-Chat-Id") @Min(1) int chatId,

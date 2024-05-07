@@ -7,6 +7,7 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
 import edu.java.bot.telegrambot.slashcommandservices.CommandService;
+import edu.java.bot.webclients.scrapper.exceptions.ScrapperWebClientErrorException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -48,10 +49,17 @@ public class TelegramBotInitializer {
     private SendMessage getResponse(Message message) {
         try {
             return commandService.handleMessage(message);
-        } catch (Exception ex) {
-            LOGGER.error();
+        } catch (ScrapperWebClientErrorException ex) {
+            LOGGER.warn(ex);
+
             Long chatId = message.chat().id();
-            return new SendMessage(chatId, ex.getMessage());
+            String messageText = ex.getErrorResponseBody().exceptionMessage();
+            return new SendMessage(chatId, messageText);
+        } catch (Exception ex) {
+            LOGGER.warn(ex);
+
+            Long chatId = message.chat().id();
+            return new SendMessage(chatId, "Some error occurred");
         }
     }
 

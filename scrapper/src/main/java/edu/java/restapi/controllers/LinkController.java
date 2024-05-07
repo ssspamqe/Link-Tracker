@@ -5,6 +5,9 @@ import edu.java.restapi.dto.requests.RemoveLinkRequest;
 import edu.java.restapi.dto.responses.LinkResponse;
 import edu.java.restapi.dto.responses.ListLinksResponse;
 import edu.java.restapi.services.LinkService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import java.net.URI;
@@ -34,6 +37,8 @@ public class LinkController {
         this.linkService = linkService;
     }
 
+    @Operation(summary = "Get all tracked links by specified chat",
+               description = "Returns a list of links, that a tracked by chat with specified id")
     @GetMapping
     public ResponseEntity<ListLinksResponse> getTrackedLinksByChatId(
         @RequestHeader("Tg-Chat-Id") @Min(1) int chatApiId
@@ -44,6 +49,8 @@ public class LinkController {
         return ResponseEntity.ok(listLinksResponse);
     }
 
+    @Operation(summary =  "Track link",
+               description = "Creates relation between passed chatId and link, sending LinkUpdates to chatId via scheduler")
     @PostMapping
     public ResponseEntity<LinkResponse> trackLink(
         @RequestHeader("Tg-Chat-Id") @Min(1) int chatId,
@@ -54,6 +61,8 @@ public class LinkController {
         return ResponseEntity.ok(linkResponse);
     }
 
+    @Operation(summary = "Untrack link",
+               description = "Removes relation between passed chatId and link, stopping sending LinkUpdates to chatId via scheduler")
     @DeleteMapping
     public ResponseEntity<LinkResponse> untrackLink(
         @RequestHeader("Tg-Chat-Id") @Min(1) int chatId,

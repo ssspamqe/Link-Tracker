@@ -26,7 +26,7 @@ public class UniversalLinkUpdatesChecker {
             try {
                 return linkUpdateChecker.getUpdates(link);
             } catch (IncorrectHostException ex) {
-
+                LOGGER.warn(STR."Can't get updates for \{link}: \{ex}");
             }
         }
         linkDao.updateLastCheckedAtById(OffsetDateTime.now(), link.getId());

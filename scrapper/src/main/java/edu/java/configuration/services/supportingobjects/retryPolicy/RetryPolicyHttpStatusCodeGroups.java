@@ -1,4 +1,4 @@
-package edu.java.configuration.global;
+package edu.java.configuration.services.supportingobjects.retryPolicy;
 
 import org.springframework.http.HttpStatusCode;
 

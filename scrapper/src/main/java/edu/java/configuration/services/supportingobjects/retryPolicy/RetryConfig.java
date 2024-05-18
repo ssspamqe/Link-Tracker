@@ -1,4 +1,4 @@
-package edu.java.configuration.global;
+package edu.java.configuration.services.supportingobjects.retryPolicy;
 
 import jakarta.validation.constraints.NotNull;
 import java.time.Duration;

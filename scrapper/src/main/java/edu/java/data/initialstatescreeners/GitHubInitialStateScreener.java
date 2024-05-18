@@ -1,6 +1,6 @@
 package edu.java.data.initialstatescreeners;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfiguration;
 import edu.java.data.dao.interfaces.GitHubRepositoryDataAccessObject;
 import edu.java.data.dto.GitHubRepository;
 import edu.java.data.dto.Link;
@@ -26,7 +26,7 @@ public class GitHubInitialStateScreener implements InitialStateScreener {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Pattern REPOSITORY_NAME_OWNER_PATTERN = Pattern.compile("github.com/([^/]+)/([^/]+)$");
 
-    private final ApplicationConfig applicationConfig;
+    private final ApplicationConfiguration applicationConfig;
     private final GitHubClient gitHubClient;
     private final GitHubRepositoryDataAccessObject gitHubRepositoryDao;
 

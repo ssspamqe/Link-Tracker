@@ -1,6 +1,6 @@
 package edu.java.configuration.beansconfiguration.kafka;
 
-import edu.java.configuration.kafkaconfiguration.KafkaConfig;
+import edu.java.configuration.services.telegrambot.kafka.TelegramBotKafkaConfiguration;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,9 +18,9 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 @ConditionalOnProperty(prefix = "app", name = "use-queue", havingValue = "true")
 public class KafkaProducerConfiguration {
 
-    private final KafkaConfig.ProducerConfiguration producerConfig;
+    private final TelegramBotKafkaConfiguration.ProducerConfiguration producerConfig;
 
-    public KafkaProducerConfiguration(KafkaConfig kafkaConfig) {
+    public KafkaProducerConfiguration(TelegramBotKafkaConfiguration kafkaConfig) {
         producerConfig = kafkaConfig.producerConfiguration();
     }
 

@@ -1,6 +1,6 @@
 package edu.java.webclients;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfiguration;
 import edu.java.webclients.gitHub.GitHubClient;
 import edu.java.webclients.stackoverflow.StackOverflowClient;
 import edu.java.webclients.webclientswithretry.gitHub.GitHubClientWithConstantRetries;
@@ -22,7 +22,7 @@ import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 @RequiredArgsConstructor
 public class WebClientsBeanConfiguration {
 
-    private final ApplicationConfig applicationConfig;
+    private final ApplicationConfiguration applicationConfig;
 
     @Bean
     public StackOverflowClient stackOverflowClient() {

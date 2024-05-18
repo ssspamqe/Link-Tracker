@@ -1,6 +1,6 @@
 package edu.java.webclients.webclientswithretry.stackoverflow;
 
-import edu.java.configuration.global.RetryConfig;
+import edu.java.configuration.services.supportingobjects.retryPolicy.RetryConfig;
 import edu.java.webclients.stackoverflow.StackOverflowClient;
 import edu.java.webclients.stackoverflow.dto.StackOverflowAnswerBody;
 import edu.java.webclients.stackoverflow.dto.StackOverflowQuestionBody;

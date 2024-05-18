@@ -1,6 +1,6 @@
 package edu.java.configuration.beansconfiguration.logging;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfiguration;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class MicrometerBeanConfiguration {
 
     private final MeterRegistry meterRegistry;
-    private final ApplicationConfig applicationConfig;
+    private final ApplicationConfiguration applicationConfig;
 
     @Bean
     public Counter processedLinkUpdatesMetric() {

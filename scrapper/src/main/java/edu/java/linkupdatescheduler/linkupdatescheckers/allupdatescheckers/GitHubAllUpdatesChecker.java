@@ -1,6 +1,6 @@
 package edu.java.linkupdatescheduler.linkupdatescheckers.allupdatescheckers;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfiguration;
 import edu.java.data.dao.interfaces.GitHubRepositoryDataAccessObject;
 import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dto.GitHubRepository;
@@ -34,7 +34,7 @@ public class GitHubAllUpdatesChecker implements LinkAllUpdatesChecker {
     private final LinkDataAccessObject linkDao;
     private final GitHubClient gitHubClient;
     private final List<GitHubRepositorySingleUpdateChecker> updateCheckers;
-    private final ApplicationConfig applicationConfig;
+    private final ApplicationConfiguration applicationConfig;
 
     @Override
     public List<LinkUpdate> getUpdates(Link link) throws IncorrectHostException {

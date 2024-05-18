@@ -1,6 +1,6 @@
 package edu.java.scrapper.webClients;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfiguration;
 import edu.java.telegrambotconnection.telegrambot.TelegramBotClient;
 import edu.java.telegrambotconnection.telegrambot.dto.responses.TelegramBotApiErrorResponse;
 import edu.java.webclients.exceptions.ClientErrorException;
@@ -20,7 +20,8 @@ import reactor.core.publisher.Mono;
 @TestConfiguration
 public class BeansConfiguration {
 
-    @Autowired ApplicationConfig applicationConfig;
+    @Autowired
+    ApplicationConfiguration applicationConfig;
 
     @Bean
     public TelegramBotClient telegramBotClient() {

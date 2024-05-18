@@ -1,6 +1,6 @@
 package edu.java.scrapper.configclasses;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfiguration;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,7 +8,7 @@ public class ApiUrlTest {
 
     @Test
     public void should_returnConfigUrl_when_itIsNotNull() {
-        ApplicationConfig.ApiUrl apiUrl = new ApplicationConfig.ApiUrl("defaultUrl", "configUrl");
+        ApplicationConfiguration.ApiUrl apiUrl = new ApplicationConfiguration.ApiUrl("defaultUrl", "configUrl");
 
         String actualBaseUrl = apiUrl.getBaseUrl();
 
@@ -17,7 +17,7 @@ public class ApiUrlTest {
 
     @Test
     public void should_returnDefaultUrl_when_configUrlIsNull() {
-        ApplicationConfig.ApiUrl apiUrl = new ApplicationConfig.ApiUrl("defaultUrl", null);
+        ApplicationConfiguration.ApiUrl apiUrl = new ApplicationConfiguration.ApiUrl("defaultUrl", null);
 
         String actualBaseUrl = apiUrl.getBaseUrl();
 

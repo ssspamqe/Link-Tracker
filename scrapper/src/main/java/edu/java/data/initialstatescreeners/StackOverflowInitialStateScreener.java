@@ -1,6 +1,6 @@
 package edu.java.data.initialstatescreeners;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfiguration;
 import edu.java.data.dao.interfaces.StackOverflowQuestionDataAccessObject;
 import edu.java.data.dto.Link;
 import edu.java.data.dto.StackOverflowQuestion;
@@ -23,7 +23,7 @@ public class StackOverflowInitialStateScreener implements InitialStateScreener {
 
     private static final Pattern QUESTION_ID_EXCTRACTOR_PATTERN = Pattern.compile("questions/(\\d+)/");
 
-    private final ApplicationConfig applicationConfig;
+    private final ApplicationConfiguration applicationConfig;
     private final StackOverflowClient stackOverflowClient;
     private final StackOverflowQuestionDataAccessObject stackOverflowQuestionDao;
 

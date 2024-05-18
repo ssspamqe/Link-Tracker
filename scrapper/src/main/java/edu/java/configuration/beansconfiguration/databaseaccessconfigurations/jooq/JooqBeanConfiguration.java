@@ -1,4 +1,4 @@
-package edu.java.configuration.databaseaccessconfigurations.jooq;
+package edu.java.configuration.beansconfiguration.databaseaccessconfigurations.jooq;
 
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package edu.java.configuration.beansconfiguration.linkupdatesender;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfiguration;
 import edu.java.linkupdatescheduler.linkupdatessender.LinkUpdatesSender;
 import edu.java.linkupdatescheduler.linkupdatessender.WebClientLinkUpdatesSender;
 import edu.java.telegrambotconnection.telegrambot.TelegramBotClient;
@@ -25,7 +25,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class WebClientLinkUpdatesSenderBeanConfiguration {
 
-    private final ApplicationConfig applicationConfig;
+    private final ApplicationConfiguration applicationConfig;
 
     @Bean
     public LinkUpdatesSender linkUpdatesSender() {

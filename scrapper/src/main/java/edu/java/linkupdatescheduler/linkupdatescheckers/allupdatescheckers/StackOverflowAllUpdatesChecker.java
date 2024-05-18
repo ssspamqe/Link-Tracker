@@ -1,6 +1,6 @@
 package edu.java.linkupdatescheduler.linkupdatescheckers.allupdatescheckers;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfiguration;
 import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dao.interfaces.StackOverflowQuestionDataAccessObject;
 import edu.java.data.dto.Link;
@@ -34,7 +34,7 @@ public class StackOverflowAllUpdatesChecker implements LinkAllUpdatesChecker {
     private final StackOverflowQuestionDataAccessObject stackOverflowQuestionDao;
     private final StackOverflowClient stackOverflowClient;
     private final List<StackOverflowQuestionSingleUpdateChecker> updateCheckers;
-    private final ApplicationConfig applicationConfig;
+    private final ApplicationConfiguration applicationConfig;
 
     @Override
     public List<LinkUpdate> getUpdates(Link link) throws IncorrectHostException {

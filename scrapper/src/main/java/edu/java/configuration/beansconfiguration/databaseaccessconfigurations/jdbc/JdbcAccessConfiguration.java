@@ -1,4 +1,4 @@
-package edu.java.configuration.databaseaccessconfigurations.jdbc;
+package edu.java.configuration.beansconfiguration.databaseaccessconfigurations.jdbc;
 
 import edu.java.data.dao.jdbc.dao.ChatJdbcDAO;
 import edu.java.data.dao.jdbc.dao.GitHubRepositoryJdbcDAO;

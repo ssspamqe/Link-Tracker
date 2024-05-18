@@ -1,6 +1,6 @@
 package edu.java.configuration.beansconfiguration.linkupdatesender;
 
-import edu.java.configuration.kafkaconfiguration.KafkaConfig;
+import edu.java.configuration.services.telegrambot.kafka.TelegramBotKafkaConfiguration;
 import edu.java.linkupdatescheduler.linkupdatessender.KafkaLinkUpdatesSender;
 import edu.java.linkupdatescheduler.linkupdatessender.LinkUpdatesSender;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
@@ -17,7 +17,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 public class KafkaLinkUpdatesSenderBeanConfiguration {
 
     private final KafkaTemplate<String, LinkUpdate> kafkaTemplate;
-    private final KafkaConfig kafkaConfig;
+    private final TelegramBotKafkaConfiguration kafkaConfig;
 
     @Bean
     public LinkUpdatesSender linkUpdatesSender() {

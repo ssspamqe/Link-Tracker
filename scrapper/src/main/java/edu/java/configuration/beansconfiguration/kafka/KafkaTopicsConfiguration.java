@@ -1,6 +1,6 @@
 package edu.java.configuration.beansconfiguration.kafka;
 
-import edu.java.configuration.kafkaconfiguration.KafkaConfig;
+import edu.java.configuration.services.telegrambot.kafka.TelegramBotKafkaConfiguration;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -18,9 +18,9 @@ public class KafkaTopicsConfiguration {
     private static final int PARTITIONS_DEFAULT = 1;
     private static final int REPLICAS_DEFAULT = 1;
 
-    private Set<KafkaConfig.KafkaTopicConfiguration> topicConfigurations;
+    private Set<TelegramBotKafkaConfiguration.KafkaTopicConfiguration> topicConfigurations;
 
-    public KafkaTopicsConfiguration(KafkaConfig config) {
+    public KafkaTopicsConfiguration(TelegramBotKafkaConfiguration config) {
         topicConfigurations = config.topicConfigurations();
     }
 
@@ -42,7 +42,7 @@ public class KafkaTopicsConfiguration {
         return result.toArray(new NewTopic[0]);
     }
 
-    private NewTopic buildNewTopic(KafkaConfig.KafkaTopicConfiguration configuration) {
+    private NewTopic buildNewTopic(TelegramBotKafkaConfiguration.KafkaTopicConfiguration configuration) {
         return TopicBuilder.name(configuration.name())
             .partitions(getDefaultPartitionsIfNull(configuration.partitions()))
             .replicas(getDefaultReplicasIfNull(configuration.replicas()))

@@ -43,7 +43,7 @@ public class WebClientsBeanConfiguration {
 
     @Bean
     public StackOverflowClientWithRetries stackOverflowClientWithRetries() {
-        var retryConfig = stackOverflowConfiguration.retryConfig();
+        var retryConfig = stackOverflowConfiguration.getRetryConfig();
         var type = retryConfig.type();
 
         return switch (type) {
@@ -61,7 +61,7 @@ public class WebClientsBeanConfiguration {
 
     @Bean
     public GitHubClientWithRetries gitHubClientWithRetries() {
-        var retryConfig = stackOverflowConfiguration.retryConfig();
+        var retryConfig = stackOverflowConfiguration.getRetryConfig();
         var type = retryConfig.type();
 
         return switch (type) {

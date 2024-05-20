@@ -18,6 +18,12 @@ trackable-services:
       max-retries: 3
       retry-on-statuses:
         - SERVER_ERROR
+    user-information:
+      service-name: GitHub
+      host-name: github.com
+      tip: Send link with repository name and owner to start tracking updates and new pushes
+      examples:
+        - https://github.com/ownernickaame/repositoryname
 
   stackoverflow-config:
     url:
@@ -29,6 +35,12 @@ trackable-services:
       max-retries: 3
       retry-on-statuses:
         - SERVER_ERROR
+    user-information:
+      service-name: Stack Overflow
+      host-name: stackoverflow.com
+      tip: Send link with question id to start tracking updates and new answers to it
+      examples:
+        - https://stackoverflow.com/questions/123123/this-is-sample-question
 
 telegram-bot:
   connection-type: kafka

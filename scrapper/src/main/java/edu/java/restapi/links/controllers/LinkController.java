@@ -1,11 +1,11 @@
-package edu.java.restapi.controllers;
+package edu.java.restapi.links.controllers;
 
-import edu.java.restapi.dto.requests.AddLinkRequest;
-import edu.java.restapi.dto.requests.RemoveLinkRequest;
-import edu.java.restapi.dto.responses.ApiErrorResponse;
-import edu.java.restapi.dto.responses.LinkResponse;
-import edu.java.restapi.dto.responses.ListLinksResponse;
-import edu.java.restapi.services.LinkService;
+import edu.java.restapi.links.dto.requests.AddLinkRequest;
+import edu.java.restapi.links.dto.requests.RemoveLinkRequest;
+import edu.java.restapi.exceptionhandlers.ApiErrorResponse;
+import edu.java.restapi.links.dto.responses.LinkResponse;
+import edu.java.restapi.links.dto.responses.ListLinksResponse;
+import edu.java.restapi.links.services.LinkService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,4 +1,4 @@
-package edu.java.restapi.services;
+package edu.java.restapi.telegramchat.services;
 
 import edu.java.data.dao.interfaces.ChatDataAccessObject;
 import edu.java.data.dto.Chat;

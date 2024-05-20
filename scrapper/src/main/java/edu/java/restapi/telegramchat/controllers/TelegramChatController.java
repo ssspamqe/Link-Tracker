@@ -1,7 +1,7 @@
-package edu.java.restapi.controllers;
+package edu.java.restapi.telegramchat.controllers;
 
-import edu.java.restapi.dto.responses.ApiErrorResponse;
-import edu.java.restapi.services.TelegramChatService;
+import edu.java.restapi.exceptionhandlers.ApiErrorResponse;
+import edu.java.restapi.telegramchat.services.TelegramChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

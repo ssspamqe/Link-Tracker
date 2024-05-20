@@ -1,4 +1,4 @@
-package edu.java.restapi.dto.responses;
+package edu.java.restapi.links.dto.responses;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package edu.java.restapi.dto.requests;
+package edu.java.restapi.links.dto.requests;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

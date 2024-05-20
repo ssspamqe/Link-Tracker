@@ -1,7 +1,7 @@
 package edu.java.bot.scrapperconnection.kafka;
 
 import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdate;
-import edu.java.bot.scrapperconnection.services.LinkUpdateService;
+import edu.java.bot.scrapperconnection.services.LinkUpdatePublisher;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ public class KafkaMessageListener {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final Validator validator;
-    private final LinkUpdateService linkUpdateService;
+    private final LinkUpdatePublisher linkUpdatePublisher;
 
     @RetryableTopic(attempts = "${kafka.retryable-topic-attempts}",
                     kafkaTemplate = "retryableTopicKafkaTemplate",
@@ -36,7 +36,7 @@ public class KafkaMessageListener {
     public void listenToLinkUpdate(@Payload LinkUpdate update) {
         LOGGER.debug("Got new update {}", update);
         throwExceptionIfInvalid(update);
-        linkUpdateService.sendUpdateToBot(update);
+        linkUpdatePublisher.publishUpdate(update);
     }
 
     @DltHandler

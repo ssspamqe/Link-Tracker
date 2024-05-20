@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class LinkUpdateService {
+public class LinkUpdatePublisher {
 
     private final TelegramBot telegramBot;
     private final Counter processedLinkUpdatesMetric;
 
-    public void sendUpdatesToBot(List<LinkUpdate> linkUpdates) {
-        linkUpdates.forEach(this::sendUpdateToBot);
+    public void publishUpdates(List<LinkUpdate> linkUpdates) {
+        linkUpdates.forEach(this::publishUpdate);
     }
 
-    public void sendUpdateToBot(LinkUpdate linkUpdate) {
+    public void publishUpdate(LinkUpdate linkUpdate) {
         String messageText = buildMessageText(linkUpdate);
         List<Long> chats = linkUpdate.tgChatIds();
         chats.forEach(chatId -> sendMessageToChatWithId(messageText, chatId));

@@ -4,7 +4,7 @@ import edu.java.bot.integration.kafka.configurations.TestKafkaDltConsumer;
 import edu.java.bot.integration.kafka.configurations.TestKafkaProducer;
 import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdate;
 import edu.java.bot.scrapperconnection.kafka.KafkaMessageListener;
-import edu.java.bot.scrapperconnection.services.LinkUpdateService;
+import edu.java.bot.scrapperconnection.services.LinkUpdatePublisher;
 import org.junit.ClassRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,7 +31,7 @@ public abstract class IntegrationEnvironment {
     protected KafkaMessageListener kafkaMessageListener;
 
     @MockBean
-    protected LinkUpdateService mockLinkUpdateService;
+    protected LinkUpdatePublisher mockLinkUpdatePublisher;
 
     @Autowired
     protected TestKafkaProducer producer;

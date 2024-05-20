@@ -1,15 +1,10 @@
 package edu.java.bot.integration.kafka.configurations;
 
 import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdate;
-import edu.java.bot.scrapperconnection.kafka.KafkaMessageListener;
-import edu.java.bot.scrapperconnection.services.LinkUpdateService;
-import jakarta.validation.Validator;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;

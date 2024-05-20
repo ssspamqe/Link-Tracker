@@ -1,6 +1,6 @@
 package edu.java.configuration.services.telegrambot;
 
 public enum TelegramBotConnectionType {
-    REST_API,
+    WEB_CLIENT,
     KAFKA
 }

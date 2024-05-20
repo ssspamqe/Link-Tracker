@@ -1,6 +1,8 @@
 package edu.java.data.initialstatescreeners;
 
 import edu.java.configuration.global.ApplicationConfiguration;
+import edu.java.configuration.services.trackableservices.AllTrackableServicesConfigurations;
+import edu.java.configuration.services.trackableservices.TrackableServiceConfiguration;
 import edu.java.data.dao.interfaces.StackOverflowQuestionDataAccessObject;
 import edu.java.data.dto.Link;
 import edu.java.data.dto.StackOverflowQuestion;
@@ -15,17 +17,28 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class StackOverflowInitialStateScreener implements InitialStateScreener {
 
     private static final Pattern QUESTION_ID_EXCTRACTOR_PATTERN = Pattern.compile("questions/(\\d+)/");
 
-    private final ApplicationConfiguration applicationConfig;
+    private final TrackableServiceConfiguration stackOverflowConfiguration;
     private final StackOverflowClient stackOverflowClient;
     private final StackOverflowQuestionDataAccessObject stackOverflowQuestionDao;
+
+    public StackOverflowInitialStateScreener(
+        @Qualifier("stackOverflowConfig")
+        TrackableServiceConfiguration stackOverflowConfiguration,
+        StackOverflowClient stackOverflowClient,
+        StackOverflowQuestionDataAccessObject stackOverflowQuestionDao
+    ){
+        this.stackOverflowConfiguration = stackOverflowConfiguration;
+        this.stackOverflowClient = stackOverflowClient;
+        this.stackOverflowQuestionDao = stackOverflowQuestionDao;
+    }
 
     @Override
     public void saveInitialState(Link link) throws IncorrectHostException {
@@ -60,7 +73,7 @@ public class StackOverflowInitialStateScreener implements InitialStateScreener {
     }
 
     private boolean isIncorrectHostName(String hostName) {
-        return !applicationConfig.stackOverflowConfig().isCorrectHostName(hostName);
+        return !stackOverflowConfiguration.isCorrectHostName(hostName);
     }
 
     private long extractQuestionId(URI url) {

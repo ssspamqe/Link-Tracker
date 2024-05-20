@@ -1,6 +1,7 @@
 package edu.java.configuration.beansconfiguration.kafka;
 
-import edu.java.configuration.services.telegrambot.kafka.TelegramBotKafkaConfiguration;
+import edu.java.configuration.services.telegrambot.TelegramBotConnectionConfiguration;
+import edu.java.configuration.services.telegrambot.kafka.KafkaProducerConfiguration;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,13 +16,13 @@ import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
 @Configuration
-@ConditionalOnProperty(prefix = "app", name = "use-queue", havingValue = "true")
-public class KafkaProducerConfiguration {
+@ConditionalOnProperty(prefix = "telegram-bot", name = "connection-type", havingValue = "kafka")
+public class KafkaProducerBeansConfiguration {
 
-    private final TelegramBotKafkaConfiguration.ProducerConfiguration producerConfig;
+    private final KafkaProducerConfiguration producerConfiguration;
 
-    public KafkaProducerConfiguration(TelegramBotKafkaConfiguration kafkaConfig) {
-        producerConfig = kafkaConfig.producerConfiguration();
+    public KafkaProducerBeansConfiguration(TelegramBotConnectionConfiguration telegramBotConnectionConfiguration) {
+        producerConfiguration = telegramBotConnectionConfiguration.kafkaConfiguration().getProducerConfiguration();
     }
 
     @Bean
@@ -35,7 +36,7 @@ public class KafkaProducerConfiguration {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
 
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, producerConfig.bootstrapServers());
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, producerConfiguration.bootstrapServers());
         setClientId(props);
         setAcks(props);
         setDeliveryTimeout(props);
@@ -47,39 +48,39 @@ public class KafkaProducerConfiguration {
     }
 
     private void setClientId(Map<String, Object> props) {
-        if (producerConfig.clientId() != null) {
-            props.put(ProducerConfig.CLIENT_ID_CONFIG, producerConfig.clientId());
+        if (producerConfiguration.clientId() != null) {
+            props.put(ProducerConfig.CLIENT_ID_CONFIG, producerConfiguration.clientId());
         }
     }
 
     private void setAcks(Map<String, Object> props) {
-        if (producerConfig.acksConfig() != null) {
-            props.put(ProducerConfig.ACKS_CONFIG, producerConfig.acksConfig());
+        if (producerConfiguration.acksConfig() != null) {
+            props.put(ProducerConfig.ACKS_CONFIG, producerConfiguration.acksConfig());
         }
 
     }
 
     private void setDeliveryTimeout(Map<String, Object> props) {
-        if (producerConfig.deliveryTimeout() != null) {
-            props.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, producerConfig.deliveryTimeout());
+        if (producerConfiguration.deliveryTimeout() != null) {
+            props.put(ProducerConfig.DELIVERY_TIMEOUT_MS_CONFIG, producerConfiguration.deliveryTimeout());
         }
     }
 
     private void setBatchSize(Map<String, Object> props) {
-        if (producerConfig.batchSize() != null) {
-            props.put(ProducerConfig.BATCH_SIZE_CONFIG, producerConfig.batchSize());
+        if (producerConfiguration.batchSize() != null) {
+            props.put(ProducerConfig.BATCH_SIZE_CONFIG, producerConfiguration.batchSize());
         }
     }
 
     private void setLingerMs(Map<String, Object> props) {
-        if (producerConfig.lingerMs() != null) {
-            props.put(ProducerConfig.LINGER_MS_CONFIG, producerConfig.lingerMs());
+        if (producerConfiguration.lingerMs() != null) {
+            props.put(ProducerConfig.LINGER_MS_CONFIG, producerConfiguration.lingerMs());
         }
     }
 
     private void setEnableIdempotence(Map<String, Object> props) {
-        if (producerConfig.enableIdempotence() != null) {
-            props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, producerConfig.enableIdempotence());
+        if (producerConfiguration.enableIdempotence() != null) {
+            props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, producerConfiguration.enableIdempotence());
         }
     }
 

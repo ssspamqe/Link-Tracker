@@ -1,6 +1,7 @@
 package edu.java.data.initialstatescreeners;
 
-import edu.java.configuration.global.ApplicationConfiguration;
+import edu.java.configuration.services.trackableservices.AllTrackableServicesConfigurations;
+import edu.java.configuration.services.trackableservices.TrackableServiceConfiguration;
 import edu.java.data.dao.interfaces.GitHubRepositoryDataAccessObject;
 import edu.java.data.dto.GitHubRepository;
 import edu.java.data.dto.Link;
@@ -14,21 +15,31 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class GitHubInitialStateScreener implements InitialStateScreener {
 
     private static final Logger LOGGER = LogManager.getLogger();
     private static final Pattern REPOSITORY_NAME_OWNER_PATTERN = Pattern.compile("github.com/([^/]+)/([^/]+)$");
 
-    private final ApplicationConfiguration applicationConfig;
+    private final TrackableServiceConfiguration gitHubConfig;
     private final GitHubClient gitHubClient;
     private final GitHubRepositoryDataAccessObject gitHubRepositoryDao;
+
+    public GitHubInitialStateScreener(
+        @Qualifier("gitHubConfig")
+        TrackableServiceConfiguration gitHubConfig,
+        GitHubClient gitHubClient,
+        GitHubRepositoryDataAccessObject gitHubRepositoryDao
+    ){
+        this.gitHubConfig = gitHubConfig;
+        this.gitHubClient = gitHubClient;
+        this.gitHubRepositoryDao = gitHubRepositoryDao;
+    }
 
     @Override
     public void saveInitialState(Link link) {
@@ -60,7 +71,7 @@ public class GitHubInitialStateScreener implements InitialStateScreener {
     }
 
     private boolean isIncorrectHostName(String hostName) {
-        return !applicationConfig.gitHubConfig().isCorrectHostName(hostName);
+        return !gitHubConfig.isCorrectHostName(hostName);
     }
 
     private GitHubRepository buildRepositoryEntity(GitHubRepositoryBody repositoryBody, long linkId) {

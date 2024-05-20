@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.KafkaTemplate;
 
 @Configuration
-@ConditionalOnProperty(prefix = "app", name = "use-queue", havingValue = "true")
+@ConditionalOnProperty(prefix = "telegram-bot", name = "connection-type", havingValue = "kafka")
 @RequiredArgsConstructor
 public class KafkaLinkUpdatesSenderBeanConfiguration {
 
@@ -26,6 +26,6 @@ public class KafkaLinkUpdatesSenderBeanConfiguration {
 
     @Bean
     public LinkUpdatesQueueProducer linkUpdatesQueueProducer() {
-        return new LinkUpdatesQueueProducer(kafkaTemplate, kafkaConfig.producerConfiguration().linkUpdatesTopic());
+        return new LinkUpdatesQueueProducer(kafkaTemplate, kafkaConfig.getProducerConfiguration().linkUpdatesTopic());
     }
 }

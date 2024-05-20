@@ -46,7 +46,7 @@ telegram-bot:
       linger-ms: 5000
       batch-size: 200000
       enable-idempotence: true
-  rest-configuration:
+  web-client-configuration:
     url:
       default-url: localhost:8090
     retry-config:

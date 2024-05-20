@@ -1,6 +1,7 @@
 package edu.java.configuration.beansconfiguration.linkupdatesender;
 
-import edu.java.configuration.global.ApplicationConfiguration;
+import edu.java.configuration.services.telegrambot.TelegramBotConnectionConfiguration;
+import edu.java.configuration.services.telegrambot.webclient.TelegramBotWebClientConfiguration;
 import edu.java.linkupdatescheduler.linkupdatessender.LinkUpdatesSender;
 import edu.java.linkupdatescheduler.linkupdatessender.WebClientLinkUpdatesSender;
 import edu.java.telegrambotconnection.telegrambot.TelegramBotClient;
@@ -10,6 +11,7 @@ import edu.java.webclients.webclientswithretry.telegramBot.TelegramBotClientWith
 import edu.java.webclients.webclientswithretry.telegramBot.TelegramBotClientWithExponentialRetries;
 import edu.java.webclients.webclientswithretry.telegramBot.TelegramBotClientWithLinearRetries;
 import edu.java.webclients.webclientswithretry.telegramBot.TelegramBotClientWithRetries;
+import java.net.URI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +27,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class WebClientLinkUpdatesSenderBeanConfiguration {
 
-    private final ApplicationConfiguration applicationConfig;
+    private final TelegramBotWebClientConfiguration webClientConfiguration;
 
     @Bean
     public LinkUpdatesSender linkUpdatesSender() {
@@ -34,12 +36,12 @@ public class WebClientLinkUpdatesSenderBeanConfiguration {
 
     @Bean
     public TelegramBotClient telegramBotClient() {
-        String baseUrl = applicationConfig.telegramBotConfig().getBaseUrl();
+        URI baseUrl = webClientConfiguration.getBaseUrl();
         WebClient webClient = WebClient.builder()
             .defaultStatusHandler(HttpStatusCode::is4xxClientError, response ->
                 response.bodyToMono(TelegramBotApiErrorResponse.class)
                     .flatMap(errorBody -> Mono.error(new ClientErrorException(errorBody))))
-            .baseUrl(baseUrl)
+            .baseUrl(baseUrl.toString())
             .build();
         WebClientAdapter adapter = WebClientAdapter.create(webClient);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
@@ -48,7 +50,7 @@ public class WebClientLinkUpdatesSenderBeanConfiguration {
 
     @Bean
     public TelegramBotClientWithRetries telegramBotClientWithRetries() {
-        var retryConfig = applicationConfig.stackOverflowConfig().retryConfig();
+        var retryConfig = webClientConfiguration.getRetryConfig();
         var type = retryConfig.type();
 
         return switch (type) {

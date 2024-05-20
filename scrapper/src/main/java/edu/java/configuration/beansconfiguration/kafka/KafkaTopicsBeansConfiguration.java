@@ -1,5 +1,7 @@
 package edu.java.configuration.beansconfiguration.kafka;
 
+import edu.java.configuration.services.telegrambot.TelegramBotConnectionConfiguration;
+import edu.java.configuration.services.telegrambot.kafka.KafkaTopicConfiguration;
 import edu.java.configuration.services.telegrambot.kafka.TelegramBotKafkaConfiguration;
 import java.util.HashSet;
 import java.util.Objects;
@@ -13,15 +15,15 @@ import org.springframework.kafka.core.KafkaAdmin;
 
 @Configuration
 @ConditionalOnProperty(prefix = "app", name = "use-queue", havingValue = "true")
-public class KafkaTopicsConfiguration {
+public class KafkaTopicsBeansConfiguration {
 
     private static final int PARTITIONS_DEFAULT = 1;
     private static final int REPLICAS_DEFAULT = 1;
 
-    private Set<TelegramBotKafkaConfiguration.KafkaTopicConfiguration> topicConfigurations;
+    private final Set<KafkaTopicConfiguration> topicConfigurations;
 
-    public KafkaTopicsConfiguration(TelegramBotKafkaConfiguration config) {
-        topicConfigurations = config.topicConfigurations();
+    public KafkaTopicsBeansConfiguration(TelegramBotConnectionConfiguration telegramBotConnectionConfiguration) {
+        topicConfigurations = telegramBotConnectionConfiguration.kafkaConfiguration().getTopicConfigurations();
     }
 
     @Bean
@@ -42,7 +44,7 @@ public class KafkaTopicsConfiguration {
         return result.toArray(new NewTopic[0]);
     }
 
-    private NewTopic buildNewTopic(TelegramBotKafkaConfiguration.KafkaTopicConfiguration configuration) {
+    private NewTopic buildNewTopic(KafkaTopicConfiguration configuration) {
         return TopicBuilder.name(configuration.name())
             .partitions(getDefaultPartitionsIfNull(configuration.partitions()))
             .replicas(getDefaultReplicasIfNull(configuration.replicas()))

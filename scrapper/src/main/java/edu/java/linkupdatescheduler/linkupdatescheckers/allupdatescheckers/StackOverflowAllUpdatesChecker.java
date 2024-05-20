@@ -1,6 +1,7 @@
 package edu.java.linkupdatescheduler.linkupdatescheckers.allupdatescheckers;
 
 import edu.java.configuration.global.ApplicationConfiguration;
+import edu.java.configuration.services.trackableservices.TrackableServiceConfiguration;
 import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dao.interfaces.StackOverflowQuestionDataAccessObject;
 import edu.java.data.dto.Link;
@@ -22,10 +23,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class StackOverflowAllUpdatesChecker implements LinkAllUpdatesChecker {
 
     private static final Pattern QUESTION_ID_EXCTRACTOR_PATTERN = Pattern.compile("questions/(\\d+)/");
@@ -34,7 +35,22 @@ public class StackOverflowAllUpdatesChecker implements LinkAllUpdatesChecker {
     private final StackOverflowQuestionDataAccessObject stackOverflowQuestionDao;
     private final StackOverflowClient stackOverflowClient;
     private final List<StackOverflowQuestionSingleUpdateChecker> updateCheckers;
-    private final ApplicationConfiguration applicationConfig;
+    private final TrackableServiceConfiguration stackOverflowConfiguration;
+
+    public StackOverflowAllUpdatesChecker(
+        LinkDataAccessObject linkDao,
+        StackOverflowQuestionDataAccessObject stackOverflowQuestionDao,
+        StackOverflowClient stackOverflowClient,
+        List<StackOverflowQuestionSingleUpdateChecker> updateCheckers,
+        @Qualifier("stackOverflowConfig")
+        TrackableServiceConfiguration stackOverflowConfiguration
+    ) {
+        this.linkDao = linkDao;
+        this.stackOverflowQuestionDao = stackOverflowQuestionDao;
+        this.stackOverflowClient = stackOverflowClient;
+        this.updateCheckers = updateCheckers;
+        this.stackOverflowConfiguration = stackOverflowConfiguration;
+    }
 
     @Override
     public List<LinkUpdate> getUpdates(Link link) throws IncorrectHostException {
@@ -76,7 +92,7 @@ public class StackOverflowAllUpdatesChecker implements LinkAllUpdatesChecker {
     }
 
     private boolean isIncorrectHostName(String hostName) {
-        return !applicationConfig.stackOverflowConfig().isCorrectHostName(hostName);
+        return !stackOverflowConfiguration.isCorrectHostName(hostName);
     }
 
     private long extractQuestionId(URI url) {

@@ -205,12 +205,6 @@
             <artifactId>jcache</artifactId>
             <version>${jcache.version}</version>
         </dependency>
-        <dependency>
-            <groupId>edu.java</groupId>
-            <artifactId>bot</artifactId>
-            <version>0.12.1</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 
     <build>

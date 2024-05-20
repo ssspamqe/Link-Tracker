@@ -1,10 +1,11 @@
 package edu.java.configuration.services.supportingobjects;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 
 public record ApiUrl(
-    @NotBlank URI defaultUrl,
+    @NotNull
+    URI defaultUrl,
     URI configUrl
 ) {
 

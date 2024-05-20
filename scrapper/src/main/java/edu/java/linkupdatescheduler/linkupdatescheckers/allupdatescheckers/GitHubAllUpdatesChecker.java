@@ -1,6 +1,6 @@
 package edu.java.linkupdatescheduler.linkupdatescheckers.allupdatescheckers;
 
-import edu.java.configuration.global.ApplicationConfiguration;
+import edu.java.configuration.services.trackableservices.TrackableServiceConfiguration;
 import edu.java.data.dao.interfaces.GitHubRepositoryDataAccessObject;
 import edu.java.data.dao.interfaces.LinkDataAccessObject;
 import edu.java.data.dto.GitHubRepository;
@@ -22,10 +22,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class GitHubAllUpdatesChecker implements LinkAllUpdatesChecker {
 
     private static final Pattern REPOSITORY_NAME_OWNER_PATTERN = Pattern.compile("github.com/([^/]+)/([^/]+)$");
@@ -34,7 +34,23 @@ public class GitHubAllUpdatesChecker implements LinkAllUpdatesChecker {
     private final LinkDataAccessObject linkDao;
     private final GitHubClient gitHubClient;
     private final List<GitHubRepositorySingleUpdateChecker> updateCheckers;
-    private final ApplicationConfiguration applicationConfig;
+    private final TrackableServiceConfiguration gitHubConfiguration;
+
+    public GitHubAllUpdatesChecker(
+        GitHubRepositoryDataAccessObject repositoryDao,
+        LinkDataAccessObject linkDao,
+        GitHubClient gitHubClient,
+        List<GitHubRepositorySingleUpdateChecker> updateCheckers,
+
+        @Qualifier("gitHubConfig")
+        TrackableServiceConfiguration gitHubConfiguration
+    ) {
+        this.repositoryDao = repositoryDao;
+        this.linkDao = linkDao;
+        this.gitHubClient = gitHubClient;
+        this.updateCheckers = updateCheckers;
+        this.gitHubConfiguration = gitHubConfiguration;
+    }
 
     @Override
     public List<LinkUpdate> getUpdates(Link link) throws IncorrectHostException {
@@ -76,7 +92,7 @@ public class GitHubAllUpdatesChecker implements LinkAllUpdatesChecker {
     }
 
     private boolean isIncorrectHostName(String hostname) {
-        return !applicationConfig.gitHubConfig().isCorrectHostName(hostname);
+        return !gitHubConfiguration.isCorrectHostName(hostname);
     }
 
     private RepositoryNameAndOwner extractRepositoryNameAndOwner(URI url) {

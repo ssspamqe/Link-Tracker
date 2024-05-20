@@ -1,20 +1,22 @@
-package edu.java.configuration.services.telegrambot.rest;
+package edu.java.configuration.services.telegrambot.webclient;
 
 import edu.java.configuration.services.supportingobjects.ApiUrl;
 import edu.java.configuration.services.supportingobjects.retryPolicy.RetryConfig;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.validation.annotation.Validated;
 import java.net.URI;
+import lombok.Data;
+import org.springframework.validation.annotation.Validated;
 
 @Validated
-public record TelegramBotRestConfiguration(
-    @NotNull
-    ApiUrl url,
+@Data
+public class TelegramBotWebClientConfiguration {
 
     @NotNull
-    RetryConfig retryConfig
-) {
+    private ApiUrl url;
+
+    @NotNull
+    private RetryConfig retryConfig;
+
     public URI getBaseUrl() {
         return url.getBaseUrl();
     }

@@ -1,14 +1,17 @@
 package edu.java.configuration.services.telegrambot.kafka;
 
 import java.util.Set;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import org.springframework.validation.annotation.Validated;
 
 @Validated
-public record TelegramBotKafkaConfiguration(
-    Set<KafkaTopicConfiguration> topicConfigurations,
+@Data
+public class TelegramBotKafkaConfiguration {
 
-    KafkaProducerConfiguration producerConfiguration
+    @NotNull
+    private Set<KafkaTopicConfiguration> topicConfigurations;
 
-) {
+    @NotNull
+    private KafkaProducerConfiguration producerConfiguration;
 }

@@ -21,7 +21,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +28,9 @@ import org.springframework.stereotype.Component;
 public class GitHubAllUpdatesChecker implements LinkAllUpdatesChecker {
 
     private static final Pattern REPOSITORY_NAME_OWNER_PATTERN = Pattern.compile("github.com/([^/]+)/([^/]+)$");
+    private static final Pattern REPOSITORY_OWNER_PATTERN = Pattern.compile("github\\.com\\/(.*)\\/");
+    private static final Pattern REPOSITORY_NAME_PATTERN = Pattern.compile("github\\.com\\/.*\\/(.+)(?:\\/.*)");
+
 
     private final GitHubRepositoryDataAccessObject repositoryDao;
     private final LinkDataAccessObject linkDao;
@@ -59,9 +61,8 @@ public class GitHubAllUpdatesChecker implements LinkAllUpdatesChecker {
             throw new IncorrectHostException(hostName);
         }
 
-        RepositoryNameAndOwner nicknameAndRepository = extractRepositoryNameAndOwner(link.getUrl());
-        String repositoryName = nicknameAndRepository.name;
-        String owner = nicknameAndRepository.owner;
+        String repositoryName = extractRepositoryName(link.getUrl());
+        String owner = extractRepositoryOwner(link.getUrl());
 
         GitHubRepository oldRepositoryRecord = repositoryDao.findByNameAndOwner(repositoryName, owner)
             .orElseThrow(() -> new NoSuchGitHubRepositoryException(repositoryName, owner));
@@ -95,15 +96,22 @@ public class GitHubAllUpdatesChecker implements LinkAllUpdatesChecker {
         return !gitHubConfiguration.isCorrectHostName(hostname);
     }
 
-    private RepositoryNameAndOwner extractRepositoryNameAndOwner(URI url) {
-        Matcher matcher = REPOSITORY_NAME_OWNER_PATTERN.matcher(url.toString());
-        if (matcher.find()) {
-            String owner = matcher.group(1);
-            String repositoryName = matcher.group(2);
-            return new RepositoryNameAndOwner(repositoryName, owner);
-        } else {
+    private String extractRepositoryName(URI url){
+        Matcher matcher = REPOSITORY_NAME_PATTERN.matcher(url.toString());
+        if(!matcher.find()){
             throw new UnsuccessfulGitHubUrlParseException(url);
         }
+
+        return matcher.group(1);
+    }
+
+    private String extractRepositoryOwner(URI url) {
+        Matcher matcher = REPOSITORY_OWNER_PATTERN.matcher(url.toString());
+        if (!matcher.find()) {
+            throw new UnsuccessfulGitHubUrlParseException(url);
+        }
+
+        return matcher.group(1);
     }
 
     private List<LinkUpdateType> iterateAllSingleUpdateCheckers(
@@ -143,10 +151,5 @@ public class GitHubAllUpdatesChecker implements LinkAllUpdatesChecker {
         repositoryDao.update(updatedRepository);
     }
 
-    private record RepositoryNameAndOwner(
-        String name,
-        String owner
-    ) {
-    }
 }
 

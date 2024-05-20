@@ -60,16 +60,14 @@ public class StackOverflowAllUpdatesChecker implements LinkAllUpdatesChecker {
         }
 
         long questionId = extractQuestionId(link.getUrl());
+
         StackOverflowQuestionBody currentQuestionBody =
             stackOverflowClient.fetchQuestionById(questionId).items().getFirst();
         StackOverflowQuestion oldQuestionRecord = stackOverflowQuestionDao.findById(questionId)
-            .orElseThrow(
-                () -> new NoSuchStackOverflowQuestionException(STR."There is no question with id \{questionId}")
-            );
+            .orElseThrow(() -> new NoSuchStackOverflowQuestionException(questionId));
 
         List<LinkUpdateType> detectedUpdatesTypes =
             iterateAllSingleUpdateCheckers(oldQuestionRecord, currentQuestionBody);
-
         if (!detectedUpdatesTypes.isEmpty()) {
             updateLocalRecord(currentQuestionBody, link.getId());
         }

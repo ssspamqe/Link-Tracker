@@ -2,6 +2,7 @@ package edu.java.telegrambotconnection.kafka;
 
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import lombok.RequiredArgsConstructor;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -15,15 +16,15 @@ public class LinkUpdatesQueueProducer {
     private final String topicName;
 
     public void send(LinkUpdate update) {
-        LOGGER.warn("Sending message to kafka...");
+        LOGGER.trace("Sending message to kafka...");
         try {
-            LOGGER.warn("topic name: {}", topicName);
+            LOGGER.trace("topic name: {}", topicName);
             kafkaTemplate.send(topicName, update).whenComplete(
                 (sendResult, throwable) -> {
                     if (throwable != null) {
-                        LOGGER.error("Kafka error: {}", throwable);
+                        LOGGER.warn("Kafka error: {}", throwable);
                     } else {
-                        LOGGER.info("Successfully sent message to kafka");
+                        LOGGER.trace("Successfully sent message to kafka");
                     }
                 }
             );

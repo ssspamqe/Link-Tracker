@@ -1,6 +1,8 @@
 package edu.java.scrapper.webClients;
 
 import edu.java.configuration.global.ApplicationConfiguration;
+import edu.java.configuration.services.telegrambot.TelegramBotConnectionConfiguration;
+import edu.java.configuration.services.telegrambot.webclient.TelegramBotWebClientConfiguration;
 import edu.java.telegrambotconnection.telegrambot.TelegramBotClient;
 import edu.java.telegrambotconnection.telegrambot.dto.responses.TelegramBotApiErrorResponse;
 import edu.java.webclients.exceptions.ClientErrorException;
@@ -16,21 +18,21 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.support.WebClientAdapter;
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 import reactor.core.publisher.Mono;
+import java.net.URI;
 
 @TestConfiguration
 public class BeansConfiguration {
 
-    @Autowired
-    ApplicationConfiguration applicationConfig;
+    @Autowired TelegramBotWebClientConfiguration telegramBotWebClientConfiguration ;
 
     @Bean
     public TelegramBotClient telegramBotClient() {
-        String baseUrl = applicationConfig.telegramBotConfig().getBaseUrl();
+        URI baseUrl = telegramBotWebClientConfiguration.getBaseUrl();
         WebClient webClient = WebClient.builder()
             .defaultStatusHandler(HttpStatusCode::is4xxClientError, response ->
                 response.bodyToMono(TelegramBotApiErrorResponse.class)
                     .flatMap(errorBody -> Mono.error(new ClientErrorException(errorBody))))
-            .baseUrl(baseUrl)
+            .baseUrl(baseUrl.toString())
             .build();
         WebClientAdapter adapter = WebClientAdapter.create(webClient);
         HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(adapter).build();
@@ -39,7 +41,7 @@ public class BeansConfiguration {
 
     @Bean
     public TelegramBotClientWithRetries telegramBotClientWithRetries() {
-        var retryConfig = applicationConfig.stackOverflowConfig().retryConfig();
+        var retryConfig = telegramBotWebClientConfiguration.getRetryConfig();
         var type = retryConfig.type();
 
         return switch (type) {

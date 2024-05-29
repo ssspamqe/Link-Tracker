@@ -1,4 +1,4 @@
-package edu.java.bot.configuration.globalconfiguration;
+package edu.java.bot.configuration.scrapperconfiguration;
 
 import org.springframework.http.HttpStatusCode;
 

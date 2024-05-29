@@ -5,14 +5,6 @@ import edu.java.bot.webclients.scrapper.exceptions.ScrapperWebClientErrorExcepti
 import edu.java.bot.webclients.scrapper.ScrapperLinksClient;
 import edu.java.bot.webclients.scrapper.ScrapperTelegramChatClient;
 import edu.java.bot.webclients.scrapper.dto.responses.ScrapperApiErrorResponse;
-import edu.java.bot.webclients.scrapperwithretries.links.ScrapperLinksClientWithConstantRetries;
-import edu.java.bot.webclients.scrapperwithretries.links.ScrapperLinksClientWithExponentialRetries;
-import edu.java.bot.webclients.scrapperwithretries.links.ScrapperLinksClientWithLinearRetries;
-import edu.java.bot.webclients.scrapperwithretries.links.ScrapperLinksClientWithRetries;
-import edu.java.bot.webclients.scrapperwithretries.telegramchat.ScrapperTelegramChatClientWithConstantRetries;
-import edu.java.bot.webclients.scrapperwithretries.telegramchat.ScrapperTelegramChatClientWithExponentialRetries;
-import edu.java.bot.webclients.scrapperwithretries.telegramchat.ScrapperTelegramChatClientWithLinearRetries;
-import edu.java.bot.webclients.scrapperwithretries.telegramchat.ScrapperTelegramChatClientWithRetries;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

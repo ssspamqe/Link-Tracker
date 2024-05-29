@@ -10,21 +10,22 @@ import org.springframework.web.service.annotation.DeleteExchange;
 import org.springframework.web.service.annotation.GetExchange;
 import org.springframework.web.service.annotation.HttpExchange;
 import org.springframework.web.service.annotation.PostExchange;
+import reactor.core.publisher.Mono;
 
 @HttpExchange(url = "/links")
 public interface ScrapperLinksClient {
 
     @GetExchange
-    ListLinksResponse fetchTrackedLinksByChatId(@RequestHeader("Tg-Chat-Id") long chatId);
+    Mono<ListLinksResponse> fetchTrackedLinksByChatId(@RequestHeader("Tg-Chat-Id") long chatId);
 
     @PostExchange
-    LinkResponse trackLinkByChatId(
+    Mono<LinkResponse> trackLinkByChatId(
         @RequestBody AddLinkRequest addLinkRequest,
         @RequestHeader("Tg-Chat-Id") long chatId
     );
 
     @DeleteExchange
-    LinkResponse untrackLinkByChatId(
+    Mono<LinkResponse> untrackLinkByChatId(
         @RequestBody RemoveLinkRequest removeLinkRequest,
         @RequestHeader("Tg-Chat-Id") long chatId
     );

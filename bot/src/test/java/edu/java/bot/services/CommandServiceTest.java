@@ -11,7 +11,7 @@ import edu.java.bot.telegrambot.slashcommandservices.exceptions.NotAReplyOnBotMe
 import edu.java.bot.telegrambot.slashcommandservices.slashcommands.HelpSlashCommand;
 import edu.java.bot.telegrambot.slashcommandservices.slashcommands.ListSlashCommand;
 import edu.java.bot.telegrambot.slashcommandservices.slashcommands.TrackSlashCommand;
-import edu.java.bot.webclients.scrapper.ScrapperLinksClient;
+import edu.java.bot.webclients.scrapper.basic.ScrapperLinksClient;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

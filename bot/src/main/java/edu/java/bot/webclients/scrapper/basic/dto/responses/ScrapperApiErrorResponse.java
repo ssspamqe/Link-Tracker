@@ -1,4 +1,4 @@
-package edu.java.bot.webclients.scrapper.dto.responses;
+package edu.java.bot.webclients.scrapper.basic.dto.responses;
 
 import java.util.List;
 

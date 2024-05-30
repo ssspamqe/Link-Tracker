@@ -4,7 +4,7 @@ import com.pengrad.telegrambot.model.BotCommand;
 import com.pengrad.telegrambot.model.Chat;
 import com.pengrad.telegrambot.model.Message;
 import edu.java.bot.telegrambot.slashcommandservices.slashcommands.TrackSlashCommand;
-import edu.java.bot.webclients.scrapper.ScrapperLinksClient;
+import edu.java.bot.webclients.scrapper.basic.ScrapperLinksClient;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

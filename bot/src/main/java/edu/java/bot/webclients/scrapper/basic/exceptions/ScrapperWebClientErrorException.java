@@ -1,6 +1,6 @@
-package edu.java.bot.webclients.scrapper.exceptions;
+package edu.java.bot.webclients.scrapper.basic.exceptions;
 
-import edu.java.bot.webclients.scrapper.dto.responses.ScrapperApiErrorResponse;
+import edu.java.bot.webclients.scrapper.basic.dto.responses.ScrapperApiErrorResponse;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 

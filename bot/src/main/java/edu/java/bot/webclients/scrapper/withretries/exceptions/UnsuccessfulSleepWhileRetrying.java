@@ -1,4 +1,4 @@
-package edu.java.bot.webclients.scrapperwithretries.exceptions;
+package edu.java.bot.webclients.scrapper.withretries.exceptions;
 
 public class UnsuccessfulSleepWhileRetrying extends RuntimeException{
     public UnsuccessfulSleepWhileRetrying(InterruptedException exception){

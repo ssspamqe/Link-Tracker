@@ -1,29 +1,29 @@
-package edu.java.bot.webclients.scrapperwithretries.scrapperendpoints.telegramchat;
+package edu.java.bot.webclients.scrapper.withretries.scrapperendpoints.telegramchat;
 
-import edu.java.bot.configuration.scrapperconfiguration.ScrapperConfiguration;
-import edu.java.bot.webclients.scrapper.ScrapperTelegramChatClient;
-import edu.java.bot.webclients.scrapperwithretries.executorsWithRetry.WebClientWithRetryExecutor;
-import edu.java.bot.webclients.scrapperwithretries.executorsWithRetry.ExecutorWithRetry;
+import edu.java.bot.webclients.scrapper.basic.ScrapperTelegramChatClient;
+import edu.java.bot.webclients.scrapper.withretries.executorsWithRetry.ExecutorWithRetry;
+import edu.java.bot.webclients.scrapper.withretries.executorsWithRetry.WebClientWithRetryExecutor;
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
 @RequiredArgsConstructor
-public class ScrapperTelegramChatWithRetryExecutor implements ScrapperTelegramChatClient, WebClientWithRetryExecutor {
+public class ScrapperTelegramChatClientWithRetryExecutor
+    implements ScrapperTelegramChatClient, WebClientWithRetryExecutor {
 
     private final ScrapperTelegramChatClient baseClient;
     private final Duration requestTimeout;
 
     private ExecutorWithRetry executorWithRetry;
 
-    public ScrapperTelegramChatWithRetryExecutor(
+    public ScrapperTelegramChatClientWithRetryExecutor(
         ScrapperTelegramChatClient baseClient,
-        ScrapperConfiguration scrapperConfiguration,
+        Duration requestTimeout,
         ExecutorWithRetry executorWithRetry
 
     ) {
         this.baseClient = baseClient;
-        this.requestTimeout = scrapperConfiguration.requestTimeout();
+        this.requestTimeout = requestTimeout;
         this.executorWithRetry = executorWithRetry;
     }
 

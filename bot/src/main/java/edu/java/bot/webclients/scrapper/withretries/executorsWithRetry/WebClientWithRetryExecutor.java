@@ -1,4 +1,4 @@
-package edu.java.bot.webclients.scrapperwithretries.executorsWithRetry;
+package edu.java.bot.webclients.scrapper.withretries.executorsWithRetry;
 
 public interface WebClientWithRetryExecutor {
 

@@ -1,13 +1,14 @@
-package edu.java.bot.webclients.scrapperwithretries.scrapperendpoints.help;
+package edu.java.bot.webclients.scrapper.withretries.scrapperendpoints.help;
 
-import edu.java.bot.configuration.scrapperconfiguration.ScrapperConfiguration;
-import edu.java.bot.webclients.scrapper.ScrapperHelpClient;
-import edu.java.bot.webclients.scrapper.dto.responses.TrackableServiceInformationBatch;
-import edu.java.bot.webclients.scrapperwithretries.executorsWithRetry.ExecutorWithRetry;
-import edu.java.bot.webclients.scrapperwithretries.executorsWithRetry.WebClientWithRetryExecutor;
+import edu.java.bot.webclients.scrapper.basic.ScrapperHelpClient;
+import edu.java.bot.webclients.scrapper.basic.dto.responses.TrackableServiceInformationBatch;
+import edu.java.bot.webclients.scrapper.withretries.executorsWithRetry.ExecutorWithRetry;
+import edu.java.bot.webclients.scrapper.withretries.executorsWithRetry.WebClientWithRetryExecutor;
 import java.time.Duration;
+import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
+@RequiredArgsConstructor
 public class ScrapperHelpClientWithRetryExecutor implements ScrapperHelpClient, WebClientWithRetryExecutor {
 
     private final ScrapperHelpClient baseClient;
@@ -17,11 +18,11 @@ public class ScrapperHelpClientWithRetryExecutor implements ScrapperHelpClient, 
 
     public ScrapperHelpClientWithRetryExecutor(
         ScrapperHelpClient baseClient,
-        ScrapperConfiguration scrapperConfiguration,
+        Duration requestTimeout,
         ExecutorWithRetry executor
     ) {
         this.baseClient = baseClient;
-        this.requestTimeout = scrapperConfiguration.requestTimeout();
+        this.requestTimeout = requestTimeout;
         this.executor = executor;
     }
 

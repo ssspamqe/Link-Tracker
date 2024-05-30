@@ -1,9 +1,9 @@
-package edu.java.bot.webclients.scrapper;
+package edu.java.bot.webclients.scrapper.basic;
 
-import edu.java.bot.webclients.scrapper.dto.requests.AddLinkRequest;
-import edu.java.bot.webclients.scrapper.dto.requests.RemoveLinkRequest;
-import edu.java.bot.webclients.scrapper.dto.responses.LinkResponse;
-import edu.java.bot.webclients.scrapper.dto.responses.ListLinksResponse;
+import edu.java.bot.webclients.scrapper.basic.dto.requests.AddLinkRequest;
+import edu.java.bot.webclients.scrapper.basic.dto.requests.RemoveLinkRequest;
+import edu.java.bot.webclients.scrapper.basic.dto.responses.LinkResponse;
+import edu.java.bot.webclients.scrapper.basic.dto.responses.ListLinksResponse;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.service.annotation.DeleteExchange;

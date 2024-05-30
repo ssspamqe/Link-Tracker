@@ -2,8 +2,8 @@ package edu.java.bot.telegrambot.slashcommandservices.slashcommands;
 
 import com.pengrad.telegrambot.model.BotCommand;
 import com.pengrad.telegrambot.model.Message;
-import edu.java.bot.webclients.scrapper.ScrapperLinksClient;
-import edu.java.bot.webclients.scrapper.dto.requests.AddLinkRequest;
+import edu.java.bot.webclients.scrapper.basic.ScrapperLinksClient;
+import edu.java.bot.webclients.scrapper.basic.dto.requests.AddLinkRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

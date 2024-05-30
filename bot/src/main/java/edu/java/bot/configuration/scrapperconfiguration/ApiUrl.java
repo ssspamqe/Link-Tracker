@@ -1,12 +1,15 @@
 package edu.java.bot.configuration.scrapperconfiguration;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import java.net.URI;
 
 public record ApiUrl(
-    @NotBlank String defaultUrl,
-    String configUrl
+    @NotNull
+    URI defaultUrl,
+    URI configUrl
 ) {
-    public String getBaseUrl() {
+    public URI getBaseUrl() {
         if (configUrl != null) {
             return configUrl;
         }

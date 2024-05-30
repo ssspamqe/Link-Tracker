@@ -7,7 +7,7 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
 import edu.java.bot.telegrambot.slashcommandservices.CommandService;
-import edu.java.bot.webclients.scrapper.exceptions.ScrapperWebClientErrorException;
+import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientErrorException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

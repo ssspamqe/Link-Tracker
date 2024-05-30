@@ -1,15 +1,15 @@
-package edu.java.bot.webclients.scrapperwithretries.executorsWithRetry;
+package edu.java.bot.webclients.scrapper.withretries.executorsWithRetry;
 
 import edu.java.bot.configuration.scrapperconfiguration.RetryPolicyHttpStatusCodeGroups;
+import reactor.core.publisher.Mono;
+import reactor.util.retry.Retry;
 import java.time.Duration;
 import java.util.Set;
 import java.util.function.Supplier;
-import reactor.core.publisher.Mono;
-import reactor.util.retry.Retry;
 
-public class ExecutorWithConstantRetry extends ExecutorWithRetry {
+public class ExecutorWithExponentialRetry extends ExecutorWithRetry{
 
-    public ExecutorWithConstantRetry(
+    public ExecutorWithExponentialRetry(
         int maxRetries,
         Duration delay,
         Set<RetryPolicyHttpStatusCodeGroups> statusCodesToRetry
@@ -21,7 +21,7 @@ public class ExecutorWithConstantRetry extends ExecutorWithRetry {
     public <A> Mono<A> retrieveWithRetry(Supplier<A> supplier) {
         return Mono.fromCallable(supplier::get)
             .retryWhen(
-                Retry.fixedDelay(maxRetries, delay)
+                Retry.backoff(maxRetries, delay)
                     .filter(this::mustBeRetried)
             );
     }
@@ -30,7 +30,7 @@ public class ExecutorWithConstantRetry extends ExecutorWithRetry {
     public Mono<Void> performWithRetry(Runnable runnable) {
         return Mono.fromRunnable(runnable)
             .retryWhen(
-                Retry.fixedDelay(maxRetries, delay)
+                Retry.backoff(maxRetries, delay)
                     .filter(this::mustBeRetried)
             ).then();
     }

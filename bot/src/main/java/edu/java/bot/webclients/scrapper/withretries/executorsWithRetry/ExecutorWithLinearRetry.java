@@ -1,7 +1,7 @@
-package edu.java.bot.webclients.scrapperwithretries.executorsWithRetry;
+package edu.java.bot.webclients.scrapper.withretries.executorsWithRetry;
 
 import edu.java.bot.configuration.scrapperconfiguration.RetryPolicyHttpStatusCodeGroups;
-import edu.java.bot.webclients.scrapperwithretries.exceptions.UnsuccessfulSleepWhileRetrying;
+import edu.java.bot.webclients.scrapper.withretries.exceptions.UnsuccessfulSleepWhileRetrying;
 import java.time.Duration;
 import java.util.Set;
 import java.util.function.Supplier;

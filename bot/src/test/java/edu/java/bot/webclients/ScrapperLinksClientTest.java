@@ -1,6 +1,6 @@
 package edu.java.bot.webclients;
 
-import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientErrorException;
+import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientException;
 import edu.java.bot.webclients.scrapper.basic.ScrapperLinksClient;
 import edu.java.bot.webclients.scrapper.basic.dto.requests.AddLinkRequest;
 import edu.java.bot.webclients.scrapper.basic.dto.requests.RemoveLinkRequest;
@@ -131,9 +131,9 @@ public class ScrapperLinksClientTest extends WebClientTest {
         assertThatThrownBy(
             () -> scrapperLinksClient.fetchTrackedLinksByChatId(1)
         )
-            .isInstanceOf(ScrapperWebClientErrorException.class)
+            .isInstanceOf(ScrapperWebClientException.class)
             .satisfies(actualException ->
-                assertThat(((ScrapperWebClientErrorException) actualException).getErrorResponseBody())
+                assertThat(((ScrapperWebClientException) actualException).getErrorResponseBody())
                     .isEqualTo(expectedApiErrorResponse)
             );
     }

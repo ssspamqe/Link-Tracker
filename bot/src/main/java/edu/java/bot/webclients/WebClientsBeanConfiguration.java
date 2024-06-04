@@ -5,7 +5,7 @@ import edu.java.bot.webclients.scrapper.basic.ScrapperHelpClient;
 import edu.java.bot.webclients.scrapper.basic.ScrapperLinksClient;
 import edu.java.bot.webclients.scrapper.basic.ScrapperTelegramChatClient;
 import edu.java.bot.webclients.scrapper.basic.dto.responses.ScrapperApiErrorResponse;
-import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientErrorException;
+import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientException;
 import edu.java.bot.webclients.scrapper.withretries.executorsWithRetry.ExecutorWithConstantRetry;
 import edu.java.bot.webclients.scrapper.withretries.executorsWithRetry.ExecutorWithExponentialRetry;
 import edu.java.bot.webclients.scrapper.withretries.executorsWithRetry.ExecutorWithLinearRetry;
@@ -43,7 +43,7 @@ public class WebClientsBeanConfiguration {
         WebClient webClient = WebClient.builder()
             .defaultStatusHandler(HttpStatusCode::is4xxClientError, response ->
                 response.bodyToMono(ScrapperApiErrorResponse.class)
-                    .flatMap(errorBody -> Mono.error(new ScrapperWebClientErrorException(errorBody)))
+                    .flatMap(errorBody -> Mono.error(new ScrapperWebClientException(errorBody)))
             )
             .baseUrl(baseUrl.toString())
             .build();

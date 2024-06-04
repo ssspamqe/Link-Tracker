@@ -4,11 +4,8 @@ import com.pengrad.telegrambot.model.BotCommand;
 import com.pengrad.telegrambot.model.Message;
 import edu.java.bot.webclients.scrapper.basic.ScrapperLinksClient;
 import edu.java.bot.webclients.scrapper.basic.dto.requests.AddLinkRequest;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import java.time.Duration;
 
-@Component
-@RequiredArgsConstructor
 public class TrackSlashCommand implements ParameterizedSlashCommand {
 
     private static final String TEXT_COMMAND = "/track";
@@ -18,6 +15,12 @@ public class TrackSlashCommand implements ParameterizedSlashCommand {
     private static final String SUBSCRIPTION_WAS_PREVIOUSLY_ADDED = "This link was already added to /track it";
 
     private final ScrapperLinksClient scrapperLinksClient;
+    private final Duration scrapperRequestTimeout;
+
+    public TrackSlashCommand(ScrapperLinksClient scrapperLinksClient, Duration scrapperRequestTimeout) {
+        this.scrapperLinksClient = scrapperLinksClient;
+        this.scrapperRequestTimeout = scrapperRequestTimeout;
+    }
 
     @Override
     public String getTextCommand() {
@@ -47,7 +50,9 @@ public class TrackSlashCommand implements ParameterizedSlashCommand {
 
     public void sendToScrapperNewUrlChatIdAssociation(String url, long chatId) {
         AddLinkRequest addLinkRequest = new AddLinkRequest(url);
-        scrapperLinksClient.trackLinkByChatId(addLinkRequest, chatId);
+        scrapperLinksClient
+            .trackLinkByChatId(addLinkRequest, chatId)
+            .block(scrapperRequestTimeout);
     }
 
     @Override

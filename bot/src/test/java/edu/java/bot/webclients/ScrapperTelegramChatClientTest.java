@@ -1,6 +1,6 @@
 package edu.java.bot.webclients;
 
-import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientErrorException;
+import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientException;
 import edu.java.bot.webclients.scrapper.basic.ScrapperTelegramChatClient;
 import edu.java.bot.webclients.scrapper.basic.dto.responses.ScrapperApiErrorResponse;
 import java.util.List;
@@ -67,10 +67,10 @@ public class ScrapperTelegramChatClientTest extends WebClientTest {
         assertThatThrownBy(
             () -> scrapperTelegramChatClient.registerNewChat(1)
         )
-            .isInstanceOf(ScrapperWebClientErrorException.class)
+            .isInstanceOf(ScrapperWebClientException.class)
             .satisfies(actualException ->
                 assertThat(
-                    ((ScrapperWebClientErrorException) actualException).getErrorResponseBody()
+                    ((ScrapperWebClientException) actualException).getErrorResponseBody()
                 ).isEqualTo(expectedApiErrorResponse)
             );
     }

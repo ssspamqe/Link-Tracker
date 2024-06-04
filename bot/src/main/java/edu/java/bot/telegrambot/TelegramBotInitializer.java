@@ -7,7 +7,7 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.request.SetMyCommands;
 import edu.java.bot.telegrambot.slashcommandservices.CommandService;
-import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientErrorException;
+import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientException;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -30,7 +30,7 @@ public class TelegramBotInitializer {
     private final CommandService commandService;
 
     @EventListener
-    public void onSpringRefreshedEvent(ContextRefreshedEvent event) {
+    public void onContextRefreshedEvent(ContextRefreshedEvent event) {
         threadPool = Executors.newFixedThreadPool(THREADS_AMOUNT);
         bot.execute(new SetMyCommands(commandService.getAllBotCommands()));
         bot.setUpdatesListener(this::handleBotUpdates);
@@ -49,7 +49,7 @@ public class TelegramBotInitializer {
     private SendMessage getResponse(Message message) {
         try {
             return commandService.handleMessage(message);
-        } catch (ScrapperWebClientErrorException ex) {
+        } catch (ScrapperWebClientException ex) {
             LOGGER.warn(ex);
 
             Long chatId = message.chat().id();

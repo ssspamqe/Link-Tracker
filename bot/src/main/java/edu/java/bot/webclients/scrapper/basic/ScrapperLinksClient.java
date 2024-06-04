@@ -4,6 +4,7 @@ import edu.java.bot.webclients.scrapper.basic.dto.requests.AddLinkRequest;
 import edu.java.bot.webclients.scrapper.basic.dto.requests.RemoveLinkRequest;
 import edu.java.bot.webclients.scrapper.basic.dto.responses.LinkResponse;
 import edu.java.bot.webclients.scrapper.basic.dto.responses.ListLinksResponse;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.service.annotation.DeleteExchange;

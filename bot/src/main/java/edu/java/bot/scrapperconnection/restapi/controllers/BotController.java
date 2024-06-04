@@ -1,7 +1,7 @@
 package edu.java.bot.scrapperconnection.restapi.controllers;
 
 import edu.java.bot.scrapperconnection.dto.linkupdate.LinkUpdate;
-import edu.java.bot.scrapperconnection.services.LinkUpdateService;
+import edu.java.bot.scrapperconnection.services.LinkUpdatePublisher;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -21,13 +21,13 @@ public class BotController {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private final LinkUpdateService linkUpdateService;
+    private final LinkUpdatePublisher linkUpdatePublisher;
 
     @Operation(summary = "Send updates to bot",
                description = "Sends updated to bot for further processing and delivering to telegram clients")
     @PostMapping("/updates")
     public ResponseEntity<?> addUpdate(@Valid @RequestBody List<LinkUpdate> linkUpdates) {
-        linkUpdateService.sendUpdatesToBot(linkUpdates);
+        linkUpdatePublisher.publishUpdates(linkUpdates);
         return ResponseEntity.ok().build();
     }
 }

@@ -1,27 +1,29 @@
 package edu.java.scrapper.configclasses;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.global.ApplicationConfiguration;
+import edu.java.configuration.services.supportingobjects.ApiUrl;
 import org.junit.jupiter.api.Test;
+import java.net.URI;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ApiUrlTest {
 
     @Test
     public void should_returnConfigUrl_when_itIsNotNull() {
-        ApplicationConfig.ApiUrl apiUrl = new ApplicationConfig.ApiUrl("defaultUrl", "configUrl");
+        var apiUrl = new ApiUrl(URI.create("https://base-url"), URI.create("https://config-url"));
 
-        String actualBaseUrl = apiUrl.getBaseUrl();
+        URI actualBaseUrl = apiUrl.getBaseUrl();
 
-        assertThat(actualBaseUrl).isEqualTo("configUrl");
+        assertThat(actualBaseUrl).isEqualTo(URI.create("https://config-url"));
     }
 
     @Test
     public void should_returnDefaultUrl_when_configUrlIsNull() {
-        ApplicationConfig.ApiUrl apiUrl = new ApplicationConfig.ApiUrl("defaultUrl", null);
+        var apiUrl = new ApiUrl(URI.create("https://base-url"), null);
 
-        String actualBaseUrl = apiUrl.getBaseUrl();
+        URI actualBaseUrl = apiUrl.getBaseUrl();
 
-        assertThat(actualBaseUrl).isNotNull().isEqualTo("defaultUrl");
+        assertThat(actualBaseUrl).isNotNull().isEqualTo(URI.create("https://base-url"));
     }
 
 }

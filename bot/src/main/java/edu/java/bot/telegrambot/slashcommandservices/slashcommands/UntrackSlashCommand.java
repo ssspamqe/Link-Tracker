@@ -2,13 +2,12 @@ package edu.java.bot.telegrambot.slashcommandservices.slashcommands;
 
 import com.pengrad.telegrambot.model.BotCommand;
 import com.pengrad.telegrambot.model.Message;
-import edu.java.bot.webclients.scrapper.ScrapperLinksClient;
-import edu.java.bot.webclients.scrapper.dto.requests.RemoveLinkRequest;
+import edu.java.bot.webclients.scrapper.basic.ScrapperLinksClient;
+import edu.java.bot.webclients.scrapper.basic.dto.requests.RemoveLinkRequest;
+import java.time.Duration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component
-@RequiredArgsConstructor
 public class UntrackSlashCommand implements ParameterizedSlashCommand {
 
     private static final String TEXT_COMMAND = "/untrack";
@@ -18,6 +17,12 @@ public class UntrackSlashCommand implements ParameterizedSlashCommand {
     private static final String SUCCESSFULLY_UNTRACKED_MESSAGE = "/unrack command succeed!";
 
     private final ScrapperLinksClient scrapperLinksClient;
+    private final Duration scrapperRequestTimeout;
+
+    public UntrackSlashCommand(ScrapperLinksClient scrapperLinksClient, Duration scrapperRequestTimeout) {
+        this.scrapperLinksClient = scrapperLinksClient;
+        this.scrapperRequestTimeout = scrapperRequestTimeout;
+    }
 
     @Override
     public String getTextCommand() {
@@ -47,7 +52,7 @@ public class UntrackSlashCommand implements ParameterizedSlashCommand {
 
     private void sendToScrapperNewUrlChatIdDissociation(String url, long chatId) {
         RemoveLinkRequest removeLinkRequest = new RemoveLinkRequest(url);
-        scrapperLinksClient.untrackLinkByChatId(removeLinkRequest, chatId);
+        scrapperLinksClient.untrackLinkByChatId(removeLinkRequest, chatId).block();
     }
 
     @Override

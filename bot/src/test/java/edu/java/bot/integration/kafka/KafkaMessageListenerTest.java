@@ -26,7 +26,7 @@ public class KafkaMessageListenerTest extends IntegrationEnvironment {
             .pollInterval(Duration.ofSeconds(2))
             .atMost(20, TimeUnit.SECONDS)
             .untilAsserted(() -> {
-                Mockito.verify(mockLinkUpdateService, Mockito.times(1)).sendUpdateToBot(any());
+                Mockito.verify(mockLinkUpdatePublisher, Mockito.times(1)).publishUpdate(any());
             });
     }
 

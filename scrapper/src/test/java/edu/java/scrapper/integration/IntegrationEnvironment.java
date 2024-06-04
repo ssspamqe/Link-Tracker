@@ -25,6 +25,8 @@ import liquibase.database.DatabaseFactory;
 import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.DirectoryResourceAccessor;
 import liquibase.resource.ResourceAccessor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.ClassRule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
@@ -50,6 +52,8 @@ import org.testcontainers.utility.DockerImageName;
 @AutoConfigureTestEntityManager
 @Transactional
 public abstract class IntegrationEnvironment {
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     protected static final String INSERT_LINK_STATEMENT =
         "INSERT INTO links(url, created_at) VALUES (?, '1970-01-01 00:00:00') RETURNING id";
@@ -135,6 +139,6 @@ public abstract class IntegrationEnvironment {
 
     @DynamicPropertySource
     static void kafkaBootstrap(DynamicPropertyRegistry registry) {
-        registry.add("kafka.producer-configuration.bootstrap-servers", KAFKA::getBootstrapServers);
+        registry.add("telegram-bot.kafka-configuration.producer-configuration.bootstrap-servers",KAFKA::getBootstrapServers);
     }
 }

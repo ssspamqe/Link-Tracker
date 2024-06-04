@@ -1,8 +1,8 @@
 package edu.java.bot.webclients;
 
-import edu.java.bot.webclients.exceptions.ClientErrorException;
-import edu.java.bot.webclients.scrapper.ScrapperTelegramChatClient;
-import edu.java.bot.webclients.scrapper.dto.responses.ScrapperApiErrorResponse;
+import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientException;
+import edu.java.bot.webclients.scrapper.basic.ScrapperTelegramChatClient;
+import edu.java.bot.webclients.scrapper.basic.dto.responses.ScrapperApiErrorResponse;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,10 +67,10 @@ public class ScrapperTelegramChatClientTest extends WebClientTest {
         assertThatThrownBy(
             () -> scrapperTelegramChatClient.registerNewChat(1)
         )
-            .isInstanceOf(ClientErrorException.class)
+            .isInstanceOf(ScrapperWebClientException.class)
             .satisfies(actualException ->
                 assertThat(
-                    ((ClientErrorException) actualException).getErrorResponseBody()
+                    ((ScrapperWebClientException) actualException).getErrorResponseBody()
                 ).isEqualTo(expectedApiErrorResponse)
             );
     }

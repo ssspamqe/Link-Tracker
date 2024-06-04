@@ -1,12 +1,12 @@
 package edu.java.bot.webclients;
 
-import edu.java.bot.webclients.exceptions.ClientErrorException;
-import edu.java.bot.webclients.scrapper.ScrapperLinksClient;
-import edu.java.bot.webclients.scrapper.dto.requests.AddLinkRequest;
-import edu.java.bot.webclients.scrapper.dto.requests.RemoveLinkRequest;
-import edu.java.bot.webclients.scrapper.dto.responses.LinkResponse;
-import edu.java.bot.webclients.scrapper.dto.responses.ListLinksResponse;
-import edu.java.bot.webclients.scrapper.dto.responses.ScrapperApiErrorResponse;
+import edu.java.bot.webclients.scrapper.basic.exceptions.ScrapperWebClientException;
+import edu.java.bot.webclients.scrapper.basic.ScrapperLinksClient;
+import edu.java.bot.webclients.scrapper.basic.dto.requests.AddLinkRequest;
+import edu.java.bot.webclients.scrapper.basic.dto.requests.RemoveLinkRequest;
+import edu.java.bot.webclients.scrapper.basic.dto.responses.LinkResponse;
+import edu.java.bot.webclients.scrapper.basic.dto.responses.ListLinksResponse;
+import edu.java.bot.webclients.scrapper.basic.dto.responses.ScrapperApiErrorResponse;
 import java.net.URI;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -131,9 +131,9 @@ public class ScrapperLinksClientTest extends WebClientTest {
         assertThatThrownBy(
             () -> scrapperLinksClient.fetchTrackedLinksByChatId(1)
         )
-            .isInstanceOf(ClientErrorException.class)
+            .isInstanceOf(ScrapperWebClientException.class)
             .satisfies(actualException ->
-                assertThat(((ClientErrorException) actualException).getErrorResponseBody())
+                assertThat(((ScrapperWebClientException) actualException).getErrorResponseBody())
                     .isEqualTo(expectedApiErrorResponse)
             );
     }

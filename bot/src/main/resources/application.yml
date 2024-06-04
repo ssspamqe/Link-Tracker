@@ -1,14 +1,17 @@
 app:
   telegram-token: ${TELEGRAM_API_KEY}
-  scrapper-url:
-    default-url: http://localhost:8080/scrapper/api/v1
-  scrapper-retry-config:
+  processed-link-updates-metric-name: processed_link_updates_total
+
+scrapper:
+  retry-config:
     type: constant
     delay: 2s
     max-retries: 3
     retry-on-statuses:
       - SERVER_ERROR
-  processed-link-updates-metric-name: processed_link_updates_total
+  url:
+    default-url: http://localhost:8080/scrapper/api/v1
+  request-timeout: 100ms
 
 kafka:
   topic-configurations:

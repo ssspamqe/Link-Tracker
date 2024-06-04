@@ -1,7 +1,7 @@
 package edu.java.webclients.webclientswithretry;
 
-import edu.java.configuration.global.RetryConfig;
-import edu.java.configuration.global.RetryPolicyHttpStatusCodeGroups;
+import edu.java.configuration.services.supportingobjects.retryPolicy.RetryConfig;
+import edu.java.configuration.services.supportingobjects.retryPolicy.RetryPolicyHttpStatusCodeGroups;
 import jakarta.annotation.PostConstruct;
 import java.time.Duration;
 import java.util.Set;

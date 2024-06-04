@@ -3,34 +3,64 @@ app:
     enable: true
     interval: 10000
     force-check-delay: 10000
-  stack-overflow-config:
-    url:
-      default-url: https://api.stackexchange.com/2.3/
-    host-names:
-      - stackoverflow.com
-    retry-config:
-      type: constant
-      delay: 2s
-      max-retries: 3
-      retry-on-statuses:
-        - SERVER_ERROR
 
+  database-access-type: jdbc
+  processed-updates-metric-name: processed_link_updates_total
+
+trackable-services:
   git-hub-config:
     url:
       default-url: https://api.github.com/
-    host-names:
-      - github.com
-      - github.dev
+    host-name: github.com
     retry-config:
       type: constant
       delay: 2s
       max-retries: 3
       retry-on-statuses:
         - SERVER_ERROR
+    user-information:
+      service-name: GitHub
+      host-name: github.com
+      tip: Send link with repository name and owner to start tracking updates and new pushes
+      examples:
+        - https://github.com/ownernickaame/repositoryname
 
-  telegram-bot-config:
+  stackoverflow-config:
     url:
-      default-url: http://localhost:8090/bot/api/v1/
+      default-url: https://api.stackexchange.com/2.3/
+    host-name: stackoverflow.com
+    retry-config:
+      type: constant
+      delay: 2s
+      max-retries: 3
+      retry-on-statuses:
+        - SERVER_ERROR
+    user-information:
+      service-name: Stack Overflow
+      host-name: stackoverflow.com
+      tip: Send link with question id to start tracking updates and new answers to it
+      examples:
+        - https://stackoverflow.com/questions/123123/this-is-sample-question
+
+telegram-bot:
+  connection-type: kafka
+  kafka-configuration:
+    topic-configurations:
+      - name: linkUpdates
+        partitions: 1
+        replicas: 1
+    producer-configuration:
+      bootstrap-servers: localhost:9092
+      link-updates-topic: linkUpdates
+      client-id: scrapperProducerGroup
+      acks-config: 1
+      delivery-timeout: 100000
+      linger-ms: 5000
+      batch-size: 200000
+      enable-idempotence: true
+  web-client-configuration:
+    url:
+      default-url: localhost:8090
     retry-config:
       type: constant
       delay: 2s
@@ -38,25 +68,6 @@ app:
       retry-on-statuses:
         - SERVER_ERROR
 
-
-  database-access-type: jdbc
-  use-queue: true
-  processed-updates-metric-name: processed_link_updates_total
-
-kafka:
-  topic-configurations:
-    - name: linkUpdates
-      partitions: 1
-      replicas: 1
-
-  producer-configuration:
-    bootstrap-servers: localhost:9092
-    client-id: scrapperProducerGroup
-    acks-config: 1
-    delivery-timeout: 100000
-    linger-ms: 5000
-    batch-size: 200000
-    link-updates-topic: linkUpdates
 
 management:
   metrics:

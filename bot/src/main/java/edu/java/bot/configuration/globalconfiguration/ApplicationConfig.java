@@ -1,5 +1,6 @@
 package edu.java.bot.configuration.globalconfiguration;
 
+import edu.java.bot.configuration.scrapperconfiguration.RetryConfig;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -12,20 +13,7 @@ public record ApplicationConfig(
     String telegramToken,
 
     @NotNull
-    ApiUrl scrapperUrl,
-
-    @NotNull
-    RetryConfig scrapperRetryConfig,
-
-    @NotNull
     String processedLinkUpdatesMetricName
 ) {
-    public record ApiUrl(@NotBlank String defaultUrl, String configUrl) {
-        public String getBaseUrl() {
-            if (configUrl != null) {
-                return configUrl;
-            }
-            return defaultUrl;
-        }
-    }
+
 }

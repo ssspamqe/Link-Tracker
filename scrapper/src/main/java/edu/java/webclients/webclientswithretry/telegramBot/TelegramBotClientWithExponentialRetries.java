@@ -1,6 +1,6 @@
 package edu.java.webclients.webclientswithretry.telegramBot;
 
-import edu.java.configuration.global.RetryConfig;
+import edu.java.configuration.services.supportingobjects.retryPolicy.RetryConfig;
 import edu.java.telegrambotconnection.dto.linkupdatedto.LinkUpdate;
 import edu.java.telegrambotconnection.telegrambot.TelegramBotClient;
 import java.util.List;

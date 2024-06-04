@@ -1,6 +1,6 @@
 package edu.java.webclients;
 
-import edu.java.configuration.global.ApplicationConfig;
+import edu.java.configuration.services.trackableservices.TrackableServiceConfiguration;
 import edu.java.webclients.gitHub.GitHubClient;
 import edu.java.webclients.stackoverflow.StackOverflowClient;
 import edu.java.webclients.webclientswithretry.gitHub.GitHubClientWithConstantRetries;
@@ -11,7 +11,8 @@ import edu.java.webclients.webclientswithretry.stackoverflow.StackOverflowClient
 import edu.java.webclients.webclientswithretry.stackoverflow.StackOverflowClientWithExponentialRetries;
 import edu.java.webclients.webclientswithretry.stackoverflow.StackOverflowClientWithLinearRetries;
 import edu.java.webclients.webclientswithretry.stackoverflow.StackOverflowClientWithRetries;
-import lombok.RequiredArgsConstructor;
+import java.net.URI;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -19,20 +20,30 @@ import org.springframework.web.reactive.function.client.support.WebClientAdapter
 import org.springframework.web.service.invoker.HttpServiceProxyFactory;
 
 @Configuration
-@RequiredArgsConstructor
 public class WebClientsBeanConfiguration {
 
-    private final ApplicationConfig applicationConfig;
+    private final TrackableServiceConfiguration gitHubConfiguration;
+    private final TrackableServiceConfiguration stackOverflowConfiguration;
+
+    public WebClientsBeanConfiguration(
+        @Qualifier("gitHubConfig")
+        TrackableServiceConfiguration gitHubConfiguration,
+        @Qualifier("stackOverflowConfig")
+        TrackableServiceConfiguration stackOverflowConfiguration
+    ) {
+        this.gitHubConfiguration = gitHubConfiguration;
+        this.stackOverflowConfiguration = stackOverflowConfiguration;
+    }
 
     @Bean
     public StackOverflowClient stackOverflowClient() {
-        String baseUrl = applicationConfig.stackOverflowConfig().getBaseUrl();
+        URI baseUrl = stackOverflowConfiguration.getBaseUrl();
         return createDefaultWebClient(baseUrl, StackOverflowClient.class);
     }
 
     @Bean
     public StackOverflowClientWithRetries stackOverflowClientWithRetries() {
-        var retryConfig = applicationConfig.stackOverflowConfig().retryConfig();
+        var retryConfig = stackOverflowConfiguration.getRetryConfig();
         var type = retryConfig.type();
 
         return switch (type) {
@@ -44,13 +55,13 @@ public class WebClientsBeanConfiguration {
 
     @Bean
     public GitHubClient gitHubClient() {
-        String baseUrl = applicationConfig.gitHubConfig().getBaseUrl();
+        URI baseUrl = gitHubConfiguration.getBaseUrl();
         return createDefaultWebClient(baseUrl, GitHubClient.class);
     }
 
     @Bean
     public GitHubClientWithRetries gitHubClientWithRetries() {
-        var retryConfig = applicationConfig.stackOverflowConfig().retryConfig();
+        var retryConfig = stackOverflowConfiguration.getRetryConfig();
         var type = retryConfig.type();
 
         return switch (type) {
@@ -60,9 +71,9 @@ public class WebClientsBeanConfiguration {
         };
     }
 
-    private <T> T createDefaultWebClient(String url, Class<T> webClientInterface) {
+    private <T> T createDefaultWebClient(URI url, Class<T> webClientInterface) {
         WebClient webClient = WebClient.builder()
-            .baseUrl(url)
+            .baseUrl(url.toString())
             .build();
 
         WebClientAdapter adapter = WebClientAdapter.create(webClient);

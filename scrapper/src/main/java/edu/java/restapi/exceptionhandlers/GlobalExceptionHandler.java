@@ -1,7 +1,6 @@
 package edu.java.restapi.exceptionhandlers;
 
 import edu.java.data.exceptions.DataServiceException;
-import edu.java.restapi.dto.responses.ApiErrorResponse;
 import java.util.Arrays;
 import java.util.List;
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +33,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiErrorResponse> handleMethodArgumentNotValidException(
         HandlerMethodValidationException exception
     ) {
-
         HttpStatusCode statusCode = exception.getStatusCode();
         String description = Arrays.toString(exception.getDetailMessageArguments());
         ApiErrorResponse errorResponse =
